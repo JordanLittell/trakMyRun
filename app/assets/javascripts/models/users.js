@@ -11,7 +11,11 @@ TrakMyRun.Collections.Users = Backbone.Collection.extend({
 				success: function () {
 					users.add(user);
 				}
+<<<<<<< HEAD
 			});
+=======
+			})
+>>>>>>> figaro
 		} 
 		else {
 			user.fetch();

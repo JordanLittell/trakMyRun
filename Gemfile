@@ -21,6 +21,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'underscore-rails'
+gem 'figaro'
 
 gem 'backbone-on-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
