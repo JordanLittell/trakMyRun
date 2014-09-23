@@ -3,7 +3,7 @@
 <section class="col-md-4 col-md-offset-4 sign-in text-center"> <!--may want to wrap this around yield, just want to get full back pic-->
 	<h1 class="text-center">Sign In</h1>
 	<%= render :partial => "layouts/errors"%>
-	<form action="<%=session_index_url%>" method="post">
+	<form action="<%=sessions_url%>" method="post">
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input id="username" placeholder="Username" name="user[username]" class="form-control">

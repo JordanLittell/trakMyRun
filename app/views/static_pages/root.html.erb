@@ -1,12 +1,29 @@
+<%= render "header" %>
+
 <div class="container">
 	<section class="content"></section>
+	<aside class="left panel well col-md-3">
+		
+		<ul class="left-sidebar">
+			<li>Edit Profile</li>
+			<li>Log Workout</li>
+			<li>Create Workout</li>
+			<li>Create Route</li>
+		</ul>
+	</aside>
 </div>
+
+	
+
+
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
 	  TrakMyRun.initialize();
+	  $('.dropdown-toggle').dropdown();
 	});
-
 	window.TrakMyRun.CurrentUser = <%= current_user.id %>
+
+	
 </script>

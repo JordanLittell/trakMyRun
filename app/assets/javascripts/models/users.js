@@ -11,10 +11,8 @@ TrakMyRun.Collections.Users = Backbone.Collection.extend({
 				success: function () {
 					users.add(user);
 				}
-
 			});
-		} 
-		else {
+		} else {
 			user.fetch();
 		}
 		return user;

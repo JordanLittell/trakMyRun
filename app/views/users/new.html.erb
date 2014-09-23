@@ -20,7 +20,7 @@
 			<input type="submit" value="Sign Up" class="btn btn-default">
 		</form>
 		<br>
-		<form action="<%=users_url%>" method="post" class="form">
+		<form action="<%=session_url%>" method="post" class="form">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 			<input type="hidden" name="user[username]" value="GuestUser">
 			<input type="hidden" name="user[password]" value="guestuser2691">

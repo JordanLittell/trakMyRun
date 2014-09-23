@@ -3,15 +3,16 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 	initialize: function(options) {
 		this.$rootEl = options.rootEl;
 		console.log(this.$rootEl);
+		Backbone.history.start();
 	},
 
 	routes: {
 		"" : "currentUserShow",
-		"api/users/:id" : "userShow"
+		"users/:id" : "userShow"
 	},
 
 	userShow: function(id) {
-		console.log("router reading...");
+		debugger;
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
 		var view = new TrakMyRun.Views.UserShow({
 			model: user
@@ -21,7 +22,7 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 
 	currentUserShow: function() {
 		var id = TrakMyRun.CurrentUser;
-		var url ="/api/users/"+id;
+		var url ="/users/"+id;
 		Backbone.history.navigate(url, { trigger: true });
 	},
 
