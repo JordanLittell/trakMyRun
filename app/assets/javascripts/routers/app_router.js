@@ -8,11 +8,11 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 
 	routes: {
 		"" : "currentUserShow",
+		"activities/new":"newActivity",
 		"users/:id" : "userShow"
 	},
 
 	userShow: function(id) {
-		debugger;
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
 		var view = new TrakMyRun.Views.UserShow({
 			model: user
@@ -24,6 +24,12 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		var id = TrakMyRun.CurrentUser;
 		var url ="/users/"+id;
 		Backbone.history.navigate(url, { trigger: true });
+	},
+
+	newActivity: function() {
+		console.log("activity fired");	
+		var view = new TrakMyRun.Views.ActivityNew();
+		swapView(view);
 	},
 
 	swapView: function(view) {

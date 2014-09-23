@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
 	validates :username, :password_digest, presence: true
 	validates :password, length: { minimum: 6, allow_nil: true }
-	attr_accessor :password
 	after_initialize :ensure_session_token
+	
+	attr_accessor :password
+	
+	has_many :activities
 
 	def password=(password)
 		@password = password
