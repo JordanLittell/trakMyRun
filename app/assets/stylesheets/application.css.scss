@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+	background-image: url('backdropPic.jpg');
+	background-size: cover;
+}
+
+.sign-up, .sign-in {
+	min-height: 400px;
+	margin-top: 10%;
+	background: rgba(0,0,0,0.6);
+	color:white;
+	padding: 40px;
+}
+
+label {
+	margin-top: 5%;
+}
+
