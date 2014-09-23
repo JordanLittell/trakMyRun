@@ -10,8 +10,20 @@ Backbone.Router.AppRouter = Backbone.Router.extend({
 		"" : "userShow"
 	},
 
-	userShow: function() {
+	userShow: function(id) {
+		var user = TrakMyRun.Collections.users.getOrFetch(id);
+		var view = new TrakMyRun.Views.UserShow({
+			model: user
+		});
+		swapView(view);	
+	},
 
+	swapView: function(view) {
+		if (this._currentView) {
+			this._currentView.remove();
+		} 
+		this.$rootEl.html(view.render().$el);
+		this._currentView = view;
 	}	
 	
 })
