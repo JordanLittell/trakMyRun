@@ -1,40 +1,35 @@
-TrakMyRun.Router.AppRouter = Backbone.Router.extend({
+TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 
 	initialize: function(options) {
-		console.log("backbone router initiated");
 		this.$rootEl = options.rootEl;
 		console.log(this.$rootEl);
 	},
 
 	routes: {
-		"" : "userShow"
+		"" : "currentUserShow",
+		"api/users/:id" : "userShow"
 	},
 
 	userShow: function(id) {
+		console.log("router reading...");
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
-<<<<<<< HEAD
-		var view = new TrakMyRun.View.UserShow({
+		var view = new TrakMyRun.Views.UserShow({
 			model: user
 		});
 		this.swapView(view);
 	},
 
-	swapView: function (view) {
-		if(this._currentView) {
-			this._currentView.remove();
-		}
-=======
-		var view = new TrakMyRun.Views.UserShow({
-			model: user
-		});
-		swapView(view);	
+	currentUserShow: function() {
+		var id = TrakMyRun.CurrentUser;
+		var url ="/api/users/"+id;
+		Backbone.history.navigate(url, { trigger: true });
 	},
 
 	swapView: function(view) {
 		if (this._currentView) {
 			this._currentView.remove();
 		} 
->>>>>>> figaro
+
 		this.$rootEl.html(view.render().$el);
 		this._currentView = view;
 	}	

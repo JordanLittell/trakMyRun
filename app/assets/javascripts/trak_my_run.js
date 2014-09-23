@@ -5,10 +5,9 @@ window.TrakMyRun = {
   Routers: {},
   initialize: function() {
     console.log('Hello from Backbone!');
-    new Backbone.Router.AppRouter({rootEl: $(".content")});
+    new TrakMyRun.Routers.AppRouter({ rootEl: $(".content") });
+    Backbone.history.start();
   }
 };
 
-$(document).ready(function(){
-  TrakMyRun.initialize();
-});
+

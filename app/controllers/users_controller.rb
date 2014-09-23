@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save 
   		log_in!(@user)
-  		redirect_to user_path(@user.id)
+  		redirect_to root_url
   	else 
   		flash.now[:errors] = @user.errors.full_messages
   		render :new
@@ -17,11 +17,6 @@ class UsersController < ApplicationController
 
   def update 
   	@user = User.find(params[:id])
-  end
-
-  def show 
-  	@user = User.find(params[:id])
-  	render :json => current_user
   end
 
   def edit 
