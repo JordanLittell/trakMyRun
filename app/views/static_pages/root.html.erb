@@ -2,7 +2,19 @@
 
 <div class="container">
 	<section class="content"></section>
-	<aside class="left panel well col-md-3">
+	<aside class="left col-md-3">
+
+		<div class="pannel well">
+			<img src= "http://pmcvariety.files.wordpress.com/2014/07/sons-of-anarchy-season-7-fx.jpg?w=670&h=377&crop=1" class="profile-pic">
+			<div class="row">
+				<div class="col-sm-3">
+					<% if current_user %>
+					<%= current_user.username %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<br>
 		<div class="panel-group" id="accordion">
 		  <div class="panel panel-default">
 		    <div class="panel-heading">

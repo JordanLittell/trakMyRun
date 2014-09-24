@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	def create 
 		@user = User.find_by_credentials(params[:user][:username], params[:user][:password])
 		if @user.nil?
-			flash[:errors] = ["We could not process your request."]
+			flash.now[:errors] = ["We could not process your request."]
 			render :new
 		else 
 			log_in!(@user)

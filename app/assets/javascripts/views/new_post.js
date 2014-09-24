@@ -21,11 +21,8 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 		});
 		var formData = $('#new-post-form').serializeJSON();
 		var post = new TrakMyRun.Models.Post(formData);
-		post.save({},{
-			success: function() {
-				Backbone.history.navigate("", { trigger: true });
-			}
-		});
+		post.save();
+		Backbone.history.navigate("", { trigger: true });
 	},
 
 	updateForm: function (ev, ui) {

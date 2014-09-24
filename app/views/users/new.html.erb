@@ -1,17 +1,17 @@
 <div class="container">
 
-	<section class="col-md-4 col-md-offset-4 sign-up text-center">
+	<section class="col-sm-4 col-sm-offset-4 sign-up text-center">
 
-		<h1>Sign Up</h1>
+		<h1 class="text-thin">Sign Up</h1>
 		<%= render :partial => "layouts/errors"%>
 		<form action="<%=users_url%>" method="POST" class="form">
 			<div class="form-group">
-				<label for="username">Username</label>
+				<label for="username" class="text-thin">Username</label>
 				<input id="username" placeholder="Username" value="<%=@user.username%>" name="user[username]" class="form-control">
 			</div>
 
 			<div class="form-group">
-				<label for="password">Password</label>
+				<label for="password" class="text-thin">Password</label>
 				<input id="password" placeholder="Password" type="password" name="user[password]" class="form-control">
 			</div>
 
@@ -20,7 +20,7 @@
 			<input type="submit" value="Sign Up" class="btn btn-default">
 		</form>
 		<br>
-		<form action="<%=session_url%>" method="post" class="form">
+		<form action="<%=sessions_url%>" method="post" class="form">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 			<input type="hidden" name="user[username]" value="GuestUser">
 			<input type="hidden" name="user[password]" value="guestuser2691">
