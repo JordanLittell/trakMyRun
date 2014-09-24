@@ -10,7 +10,11 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		"" : "currentUserShow",
 		"posts/new":"newPost",
 		"users/:id" : "userShow",
+<<<<<<< HEAD
 		"users/:id/edit", "editUser"
+=======
+		"users/:id/edit": "editUser"
+>>>>>>> master
 	},
 
 	userShow: function(id) {
@@ -22,7 +26,16 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	editUser: function(id) {
+<<<<<<< HEAD
 		var user = TrakMyRun.Collections.users.getOrFetch(id);	}
+=======
+		var user = TrakMyRun.Collections.users.getOrFetch(id);
+		var view = new TrakMyRun.Views.UserEdit({
+			model: user
+		});
+		this.swapView(view);
+	},
+>>>>>>> master
 
 	currentUserShow: function() {
 		var id = TrakMyRun.CurrentUser;

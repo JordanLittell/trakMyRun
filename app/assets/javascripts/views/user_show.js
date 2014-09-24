@@ -16,7 +16,10 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 			});
 			view.addSubview('.posts-container', subview);
 		});
+<<<<<<< HEAD
 		debugger;
+=======
+>>>>>>> master
 		return this;
 	}
 });
