@@ -1,18 +1,9 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
+
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -41,7 +32,61 @@ ul.alert {
 	background-color: rgba(199, 10, 10, 0.41);
 }
 
+.duration {
+	display: inline-block;
+	margin: 0 5%;
+	height: 200px;
+}
 
 
+.time-display {
+	color: white;
+	font-weight: 100;
+	width: 80%;
+	font-size: 34px;
+	margin: 3% 10%;
+	padding: 20px 0;
+	background: rgba(0,0,0,0.7);
+	height: 100px;
+}
+.text-thin {
+	font-weight: 100;
+}
+.activity-form{
+	color: white;
+	font-weight: 100;
+	font-size: 34px;
+	margin: 3% 0;
+	padding: 20px 0;
+	background: rgba(0,0,0,0.7);
+	height: 100px;
+}
+
+.modal-form {
+	color: white;
+	background-color: white;
+	padding: 20px;
+	background: rgba(0,0,0,0.7);
+	border-radius: 5px;
+}
+
+.modal-submit {
+	width: 40%;
+	padding: 10px;
+	font-weight: 100;
+	font-size: 20px;
+	background: rgba(0,0,0,0.8);
+	border: 1px solid black;
+	border-radius: 5px;
+	transition: border .5s ease-in;
+}
+.modal-submit:hover {
+	border: 1px solid #ACACAC;
+}
+
+.time-label {
+	display: inline;
+	margin:2%;
+}
 
 

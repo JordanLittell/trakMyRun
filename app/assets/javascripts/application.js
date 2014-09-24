@@ -12,10 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require jquery-ui
 //= require underscore
 //= require backbone
+//= require serialize_json
 //= require trak_my_run
 //= require_tree ../templates
 //= require_tree ./models
