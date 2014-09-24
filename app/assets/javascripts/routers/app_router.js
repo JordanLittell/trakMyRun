@@ -36,8 +36,10 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	newPost: function() {
-		console.log("activity fired");	
-		var view = new TrakMyRun.Views.NewPost();
+		var user = TrakMyRun.Collections.users.getOrFetch(TrakMyRun.CurrentUser);
+		var view = new TrakMyRun.Views.NewPost({
+			model: user
+		});
 		this.swapView(view);
 		view.setSliders();
 	},
