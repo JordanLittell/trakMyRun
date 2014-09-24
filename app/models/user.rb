@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	
 	attr_accessor :password
 	
-	has_many :activities
+	has_many :posts
 
 	def password=(password)
 		@password = password

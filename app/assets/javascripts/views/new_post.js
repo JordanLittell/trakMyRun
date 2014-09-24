@@ -11,6 +11,7 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	events: {
 		"submit #new-post-form" : "savePost",
 		"slidechange .duration": "updateForm",
+		"click .close-view": "closeView"
 	}, 
 
 	savePost: function (event) {
@@ -22,6 +23,10 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 		var formData = $('#new-post-form').serializeJSON();
 		var post = new TrakMyRun.Models.Post(formData);
 		post.save();
+		Backbone.history.navigate("", { trigger: true });
+	},
+
+	closeView: function() {
 		Backbone.history.navigate("", { trigger: true });
 	},
 
