@@ -39,7 +39,7 @@ ul.alert {
 }
 
 
-.time-display {
+.transparent-display {
 	color: white;
 	font-weight: 100;
 	width: 80%;
@@ -120,5 +120,11 @@ ul.alert {
 .glyphicon:hover{
 	color: #FFA500;
 	cursor: pointer
+}
+#calories {
+	width: 100%;
+	display:inline-block;
+	height: 60px;
+	padding: 0;
 }
 
