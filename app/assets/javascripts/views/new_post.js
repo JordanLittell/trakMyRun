@@ -44,8 +44,16 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	        max: 59,
 	        orientation: "vertical",
 	        range: "min",
-	        animate: true
-	        
+	        animate: true    
+        });
+
+        $("#hour").slider({
+	        value: 0,
+	        step: 1,
+	        max: 10,
+	        orientation: "vertical",
+	        range: "min",
+	        animate: true    
         });
 	}
 });

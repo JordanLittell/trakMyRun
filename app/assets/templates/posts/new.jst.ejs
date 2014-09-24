@@ -3,13 +3,22 @@
 	<h1 class="text-thin">Log Your Activity</h1>
 
 	<form class="form" id="new-post-form" >
-		<div class="form-group col-md-4 col-md-offset-4">
+		<div class="form-group col-md-3 col-md-offset-1">
 			<label for="type"><h1 class="text-thin">Type</h1></label>
 			<input class="form-control col-md-3" id="type" placeholder="Cycling, Running, Biking..." name="post[workout_type]">
 		</div>
 
+		<div class="form-group col-md-3 ">
+			<label for="type"><h1 class="text-thin">Heart Rate</h1></label>
+			<input class="form-control col-md-3" id="type" placeholder="Average Heart Rate">
+		</div>
+		<div class="form-group col-md-4 calories">
+			<h1 class="text-thin">Calories Burned</h1>
+			<span class="transparent-display" id="calories">0</span>
+		</div>
+
 		<div class="row text-center">
-			<span class="time-display col-md-4"> 
+			<span class="transparent-display col-md-4"> 
 			<span id="hours">0</span> Hours   |  
 			<span id="minutes">0</span> Minutes | 
 			<span id="seconds">0</span> Seconds 
@@ -20,7 +29,7 @@
 		<input type="hidden" class="seconds-value" name="post[seconds]">
 
 		<div class="row">
-			<div class="duration" col-md-offset-2" data-time-type="hours"></div>
+			<div class="duration" id="hour" col-md-offset-2" data-time-type="hours"></div>
 			
 			<div class="duration" col-md-offset-2" data-time-type="minutes"></div>
 			

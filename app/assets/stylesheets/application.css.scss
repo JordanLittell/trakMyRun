@@ -39,7 +39,7 @@ ul.alert {
 }
 
 
-.time-display {
+.transparent-display {
 	color: white;
 	font-weight: 100;
 	width: 80%;
@@ -106,5 +106,25 @@ ul.alert {
 .close-view:hover {
 	color: white;
 	text-decoration: none
+}
+
+.feed {
+	background-color: #212121;
+	color: #E5E5E5;
+	padding: 20px;
+}
+.activity {
+	color: black;
+}
+
+.glyphicon:hover{
+	color: #FFA500;
+	cursor: pointer
+}
+#calories {
+	width: 100%;
+	display:inline-block;
+	height: 60px;
+	padding: 0;
 }
 
