@@ -1,4 +1,4 @@
-TrakMyRun.Views.PostShow = Backbone.View.extend({
+TrakMyRun.Views.PostShow = Backbone.CompositeView.extend({
 	template: JST["posts/show"],
 
 	render: function () {
@@ -7,5 +7,6 @@ TrakMyRun.Views.PostShow = Backbone.View.extend({
 		});
 		this.$el.html(content);
 		return this;
-	}
+	},
+
 });

@@ -1,8 +1,8 @@
-<div class="panel well col-md-4 "> 
-	<div class="row">
-		<div class="col-md-4 col-offset-md-2">
-			<h4>Workout Type:</h4> <%= post.get('workout_type') %>
-			<table class="table">
+
+	<div class="row pannel well activity">
+		<div class="col-sm-6">
+			<h4>Workout Type</h4> <%= post.get('workout_type') %>
+			<table class="table col-sm-6">
 				<tr>
 					<td>Hours</td>
 					<td><%=post.get('hours')%></td>
@@ -22,8 +22,8 @@
 			</table>	
 		</div>
 
-		<div>
+		<div class="col-sm-5 col-sm-offset-1">
+		<h3>Description</h3>
 			Lorem ipsum dolor sit amet, eget mollis velit elit vestibulum suspendisse lectus, non ut congue id ipsum, pellentesque consequat, at turpis malesuada in dictum mollis, luctus turpis dui tristique ut in a.
 		</div>
 	</div>
-</div>
