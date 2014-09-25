@@ -16,6 +16,15 @@ TrakMyRun.Collections.Users = Backbone.Collection.extend({
 			user.fetch();
 		}
 		return user;
+	},
+
+	parse: function(resp) {
+		debugger;
+		if(resp.users) {
+			TrakMyRun.Collections.users.set(resp.users, { parse: true })
+		}
+		delete resp.users
+		return resp
 	}
 });
 

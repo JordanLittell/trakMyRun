@@ -1,5 +1,5 @@
-<aside class="left col-md-3">
 
+<aside class="left col-md-3">
 		<div class="pannel well">
 			<img src= "http://pmcvariety.files.wordpress.com/2014/07/sons-of-anarchy-season-7-fx.jpg?w=670&h=377&crop=1" class="profile-pic">
 			
@@ -23,17 +23,17 @@
 	                <table class="table">
 	                    <tr>
 	                        <td>
-	                            <span class="glyphicon glyphicon-pencil text-primary"></span><a href="/#users/<%= user.get('id') %>/edit">Edit Profile</a>
+	                            <span class="glyphicon glyphicon-flash text-success"></span>
+	                            <a href="/#users">News Feed</a>
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td>
-	                            <span class="glyphicon glyphicon-flash text-success"></span><a href="">News Feed</a>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <span class="glyphicon glyphicon-file text-info"></span><a href="/" id="home">My Activities</a>
+	                            <span class="glyphicon glyphicon-file text-info" >
+	                            	<a href="/#users/<%= user.get('id') %>" id="home">
+	                            		Activities
+	                            	</a>
+	                            </span>
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -81,16 +81,17 @@
 	            </div>
 	        </div>
 	    </div>
+</aside>
+
+<section class="feed-content col-md-8  col-md-offset-1 ">
+	
+	
+	<div class="posts-container">
+		<h1 class="text-thin text-center feed">Your Activities</h1>	
+		<!-- Insert posts and edit views here here -->
+	</div>
+
+</section>
 
 
-	</aside>
 
-	<section class="feed-content col-md-8  col-md-offset-1 ">
-		
-		
-		<div class="posts-container">
-			<h1 class="text-thin text-center feed">Your Activities</h1>	
-			<!-- Insert posts and edit views here here -->
-		</div>
-
-	</section>

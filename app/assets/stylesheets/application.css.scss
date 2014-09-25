@@ -8,11 +8,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body {
+.main-background {
 	background-image: url('backdropPic.jpg');
 	background-size: cover;
 }
-
+body {
+	background-color: #C1C1C1;
+}
 .sign-up, .sign-in {
 	min-height: 400px;
 	margin-top: 10%;
@@ -144,5 +146,28 @@ ul.alert {
 }
 .side-nav-link:hover {
 	text-decoration: underline;
+}
 
+.visitor-link {
+	color: white;
+	display:inline-block;
+	font-weight: 100;
+	font-size: 40px;
+	padding: 10px;
+	margin-top: 4%;
+	border: 1px solid white;
+	border-radius: 4px;
+	background-color: rgba(0,0,0,0.5);
+	transition: background 1s ease_in;
+}
+.visitor-link:hover {
+	background-color: rgba(0,0,0,0);
+	color:white;
+	text-decoration: none;
+}
+.error-pannel {
+	color: red;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	top: 40px;
 }

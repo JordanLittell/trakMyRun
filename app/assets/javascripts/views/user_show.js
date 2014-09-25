@@ -28,19 +28,43 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		"click #changePassword" : "showPasswordChange",
 		"click #changeAddress" : "showAddressChange",
 		"click #updateInfo": "showChangeInfo",
-		"click #home": "goHome"
+		"click #home": "goHome",
+		"submit #personal-stat-form": "updateUser"
 	},
 
+	goHome: function() {
+		this.render();
+	},
 	showChangeInfo: function () {
 		var content = this.editTemplate({
 			user: this.model
 		});
+		debugger;
 		$('.posts-container').html(content);
+	},
+
+	createNewPassword: function (ev) {
+		ev.preventDefault();
+		var form_data = $('form').serializeJSON();
+		this.model.save(form_data, {
+			success: function(a,b) {
+				debugger;
+			}
+		})
+	},
+
+	updateUser: function (ev) {
+		ev.preventDefault();
+		var data = $(ev.currentTarget).serializeJSON();
+		console.log(data);
+		this.model.save(data.user);
+		TrakMyRun.Collections.users.set(this.model);
 	},
 
 	showPhotoEdit: function(ev) {
 
 	},
+
 	showPasswordChange: function(ev) {
 		var content = this.passwordEditTemplate({
 			user: this.model

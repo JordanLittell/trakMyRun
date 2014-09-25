@@ -1,20 +1,27 @@
-<%= render "header" %>
+
+<% if flash[:errors] %> 
+<div class="pannel well col-md-6">
+	<ul > 
+		<%flash[:errors].each do |error| %> 
+		<li><%= error %></li>
+		<% end %> 
+	</ul>
+</div>
+<% end %>
 
 <div class="container">
 	<section class="content"></section>
 </div>
-
-	
-
-
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
 	  TrakMyRun.initialize();
 	  $('.dropdown-toggle').dropdown();
+	  $('body').removeClass("main-background");
 	});
 	window.TrakMyRun.CurrentUser = <%= current_user.id %>
 
 	
 </script>
+
