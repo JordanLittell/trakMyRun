@@ -27,15 +27,7 @@
 	                            <a href="/#users">News Feed</a>
 	                        </td>
 	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <span class="glyphicon glyphicon-file text-info" >
-	                            	<a href="/#users/<%= user.get('id') %>" id="home">
-	                            		Activities
-	                            	</a>
-	                            </span>
-	                        </td>
-	                    </tr>
+	           
 	                    <tr>
 	                        <td>
 	                            <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">Comments</a>
@@ -57,6 +49,15 @@
 	        <div id="collapseThree" class="panel-collapse collapse">
 	            <div class="panel-body">
 	                <table class="table">
+	                	<tr>
+	                        <td>
+	                            <span class="glyphicon glyphicon-home text-info" >
+	                            	<a href="/#users/<%= user.get('id') %>" id="home">
+	                            		Home
+	                            	</a>
+	                            </span>
+	                        </td>
+	                    </tr>
 	                	<tr>
 	                        <td>
 	                            <span class="side-nav-link" id="changePhoto">Change Photo</span>
