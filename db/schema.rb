@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925040515) do
+ActiveRecord::Schema.define(version: 20140925234115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20140925040515) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "maps", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "path"
+    t.string   "total_miles"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "maps", ["user_id"], name: "index_maps_on_user_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
