@@ -15,20 +15,6 @@ class UsersController < ApplicationController
   	end
   end
 
-  def update 
-  	@user = User.find(params[:id])
-  end
-
-  def edit 
-  	@user = User.find(params[:id])
-  	if @user.update(user_params)
-  		render :show
-  	else 
-  		flash.now[:errors] = @user.errors.full_messages
-  		render :show
-  	end
-  end
-
   def destroy 
   end
 

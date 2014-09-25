@@ -9,8 +9,9 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 	routes: {
 		"" : "currentUserShow",
 		"posts/new":"newPost",
+		"users/:id/edit": "editUser",
 		"users/:id" : "userShow",
-		"users/:id/edit": "editUser"
+		
 	},
 
 	userShow: function(id) {

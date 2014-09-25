@@ -1,2 +1,2 @@
-json.(@user, :id, :username, :weight, :age, :gender)
-json.posts @posts, :hours, :minutes, :seconds, :calories, :workout_type
+json.(@user, :id, :username, :weight, :age, :gender, :height)
+json.posts @posts, :hours, :minutes, :seconds, :calories, :workout_type, :id

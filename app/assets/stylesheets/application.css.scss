@@ -42,12 +42,11 @@ ul.alert {
 .transparent-display {
 	color: white;
 	font-weight: 100;
-	width: 80%;
+	width: 100%;
 	font-size: 34px;
-	margin: 3% 10%;
+	margin: 3% 0%;
 	padding: 20px 0;
 	background: rgba(0,0,0,0.7);
-	height: 100px;
 }
 .text-thin {
 	font-weight: 100;
@@ -128,3 +127,12 @@ ul.alert {
 	padding: 0;
 }
 
+.delete-view {
+	color: black;
+	cursor:pointer;
+	font-size: 30px;
+	transition: color .4s ease-in
+}
+.delete-view:hover {
+	color: red;
+}

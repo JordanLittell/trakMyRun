@@ -41,8 +41,11 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	  var gender = this.model.get('gender');
 	  var time = this.totalMinutes();
 	  if (heartRate > 0) {
+	  	debugger;
 		  var result = this.getCaloriesBurned(age, weight, heartRate, gender, time);
 		  $("#calories").html(result);
+		  $("#calories-input").val(result);
+
 		}
 	},
 
@@ -88,7 +91,7 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 			 hrConst = 0.6309;
 			 subt = 55.0969;
 		}
-		var numerator = (((age * ageConst) - (weight * weightConst) 
+		var numerator = (((age * ageConst) - ((weight/2.2) * weightConst) 
 						+ (heartRate * hrConst) - subt) * totTime)
 		return Math.round(numerator/4.184)
 	}

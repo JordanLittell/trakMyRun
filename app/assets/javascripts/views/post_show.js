@@ -9,4 +9,13 @@ TrakMyRun.Views.PostShow = Backbone.CompositeView.extend({
 		return this;
 	},
 
+	events: {
+		"click .delete-view": "deletePost"
+	},
+
+	deletePost: function (event) {
+		var id = $(event.currentTarget).data('post-id');
+		this.model.destroy();
+	}
+
 });
