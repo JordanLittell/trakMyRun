@@ -15,7 +15,13 @@ TrakMyRun.Views.PostShow = Backbone.CompositeView.extend({
 
 	deletePost: function (event) {
 		var id = $(event.currentTarget).data('post-id');
-		this.model.destroy();
+		if (TrakMyRun.CurrentUser === this.model.get("user_id")) {
+			this.model.destroy();
+			console.log('post deleted for user');	
+		} else {
+			console.log('this is not your comment');
+		}
+		
 	}
 
 });

@@ -9,7 +9,7 @@
 				</div>
 			</div>
 		</div>
-
+<% if (TrakMyRun.CurrentUser === user.get('id')) { %>
 		<div class="panel-group" id="accordion">
 		  <div class="panel panel-default">
 	        <div class="panel-heading">
@@ -81,6 +81,7 @@
 	            </div>
 	        </div>
 	    </div>
+	    <% } %>
 </aside>
 
 <section class="feed-content col-md-8  col-md-offset-1 ">

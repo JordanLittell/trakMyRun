@@ -1,6 +1,7 @@
 json.(@user, :id, :username, :weight, :age, :gender, :height)
 json.posts @posts do |post| 
 	json.id post.id
+	json.user_id post.user_id
 	json.hours post.hours
 	json.minutes post.minutes 
 	json.seconds post.seconds 

@@ -4,7 +4,7 @@ TrakMyRun.Models.Post = Backbone.Model.extend({
 		var model = this;
 		if(!this._comments) {
 			this._comments = new TrakMyRun.Collections.Comments([], { post: this });
-			debugger;
+			
 		}
 		return this._comments;
 	},

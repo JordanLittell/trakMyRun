@@ -1,12 +1,20 @@
-TrakMyRun.Views.UserIndex = Backbone.View.extend({ 
+TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({ 
 	template: JST["users/index"],
 	render: function() {
-		debugger;
-		var content = this.template({
-			users: this.collection
+		var view = this;
+		var content = view.template({
+			users: view.collection
 		});
-		this.$el.html(content);
-		return this;
+		view.collection.each(function(user){
+			user.posts().each(function(post) {
+				var subview = new TrakMyRun.Views.PostShow({
+					model: post
+				});
+				view.addSubview('.posts-container', subview);
+			})
+		});
+		view.$el.html(content);
+		return view;
 	},
 	initialize: function() {
 		this.listenTo(this.collection, "sync", this.render)

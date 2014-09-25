@@ -1,5 +1,12 @@
 <ul>
-<% users.forEach(function(user) {  %>
-	<li><%= user.get('username') %></li>
+<% users.each(function(user) {  %>
+	<div class="pannel well">
+		<li><%= user.get('username') %></li>
+		
+		<% user.posts().forEach(function(post){ %>
+		<li><%= post.get('workout_type')%></li> 
+		<% }); %>
+
+	</div>
 <% }); %>
 </ul>

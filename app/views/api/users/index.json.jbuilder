@@ -1,4 +1,4 @@
-json.users @users do |user|
+json.array! @users do |user|
 	json.id user.id
 	json.username user.username
 	json.gender user.gender 
@@ -14,6 +14,7 @@ json.users @users do |user|
 			json.content comment.content
 			json.user_id comment.user_id
 			json.post_id comment.post_id 
+			json.id comment.id
 		end
 	end
 end

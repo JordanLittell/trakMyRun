@@ -8,7 +8,7 @@
 			end
 
 			def index 
-				@users = User.all[0..20]
+				@users = User.all
 				render "index"
 			end
 

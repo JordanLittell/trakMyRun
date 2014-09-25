@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-50.times do 
+20.times do 
 	User.create(
 				username: Faker::Name.name, 
 				age: Random.rand(50), 
@@ -17,7 +17,7 @@
 				height: Random.rand(7) 
 	)
 end
-50.times do
+10.times do
 	User.create(
 				username: Faker::Name.name, 
 				password_digest: BCrypt::Password.create(Faker::Internet.user_name),
@@ -31,7 +31,7 @@ end
 
 100.times do |i|
 	Post.create(
-				user_id: i,
+				user_id: (1+i%31),
 				hours: Random.rand(10),
 				minutes: Random.rand(60),
 				calories: Random.rand(2000),
@@ -39,7 +39,7 @@ end
 		)
 	Comment.create(
 				content: Faker::Lorem.sentence,
-				user_id: i,
+				user_id: (1+i%31),
 				post_id: Random.rand(100)
 		)
 end
