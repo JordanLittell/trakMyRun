@@ -8,71 +8,89 @@
 					<%= user.get('username') %>
 				</div>
 			</div>
-
-			<div class="row">
-
-				<div class="col-sm-1 center-text">
-					<span class="glyphicon glyphicon-picture"></span>
-				</div>
-				<div class="col-sm-1 center-text">
-					<a href="/#users/<%= user.get('id') %>/edit"><span class="glyphicon glyphicon-pencil"></span></a>
-				</div>
-
-			</div>
 		</div>
-		<br>
+
 		<div class="panel-group" id="accordion">
 		  <div class="panel panel-default">
-		    <div class="panel-heading">
-		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-		          Collapsible Group Item #1
-		        </a>
-		      </h4>
-		    </div>
+	        <div class="panel-heading">
+	            <h4 class="panel-title">
+	                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+	                </span>Content</a>
+	            </h4>
+	        </div>
+	        <div id="collapseOne" class="panel-collapse collapse in">
+	            <div class="panel-body">
+	                <table class="table">
+	                    <tr>
+	                        <td>
+	                            <span class="glyphicon glyphicon-pencil text-primary"></span><a href="/#users/<%= user.get('id') %>/edit">Edit Profile</a>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <span class="glyphicon glyphicon-flash text-success"></span><a href="">News Feed</a>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <span class="glyphicon glyphicon-file text-info"></span><a href="/" id="home">My Activities</a>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">Comments</a>
+	                            <span class="badge"></span>
+	                        </td>
+	                    </tr>
+	                </table>
+	            </div>
+	        </div>
+	    </div>
 
-		    <div id="collapseOne" class="panel-collapse collapse in">
-		      <div class="panel-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-		      </div>
-		    </div>
-		  </div>
-		  <div class="panel panel-default">
-		    <div class="panel-heading">
-		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-		          Collapsible Group Item #2
-		        </a>
-		      </h4>
-		    </div>
-		    <div id="collapseTwo" class="panel-collapse collapse">
-		      <div class="panel-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-		      </div>
-		    </div>
-		  </div>
-		  <div class="panel panel-default">
-		    <div class="panel-heading">
-		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-		          Collapsible Group Item #3
-		        </a>
-		      </h4>
-		    </div>
-		    <div id="collapseThree" class="panel-collapse collapse">
-		      <div class="panel-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-		      </div>
-		    </div>
-		  </div>
-		</div>
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h4 class="panel-title">
+	                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+	                </span>Account</a>
+	            </h4>
+	        </div>
+	        <div id="collapseThree" class="panel-collapse collapse">
+	            <div class="panel-body">
+	                <table class="table">
+	                	<tr>
+	                        <td>
+	                            <span class="side-nav-link" id="changePhoto">Change Photo</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <span class="side-nav-link" id="changePassword">Change Password</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <span class="side-nav-link" id="updateInfo">Update Info</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <span class="side-nav-link" id="changeAddress">Update Address</span>
+	                        </td>
+	                    </tr>
+	                </table>
+	            </div>
+	        </div>
+	    </div>
+
+
 	</aside>
 
-	<section class="feed-content col-md-8  col-md-offset-1 feed text-center">
-		<h1 class="text-thin">Your Activities</h1>	
+	<section class="feed-content col-md-8  col-md-offset-1 ">
+		
 		
 		<div class="posts-container">
-			<!-- Insert post subviews here -->
+			<h1 class="text-thin text-center feed">Your Activities</h1>	
+			<!-- Insert posts and edit views here here -->
 		</div>
 
 	</section>

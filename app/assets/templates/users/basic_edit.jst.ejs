@@ -1,0 +1,27 @@
+<div class="row pannel well">
+	<h1 class="text-center">Basic Info</h1>
+	<form id="personal-stat-form">
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-3 col-md-offset-3">
+					<label for="age">Age</label>
+					<input id="age" class="form-control" value="<%=user.get('age')%>" name="user[age]">
+					<label for="weight">Weight</label>
+					<input id="weight" class="form-control" value="<%=user.get('weight')%>"name="user[weight]">
+				</div>
+
+				<div class="col-md-3">
+					<label for="gender">Gender</label>
+					<input id="gender" class="form-control" value="<%=user.get('gender')%>"name="user[gender]">
+					<label for="height">Height</label>
+					<input id="height" class="form-control" value="<%=user.get('height')%>"name="user[height]">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<input type="submit" class="btn btn-primary col-md-6 col-md-offset-3">
+			</div>
+		</div>
+		
+	</form>
+</div>

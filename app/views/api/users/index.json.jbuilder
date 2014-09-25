@@ -1,1 +1,1 @@
-json.users @users :username, :id  
+json.(@user, :id, :username, :weight, :age, :gender, :height)

@@ -1,6 +1,8 @@
 
 	<div class="row pannel well activity">
-	<span class="pull-right delete-view" data-post-id="<%=post.get('id')%>">X</span>
+		<span class="pull-right delete-view" data-post-id="<%=post.get('id')%>">
+			X
+		</span>
 		<div class="col-sm-6">
 			<h4>Workout Type</h4> <%= post.get('workout_type') %>
 			<table class="table col-sm-6">
@@ -27,4 +29,21 @@
 		<h3>Description</h3>
 			Lorem ipsum dolor sit amet, eget mollis velit elit vestibulum suspendisse lectus, non ut congue id ipsum, pellentesque consequat, at turpis malesuada in dictum mollis, luctus turpis dui tristique ut in a.
 		</div>
+		<div class="col-sm-12">
+		<hr>
+		<h3>Comments</h3>
+			<% if(post.comments()) { %> 
+			<ul>
+				<% post.comments().forEach(function(comment){ %>
+					<li><a href=<%="#users/"+comment.user().get('id')%>><%= comment.user().get('username') %>:</a> <%= comment.get('content') %> </li>
+				<%	}); %>
+			</ul>
+
+			<% } else { %>
+			<p>There are no comments at this time.</p>
+				<% } %>
+		</div>
+
 	</div>
+
+	

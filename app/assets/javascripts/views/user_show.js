@@ -1,5 +1,8 @@
 TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 	template: JST["users/show"],
+	editTemplate: JST["users/basic_edit"],
+	locationEditTemplate: JST["users/location_edit"],
+	passwordEditTemplate: JST["users/password_edit"],
 
 	initialize: function() {
 		this.listenTo(this.model, "sync", this.render);
@@ -18,5 +21,36 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 			view.addSubview('.posts-container', subview);
 		});
 		return this;
-	}
+	},
+
+	events: {
+		"click #changePhoto": "showPhotoEdit",
+		"click #changePassword" : "showPasswordChange",
+		"click #changeAddress" : "showAddressChange",
+		"click #updateInfo": "showChangeInfo",
+		"click #home": "goHome"
+	},
+
+	showChangeInfo: function () {
+		var content = this.editTemplate({
+			user: this.model
+		});
+		$('.posts-container').html(content);
+	},
+
+	showPhotoEdit: function(ev) {
+
+	},
+	showPasswordChange: function(ev) {
+		var content = this.passwordEditTemplate({
+			user: this.model
+		});
+		$('.posts-container').html(content);
+	},
+	showAddressChange: function(ev) {
+		var content = this.locationEditTemplate({
+			user: this.model
+		});
+		$('.posts-container').html(content);
+	},
 });
