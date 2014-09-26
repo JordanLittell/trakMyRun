@@ -7,6 +7,13 @@ TrakMyRun.Models.User = Backbone.Model.extend({
 		return this._posts
 	},
 
+	maps: function () {
+		if(!this._maps) {
+			this._maps = new TrakMyRun.Collections.Maps([], {user:this})
+		}
+		return this._maps
+	},
+
 	parse: function(resp) {
 		if(resp.posts) {
 			this.posts().set(resp.posts, { parse: true });
