@@ -16,7 +16,6 @@
 //= require bootstrap-sprockets
 //= require jquery-ui
 //= require underscore
-//= require gmaps/google
 //= require gmaps_api
 //= require gmaps_util_lib
 //= require backbone
