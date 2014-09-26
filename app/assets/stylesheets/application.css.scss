@@ -26,7 +26,14 @@ body {
 label {
 	margin-top: 5%;
 }
+a {
+	cursor: pointer	
+}
 
+.map-display {
+	height: 200px;
+	padding: 10px;
+}
 ul.alert {
 	font-size: 20px;
 	list-style: none;

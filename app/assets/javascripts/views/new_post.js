@@ -41,7 +41,6 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	  var gender = this.model.get('gender');
 	  var time = this.totalMinutes();
 	  if (heartRate > 0) {
-	  	debugger;
 		  var result = this.getCaloriesBurned(age, weight, heartRate, gender, time);
 		  $("#calories").html(result);
 		  $("#calories-input").val(result);

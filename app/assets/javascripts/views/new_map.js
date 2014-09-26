@@ -8,9 +8,16 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 		return this;
 	},
 
-	   
- 	renderMap: function(selector) {
+	initialize: function () {
+		this.listenTo(this.model,"sync",window.initialize)
+	},
+	events: {
+		"click .new": "reload",
+		"click #map": "updateDistance"
+	},
 
- 	}
+	reload: function() {
+		window.location.reload();
+	}
 
 });

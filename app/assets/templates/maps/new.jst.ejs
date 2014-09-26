@@ -12,40 +12,105 @@
                     <i class="fa fa-times"></i>
                 </span>
             </span>
-            <a href="#create" class="list-group-item">
+            <a  class="list-group-item">
                 <i class="fa fa-comment-o"></i>Create
             </a>
-            <a href="#new" class="list-group-item">
+            <a  class="list-group-item new">
                 <i class="fa fa-search"></i>New
             </a>
-            <a href="#edit" class="list-group-item">
+            <a  class="list-group-item">
                 <i class="fa fa-user"></i>Save
             </a>
-            <a href="#show" class="list-group-item">
+            <a  class="list-group-item">
                 <i class="fa fa-folder-open-o"></i> Dude 
             </a>
-            <a href="#do" class="list-group-item">
+            <a  class="list-group-item">
                 <i class="fa fa-bar-chart-o"></i>Stuff 
             </a>
-            <a href="#stuff" class="list-group-item">
+            <a  class="list-group-item">
                 <i class="fa fa-envelope"></i>More Stuff!
             </a>
+            <div class="transparent-display map-display text-center">
+                Total Distance: <br>
+                <span class="distance-field">0 Miles</span>
+            </div>
         </div>  
     </div>      
     <div class="col-md-9 map-content pannel well">
         <div style='width: 800px;'>
             <div id="map" style='width: 700px; height: 600px;'>
             </div>
+            
         </div>
     </div>
 </div>
 
 <script>
-$(document).ready(function(){
 
+function initialize() {
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(37.7749300, -122.4194200)
+  };
+//Declare map, service and path variables
+  var map = new google.maps.Map(document.getElementById('map'),
+      mapOptions),
+      service = new google.maps.DirectionsService(),
+      //path will be used to set the polyline
+      path = new google.maps.MVCArray(),
+      distance = 0 //accumulator used to get total distance
 
-})
-   
+  var poly = new google.maps.Polyline({ map: map });
+
+  google.maps.event.addListener(map, "click", function(evt) {
+
+    if (path.getLength() === 0) {
+      path.push(evt.latLng);
+      poly.setPath(path);
+        new google.maps.Marker({
+            position: evt.latLng,
+            map: map,
+            animation: 'bounce'
+        })
+
+    } else {
+
+      service.route({
+        //origin is previous point in array
+        origin: path.getAt(path.getLength() - 1),
+        //destination is point that has just been clicked
+        destination: evt.latLng,
+        travelMode: google.maps.DirectionsTravelMode.WALKING
+      }, function(result, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+
+            distance += result.routes[0].legs[0].distance.value;
+            var distanceString = parseFloat(distance*(0.000621371)).toFixed(3)
+                
+            $('.distance-field').text(distanceString.concat(" miles"));
+
+            new google.maps.Marker({ position: evt.latLng, map: map });
+          for (var i = 0, len = result.routes[0].overview_path.length;
+              i < len; i++) {
+            path.push(result.routes[0].overview_path[i]);
+          }
+        }
+      });
+    }
+  });
+
+  function placeMarker(position, map) {
+  var marker = new google.maps.Marker({
+    position: position,
+    map: map
+  });
+  map.panTo(position);
+}
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
   
 
