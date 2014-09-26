@@ -165,10 +165,10 @@ ul.alert {
 	border: 1px solid white;
 	border-radius: 4px;
 	background-color: rgba(0,0,0,0.5);
-	transition: background 1s ease_in;
+	transition: background-color 1s ease_in;
 }
 .visitor-link:hover {
-	background-color: rgba(0,0,0,0);
+	background-color: rgba(70,70,70,0.5);
 	color:white;
 	text-decoration: none;
 }

@@ -6,36 +6,58 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 			user: this.model
 		});
 		this.$el.html(content);
-
 		this.initializeMap();
 		return this;
 	},
 
 	initialize: function () {
-		this.listenTo(this.model,"sync", this.initializeMap)
-		this.mapOptions = {
-    		zoom: 14,
-    		center: new google.maps.LatLng(37.7749300, -122.4194200)
-        };
+		this.listenTo(this.model,"sync", this.initializeMap);
 	},
 
 	events: {
-		"click .new": "reload",
-		"click #map": "updateDistance"
+		"click .create-new-map": "reload",
+		"click #map": "updateDistance",
+		"click .save-map": "saveMap",
+		"click .restart": "restartPolyLine"
 	},
 
 	reload: function() {
 		window.location.reload();
 	},
 
+	restartPolyLine: function () {
+		this.initializeMap();
+		this.markers.forEach(function(marker) {
+			marker.setMap(null);
+		});
+		this.$el.find('.distance-field').text('0 Miles');
+
+	},
+
+	saveMap: function() {
+		// console.log(JSON.stringify(this.poly.getPath()));
+		var data = new TrakMyRun.Models.Map();
+		var view = this;
+		console.log(this.poly.getPath())
+		data.set({
+			"path": (JSON.stringify(this.poly.getPath())),
+			"total_miles": view.distance
+		});
+		data.save();
+	},
+
 	mapUpdated: function(evt) {
 	    if (this.path.getLength() === 0) {
 	      this.path.push(evt.latLng);
 	      this.poly.setPath(this.path);
-	      new google.maps.Marker({
+	   
+	      var marker = new google.maps.Marker({
             position: evt.latLng,
             map: this.map
 	      });
+	      //add marker
+	      this.markers.push(marker);
+
 	    } else {
 
           this.service.route({
@@ -50,13 +72,14 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 
 	extendPath: function(evt, result, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
-		    this.distance += result.routes[0].legs[0].distance.value;
-		    var distanceString = parseFloat(this.distance*(0.000621371)).toFixed(3);
-		    distanceString.concat(" miles");
-		    this.$el.find('.distance-field').text(distanceString);
+		    this.distance += result.routes[0].legs[0].distance.value*(0.000621371);
+		    var distanceString = parseFloat(this.distance).toFixed(3);
+		    
+		    this.$el.find('.distance-field').text(distanceString.concat(' miles'));
 		    var newPath = result.routes[0].overview_path;
-		    new google.maps.Marker({ position: evt.latLng, map: this.map });
-
+		    var marker = new google.maps.Marker({ position: evt.latLng, map: this.map });
+		    //add marker
+		    this.markers.push(marker);
 		    for (var i = 0, len = newPath.length; i < len; i++) {
 		    
 		        this.path.push(result.routes[0].overview_path[i]);
@@ -75,7 +98,13 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
           this.path = new google.maps.MVCArray();
           this.poly = new google.maps.Polyline({ map: this.map, strokeColor: "#0066FF" });
           this.elevationService = new google.maps.ElevationService();
-          this.distance = 0; //accumulator used to get total distanc
+          this.distance = 0; //accumulator used to get total distance
+          this.markers = [];
+          this.mapOptions = {
+    		zoom: 14,
+    		center: new google.maps.LatLng(37.7749300, -122.4194200)
+        };
+
         google.maps.event.addListener(this.map, "click", this.mapUpdated.bind(this));
     },
 

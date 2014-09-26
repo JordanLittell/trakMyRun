@@ -1,3 +1,3 @@
 class Map < ActiveRecord::Base
-	validates :user_id, :path_string, :total_miles, presence: true
+	validates :user_id, :total_miles, presence: true
 end

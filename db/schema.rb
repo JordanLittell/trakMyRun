@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925234115) do
+ActiveRecord::Schema.define(version: 20140926181550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "activity", force: true do |t|
     t.integer  "user_id"
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140925234115) do
     t.string   "total_miles"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "latLn"
   end
 
   add_index "maps", ["user_id"], name: "index_maps_on_user_id", using: :btree
