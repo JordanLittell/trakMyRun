@@ -19,6 +19,10 @@ TrakMyRun.Models.User = Backbone.Model.extend({
 			this.posts().set(resp.posts, { parse: true });
 			delete resp.posts;
 		}
+		if(resp.maps) {
+			this.maps().set(resp.maps, { parse: true });
+			delete resp.maps;	
+		}
 		return resp;
 	}
 });

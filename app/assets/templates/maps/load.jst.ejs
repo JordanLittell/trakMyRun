@@ -1,0 +1,17 @@
+
+<div class="row clear-black">
+	<div class"pannel well col-md-12 text-center">
+		<h1 class="text-center text-thin">
+			<%=user.get('username')%>'s' Maps
+		</h1>
+		<% if(user.maps()) { %>
+			<ul>
+				<% user.maps().each(function(map) {    %>
+			
+					<li><%= map.get('id')%> <%= map.get('name') %> created at: <%=map.get('created_at')%></li>
+					
+				<% }) %>
+			</ul>
+		<% } %>
+	</div>
+</div>

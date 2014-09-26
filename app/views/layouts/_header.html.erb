@@ -22,8 +22,17 @@
             </a>
           </li>
 
-          <li><a href="#/posts/new">Log Workout</a></li>
-          <li><a href="">Dashboard</a></li>
+          <li>
+            <a href="#/posts/new">
+              <span class="glyphicon glyphicon-folder-open icon-hover"></span> Log Workout
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <span class="glyphicon glyphicon-th icon-hover"></span>
+              Dashboard
+            </a>
+          </li>
           <li class="dropdown">
           
         </ul>
@@ -36,7 +45,7 @@
         <ul class="nav navbar-nav navbar-right">
           
           <li><a href="#users/<%=current_user.id%>" 
-                class="glyphicon glyphicon-home icon-hover"></a></li>
+                class="glyphicon glyphicon-home icon-hover blue"></a></li>
           <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.username%><span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">

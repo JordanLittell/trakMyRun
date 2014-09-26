@@ -4,6 +4,7 @@ json.maps @user.maps do |map|
 	json.name map.name
 	json.user_id map.user_id
 	json.path map.path
+	json.created_at map.created_at
 end
 json.posts @posts do |post| 
 	json.id post.id
