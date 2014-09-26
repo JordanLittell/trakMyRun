@@ -5,7 +5,6 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		console.log(this.$rootEl);
 		Backbone.history.start();
 	},
-
 	routes: {
 		"" : "currentUserShow",
 		"posts/new":"newPost",

@@ -3,5 +3,4 @@ Backbone.MapView = Backbone.View.extend({
 	//class should keep array of points that represent the current path
 
 
-
 });
