@@ -30,7 +30,8 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var content = this.mapLoadTemplate({
 			maps: this.collection
 		});
-		$('.previous-maps').html(content).slideDown();
+		$('.previous-maps').html(content).slideDown("slow");
+		
 	},
 	
 	fetchMap: function(evt) {
@@ -56,7 +57,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 			miles = map.get('total_miles');
 
 		this.parseToGmap(JSON.parse(map.get('path')));
-		
 		this.$el.find('.distance-field').html(miles);
 	},
 

@@ -30,6 +30,12 @@ a {
 	cursor: pointer	
 }
 
+.previous-maps {
+	display:none;
+	height: 250px;
+	overflow: scroll;
+}
+
 .map-display {
 	height: 200px;
 	padding: 10px;
@@ -135,6 +141,9 @@ ul.alert {
 .glyphicon:hover{
 	color: #FFA500;
 	cursor: pointer
+}
+.active {
+	color: #FFA500;
 }
 #calories {
 	width: 100%;
