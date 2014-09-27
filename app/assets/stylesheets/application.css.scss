@@ -13,7 +13,11 @@
 	background-size: cover;
 }
 body {
+	background-color: #303030;
+}
+.container {
 	background-color: #FFF;
+	padding: 30px;
 }
 .sign-up, .sign-in {
 	min-height: 400px;
