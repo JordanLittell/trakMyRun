@@ -1,0 +1,8 @@
+<script type="text/javascript">
+	$(".close-form").on('click', function(event){
+		event.preventDefault();
+		var formId = $(event.currentTarget).data('form-id');
+		$(formId).slideUp('slow');
+	});
+
+</script>

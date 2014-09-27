@@ -19,9 +19,10 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		"click .create-new-map": "reload",
 		"click #map": "updateDistance",
 		"click .save-map": "saveMap",
-		"click .restart": "restartPolyLine",
+		"click .create-new-map": "restartPolyLine",
 		"click .load-options": "displayLoaded",
-		"click .map-show-link": "updatePage"
+		"click .map-show-link": "updatePage",
+		"click .close-icon": "closeView"
 	},
 
 	displayLoaded: function() {
@@ -31,7 +32,11 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 			maps: this.collection
 		});
 		$('.previous-maps').html(content).slideDown("slow");
-		
+	},
+
+	closeView: function(event){
+		var view = $(event.currentTarget).parents().eq(3);
+		$(view).slideUp();
 	},
 	
 	fetchMap: function(evt) {

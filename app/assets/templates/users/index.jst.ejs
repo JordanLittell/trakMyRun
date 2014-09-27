@@ -1,12 +1,53 @@
-<ul>
+<div class="pannel well">
 <% users.each(function(user) {  %>
-	<div class="pannel well">
-		<li><%= user.get('username') %></li>
-		
-		<% user.posts().forEach(function(post){ %>
-		<li><%= post.get('workout_type')%></li> 
-		<% }); %>
+	
+		<div class="row">
 
-	</div>
+			<div class="col-md-4 text-center">
+				<img src="<%=user.get('image_url')%>" class="profile-pic">
+				<h3 class="text-thin"><%= user.get('username') %></h3>
+			</div>
+
+			<div class="col-md-4 text-thin">
+				<h1 class="text-thin text-center">Recent Activities</h1>
+				<table class="table">
+					<tr>
+						<td>Type</td>
+						<td>Calories</td>
+						<td>Average HR</td>
+						<td>Time</td>
+					</tr>
+
+					<% user.posts().forEach(function(post){ %>
+						<tr>
+							<td class="text-thin">
+								<%=post.get('workout_type')%>
+							</td>
+					
+							<td>
+								<%=post.get('calories')%>
+							</td>
+							<td>
+								<span class="glyphicon glyphicon-heart-empty heart red"></span> 
+								<%=post.get('heart_rate')%> bpm
+							</td>
+					
+							<td>
+								<%=post.get('hours')%>h 
+								<%=post.get('minutes')%>m 
+							</td>
+						</tr>
+					<% }); %>
+				</table>
+			</div>
+
+			<div class="col-md-4 text-center text-thin">
+				<h1 class="text-thin">Stats</h1>
+				<p>Click on a user's recent activity to see the stats.</p>
+			</div>
+
+		</div>
+		<hr>
+
 <% }); %>
-</ul>
+</div>

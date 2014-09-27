@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926181550) do
+ActiveRecord::Schema.define(version: 20140927212847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140926181550) do
     t.integer  "calories"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "heart_rate"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140926181550) do
     t.integer  "weight"
     t.integer  "height"
     t.string   "gender"
+    t.string   "image_url"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree

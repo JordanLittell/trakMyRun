@@ -7,12 +7,12 @@
 		<form action="<%=users_url%>" method="POST" class="form">
 			<div class="form-group">
 				<label for="username" class="text-thin">Username</label>
-				<input id="username" placeholder="Username" value="<%=@user.username%>" name="user[username]" class="form-control">
+				<input id="username" placeholder="Username" value="<%=@user.username%>" name="users[username]" class="form-control">
 			</div>
 
 			<div class="form-group">
 				<label for="password" class="text-thin">Password</label>
-				<input id="password" placeholder="Password" type="password" name="user[password]" class="form-control">
+				<input id="password" placeholder="Password" type="password" name="users[password]" class="form-control">
 			</div>
 
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -22,8 +22,8 @@
 		<br>
 		<form action="<%=sessions_url%>" method="post" class="form">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-			<input type="hidden" name="user[username]" value="GuestUser">
-			<input type="hidden" name="user[password]" value="guestuser2691">
+			<input type="hidden" name="users[username]" value="GuestUser">
+			<input type="hidden" name="users[password]" value="guestuser2691">
 			<input type="submit" value="Sign In As Guest User" class="btn btn-primary">
 		</form>
 			

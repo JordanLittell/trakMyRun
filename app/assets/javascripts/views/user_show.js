@@ -3,6 +3,7 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 	editTemplate: JST["users/basic_edit"],
 	locationEditTemplate: JST["users/location_edit"],
 	passwordEditTemplate: JST["users/password_edit"],
+	photoChangeTemplate: JST["users/photo_edit"],
 
 	initialize: function() {
 		this.listenTo(this.model, "sync", this.render);
@@ -29,9 +30,14 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		"click #changeAddress" : "showAddressChange",
 		"click #updateInfo": "showChangeInfo",
 		"click #home": "goHome",
-		"submit #personal-stat-form": "updateUser"
+		"click #changePhoto": "displayPhotoForm",
+		"submit #personal-stat-form": "updateUser",
 	},
 
+	displayPhotoForm: function () {
+		$('#filepicker-form').removeClass('hidden');
+		$('#filepicker-form').slideDown('slow');
+	},
 	goHome: function() {
 		this.render();
 	},
@@ -39,7 +45,6 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		var content = this.editTemplate({
 			user: this.model
 		});
-		debugger;
 		$('.posts-container').html(content);
 	},
 

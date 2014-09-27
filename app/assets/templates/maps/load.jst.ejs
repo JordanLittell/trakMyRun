@@ -1,4 +1,8 @@
-<table class="table scroll-down"><% maps.each(function(map){ %>
+<table class="table scroll-down">
+<tr>
+<th class="text-thin">Previous Runs</th>
+<th class="close-icon text-thin pull-right">X</th>
+<% maps.each(function(map){ %>
 	<tr data-map-id="<%=map.get('id')%>" class="map-show-link">
 		<td><%= map.get('name') %></td> 
 		<td><%= map.get('total_miles').toString().slice(0,3) %> Miles</td>

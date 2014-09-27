@@ -12,13 +12,11 @@
 	background-image: url('backdropPic.jpg');
 	background-size: cover;
 }
-body {
-	background-color: #303030;
+
+.profile-pic {
+	max-width: 200px	
 }
-.container {
-	background-color: #FFF;
-	padding: 30px;
-}
+
 .sign-up, .sign-in {
 	min-height: 400px;
 	margin-top: 10%;
@@ -33,9 +31,20 @@ label {
 a {
 	cursor: pointer	
 }
-
+.close-icon {
+	font-size: 20px;
+	padding: 5px;
+	cursor: pointer;
+	transition: color .4s ease-in;
+	transition: background-color .4s ease-in;
+}
+.close-icon:hover {
+	color:white;
+	background-color: #BFBFBF;
+}
 .previous-maps {
 	display:none;
+	background-color: #F2F2F2;
 	height: 250px;
 	overflow: scroll;
 }
@@ -87,12 +96,35 @@ ul.alert {
 	height: 100px;
 }
 
+hr {
+	color: #B0B0B0;
+}
+
 .modal-form {
 	color: white;
-	background-color: white;
-	padding: 20px;
+	z-index: 10;
 	background: rgba(0,0,0,0.7);
 	border-radius: 5px;
+	padding: 20px;
+}
+
+#filepicker-form { 
+	color: white;
+	display: none;
+	padding: 20px;
+	position: absolute;
+	z-index: 10;
+	height:300px;
+	top: -25px;
+	z-index: 10;
+	background: rgba(0,0,0,0.7);
+}
+
+.file-submit {
+	position: absolute;
+	color: white;
+	z-index : 3;
+	background: rgba(0,0,0,0.7);
 }
 
 .modal-submit {
@@ -112,6 +144,10 @@ ul.alert {
 .time-label {
 	display: inline;
 	margin:2%;
+}
+
+.hidden {
+	display: none;
 }
 
 .profile-pic {
@@ -149,6 +185,22 @@ ul.alert {
 .active {
 	color: #FFA500;
 }
+.red {
+	color: #8B0000;
+}
+
+tr {
+	transition: background .4s ease-in;
+}
+
+tr:hover {
+	background-color: #EDEDED;
+	cursor: pointer;
+}
+.fixed {
+	position: fixed;
+}
+
 #calories {
 	width: 100%;
 	display:inline-block;

@@ -1,4 +1,4 @@
-json.(@user, :id, :username, :weight, :age, :gender, :height)
+json.(@user, :id, :username, :weight, :age, :gender, :height, :image_url)
 json.maps @user.maps do |map|
 	json.id map.id
 	json.name map.name

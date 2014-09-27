@@ -15,12 +15,20 @@ class UsersController < ApplicationController
   	end
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = ["Request completed"]
+      redirect_to :root
+    end
+  end
+
   def destroy 
   end
 
   private
 
   def user_params 
-  	params.require(:user).permit(:username, :password)
+  	params.require(:users).permit(:username, :password, :image_url)
   end
 end

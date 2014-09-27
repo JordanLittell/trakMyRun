@@ -15,15 +15,26 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          
           <li class="active">
+            <a href="#users/<%=current_user.id%>" class="show-icon">
+              Home
+            </a>
+          </li>
+         <li>
+          <a href="#users">
+            <span class=""></span>
+            The Hub
+          </a>
+        </li>
+          
+          <li>
             <a href="#users/<%=current_user.id%>/routes/show" class="show-icon">
               <span class="glyphicon glyphicon-map-marker icon-hover"></span> Create Route
             </a>
           </li>
 
           <li>
-            <a href="#/posts/new">
+            <a href="#posts/new">
               <span class="glyphicon glyphicon-folder-open icon-hover"></span> Log Workout
             </a>
           </li>
@@ -32,7 +43,14 @@
               <span class="glyphicon glyphicon-th icon-hover"></span>
               Dashboard
             </a>
+          <li>
+            <a href="">
+              Leaderboard
+            </a>
           </li>
+          </li>
+         
+
           <li class="dropdown">
           
         </ul>
@@ -58,11 +76,38 @@
           </li>
 
         </ul>
-
-
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
+  <!-- IMAGE UPLOAD FORM -->
+  <div class="col-md-12 text-center" id="filepicker-form">
+    <form class="form col-md-4 col-md-offset-4" action="<%=user_url(current_user)%>" method="post"> 
+
+      <div class="form-group">
+
+        <label for="image"><h1>Upload Image</h1></label> 
+        <br>
+        <input type="hidden" name="_method" value="PATCH">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+        <input type='filepicker' class="form-control" name="users[image_url]">
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary form-control">Submit</button>
+          </div>
+
+          <div class="col-md-6">
+            <button class="btn btn-danger form-control col-md-3 close-form" data-form-id="#filepicker-form">Cancel</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
 <% else %>
 <div class="row">
   <div class="col-md-3 pull-right">

@@ -11,8 +11,7 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		"users" : "userIndex",
 		"users/:id/routes/show": "mapShow",
 		"users/:id/routes/load": "loadMaps",
-		"users/:id" : "userShow",
-		
+		"users/:id" : "userShow",	
 	},
 
 	loadMaps: function (id) {
