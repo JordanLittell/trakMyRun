@@ -1,4 +1,4 @@
-TrakMyRun.MapView = Backbone.View.extend({ 
+Backbone.MapView = Backbone.View.extend({ 
 	restartPolyLine: function () {
 		this.initializeMap();
 		this.markers.forEach(function(marker) {
@@ -32,5 +32,27 @@ TrakMyRun.MapView = Backbone.View.extend({
             });
             this.map.panTo(position);
     },
+
+    
+	loadMaps: function () {
+		var loadUrl = "users/"+this.model.get('id')+"/routes/load";
+		console.log(loadUrl);
+		Backbone.history.navigate(loadUrl, { trigger: true });
+	},
+
+
+    saveMap: function() {
+		// console.log(JSON.stringify(this.poly.getPath()));
+		var data = new TrakMyRun.Models.Map();
+		var view = this;
+		console.log(this.poly.getPath())
+		data.set({
+			"path": (JSON.stringify(this.poly.getPath())),
+			"total_miles": view.distance
+		});
+		data.save();
+		this.restartPolyLine();
+		alert("you have just saved a map!!");
+	},
 
 });
