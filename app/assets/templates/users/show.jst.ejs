@@ -83,7 +83,20 @@
 	        </div>
 	    </div>
 	    <% } %>
+		<aside class="left pannel well">
+			<h1 class='text-center'>Recent Routes</h1>
+			<% user.maps().each(function(map){ %>
+				<li> <a href=<%="#maps/"+map.get('id')%>>
+						<% map.get('name') %> <%= map.get('id')%>th run 
+						<%= map.get('total_miles') %> Miles at 
+						<%=map.get('created_at')%> 
+					</a>
+				</li>
+			<%	}) %>
+		</aside>
 </aside>
+
+
 
 <section class="feed-content col-md-8  col-md-offset-1 ">
 	

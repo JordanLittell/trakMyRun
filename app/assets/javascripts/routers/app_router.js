@@ -9,28 +9,34 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		"" : "currentUserShow",
 		"posts/new":"newPost",
 		"users" : "userIndex",
-		"users/:id/routes/new": "newRoute",
-		"users/:id/routes/load": "loadRoutes",
+		"users/:id/routes/new": "newMap",
+		"users/:id/routes/load": "loadMaps",
 		"users/:id/edit": "editUser",
 		"users/:id" : "userShow",
-		"maps/:id" : "mapShow"
-		
+		"maps/:id" : "loadMapForUser"
 	},
 
-	loadRoutes: function (id) {
+	loadMaps: function (id) {
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
 		var view = new TrakMyRun.Views.MapLoad({
-			model: user
+			collection: user.maps()
 		});
 		this.swapView(view); 
 	},
-	newRoute: function(id) {
+	newMap: function(id) {
 
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
 		var view = new TrakMyRun.Views.MapNew({
 			model: user
 		});
 		this.swapView(view);
+	},
+
+	loadMapForUser: function (id) {
+		var map = TrakMyRun.Collections.maps.getOrFetch(id);
+		var view = new TrakMyRun.Views.LoadMap({
+			model: map
+		});
 	},
 
 	userShow: function(id) {

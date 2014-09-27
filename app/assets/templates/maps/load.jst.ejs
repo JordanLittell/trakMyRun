@@ -6,11 +6,18 @@
 		</h1>
 		<% if(user.maps()) { %>
 			<ul>
+
 				<% user.maps().each(function(map) {    %>
-			
-					<li><%= map.get('id')%> <%= map.get('name') %> created at: <%=map.get('created_at')%></li>
+					
+						<li>
+							<a href = <%="#maps/"+map.get('id') %> >
+								<%= map.get('id')%> 
+								<%= map.get('name') %> created at: <%=map.get('created_at')%>
+							</a>
+						</li>
 					
 				<% }) %>
+
 			</ul>
 		<% } %>
 	</div>

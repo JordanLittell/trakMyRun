@@ -19,3 +19,5 @@ TrakMyRun.Collections.Maps = Backbone.Collection.extend({
 	}
 
 });
+
+TrakMyRun.Collections.maps = new TrakMyRun.Collections.Maps();

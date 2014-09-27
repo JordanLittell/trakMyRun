@@ -10,8 +10,11 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 		return this;
 	},
 
-	initialize: function () {
+	initialize: function (options) {
 		this.listenTo(this.model,"sync", this.initializeMap);
+		if(options.preload === true) {
+			this.importMapFromDb(options.map);
+		}
 	},
 
 	events: {
@@ -22,18 +25,14 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 		"click .load-map": "loadMaps"
 	},
 
-	reload: function() {
-		window.location.reload();
-	},
-
 	restartPolyLine: function () {
 		this.initializeMap();
 		this.markers.forEach(function(marker) {
 			marker.setMap(null);
 		});
 		this.$el.find('.distance-field').text('0 Miles');
-
 	},
+
 	loadMaps: function () {
 		var loadUrl = "users/"+this.model.get('id')+"/routes/load";
 		console.log(loadUrl);
@@ -50,6 +49,8 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 			"total_miles": view.distance
 		});
 		data.save();
+		this.restartPolyLine();
+		alert("you have just saved a map!!");
 	},
 
 	mapUpdated: function(evt) {

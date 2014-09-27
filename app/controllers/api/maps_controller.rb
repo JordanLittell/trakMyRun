@@ -13,6 +13,11 @@ module Api
 			end
 		end
 
+		def show 
+			@map = Map.find(params[:id])
+			
+		end
+
 		def map_params
 			params.require(:map).permit(:path, :total_miles, :name)
 		end
