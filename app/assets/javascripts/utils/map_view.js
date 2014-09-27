@@ -33,13 +33,6 @@ Backbone.MapView = Backbone.View.extend({
             this.map.panTo(position);
     },
 
-    
-	loadMaps: function () {
-		var loadUrl = "users/"+this.model.get('id')+"/routes/load";
-		console.log(loadUrl);
-		Backbone.history.navigate(loadUrl, { trigger: true });
-	},
-
 
     saveMap: function() {
 		// console.log(JSON.stringify(this.poly.getPath()));
@@ -54,5 +47,6 @@ Backbone.MapView = Backbone.View.extend({
 		this.restartPolyLine();
 		alert("you have just saved a map!!");
 	},
+	//do stuff with elevation in this class.
 
 });

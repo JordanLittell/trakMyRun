@@ -9,11 +9,10 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		"" : "currentUserShow",
 		"posts/new":"newPost",
 		"users" : "userIndex",
-		"users/:id/routes/new": "newMap",
+		"users/:id/routes/show": "mapShow",
 		"users/:id/routes/load": "loadMaps",
-		"users/:id/edit": "editUser",
 		"users/:id" : "userShow",
-		"maps/:id" : "loadMapForUser"
+		
 	},
 
 	loadMaps: function (id) {
@@ -23,10 +22,10 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		});
 		this.swapView(view); 
 	},
-	newMap: function(id) {
+	mapShow: function(id) {
 
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
-		var view = new TrakMyRun.Views.MapNew({
+		var view = new TrakMyRun.Views.MapShow({
 			model: user
 		});
 		this.swapView(view);
@@ -42,14 +41,6 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 	userShow: function(id) {
 		var user = TrakMyRun.Collections.users.getOrFetch(id);
 		var view = new TrakMyRun.Views.UserShow({
-			model: user
-		});
-		this.swapView(view);
-	},
-
-	editUser: function(id) {
-		var user = TrakMyRun.Collections.users.getOrFetch(id);
-		var view = new TrakMyRun.Views.UserEdit({
 			model: user
 		});
 		this.swapView(view);

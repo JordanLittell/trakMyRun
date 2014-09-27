@@ -1,24 +1,7 @@
-
-<div class="row clear-black">
-	<div class"pannel well col-md-12 text-center">
-		<h1 class="text-center text-thin">
-			<%=user.get('username')%>'s' Maps
-		</h1>
-		<% if(user.maps()) { %>
-			<ul>
-
-				<% user.maps().each(function(map) {    %>
-					
-						<li>
-							<a href = <%="#maps/"+map.get('id') %> >
-								<%= map.get('id')%> 
-								<%= map.get('name') %> created at: <%=map.get('created_at')%>
-							</a>
-						</li>
-					
-				<% }) %>
-
-			</ul>
-		<% } %>
-	</div>
-</div>
+<table class="table scroll-down"><% maps.each(function(map){ %>
+	<tr data-map-id="<%=map.get('id')%>" class="map-show-link">
+		<td><%= map.get('name') %></td> 
+		<td><%= map.get('total_miles').toString().slice(0,3) %> Miles</td>
+	</tr> 
+<% }) %>
+</table>

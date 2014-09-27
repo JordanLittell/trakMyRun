@@ -34,6 +34,13 @@ a {
 	height: 200px;
 	padding: 10px;
 }
+.map-show-link {
+	cursor: pointer;
+}
+.map-show-link:hover {
+	color:lightblue
+}
+
 ul.alert {
 	font-size: 20px;
 	list-style: none;

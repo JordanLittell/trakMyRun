@@ -1,5 +1,5 @@
 TrakMyRun.Collections.Posts = Backbone.Collection.extend({
-	
+	comparator: 'created_at',	
 	model: TrakMyRun.Models.Post,
 	
 	url: "api/posts",

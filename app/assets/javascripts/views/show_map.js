@@ -1,5 +1,6 @@
-TrakMyRun.Views.MapNew = Backbone.MapView.extend({
+TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	template: JST["maps/new"],
+	mapLoadTemplate: JST["maps/load"],
 
 	render: function() {
 		var content = this.template({
@@ -19,18 +20,45 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 		"click #map": "updateDistance",
 		"click .save-map": "saveMap",
 		"click .restart": "restartPolyLine",
-		"click .load-map": "loadMaps"
+		"click .load-options": "displayLoaded",
+		"click .map-show-link": "updatePage"
 	},
 
+	displayLoaded: function() {
+		// user jquery slideDown to display saved maps
+		this.collection = this.model.maps();
+		var content = this.mapLoadTemplate({
+			maps: this.collection
+		});
+		$('.previous-maps').html(content).slideDown();
+	},
 	
-
-	loadMaps: function () {
-		var loadUrl = "users/"+this.model.get('id')+"/routes/load";
-		console.log(loadUrl);
-		Backbone.history.navigate(loadUrl, { trigger: true });
+	fetchMap: function(evt) {
+		var target = evt.currentTarget;
+		var mapId = $(target).data('map-id');
+		var result = this.model.maps().get(mapId);
+		return result;
 	},
 
-	
+	parseToGmap: function (json) {
+		var latLnArray = [];
+		json.j.forEach(function(obj){
+			latLnArray.push( new google.maps.LatLng(obj.k , obj.A ))
+		})
+		this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
+		this.poly.setMap(this.map);
+		return this.poly
+	},
+
+	updatePage: function(evt) {
+		this.restartPolyLine();
+		var map = this.fetchMap(evt),
+			miles = map.get('total_miles');
+
+		this.parseToGmap(JSON.parse(map.get('path')));
+		
+		this.$el.find('.distance-field').html(miles);
+	},
 
 	mapUpdated: function(evt) {
 	    if (this.path.getLength() === 0) {
@@ -76,16 +104,4 @@ TrakMyRun.Views.MapNew = Backbone.MapView.extend({
 		    }
 		}
 	},
-
-    
-    
-
-    // function plotElevation(resp, success) {
-    //   console.log(resp[0].elevation)
-    // }
-
-    // google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
 });
