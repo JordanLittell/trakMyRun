@@ -7,9 +7,10 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		});
 		this.$el.html(content);
 		var view = this;
-		this.renderBar(this.getMileage);
+		this.renderBar(this.getMileage, this.barChart);
 		return this;
 	},
+
 	initialize: function() {
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.posts(), 'sync', this.render);
@@ -44,6 +45,27 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		return results;
 	},
 
+	getCtx: function() {
+		this.ctx = this.$el.find("#myChart")[0].getContext("2d");
+	},
+
+	barChart: function (data) {
+		debugger;
+		new Chart(this.ctx).Bar(data,{responsive:true});
+	},
+
+	pieChart: function(data){
+		new Chart(this.ctx).Pie(data,{responsive:true});
+	},
+
+	radarChart: function(data) {
+		new Chart(this.ctx).Radar(data, {responsive: true});
+	},
+
+	lineChart: function(data) {
+		new Chart(this.ctx).Line(data, {responsive: true});
+	},
+
 	extractTime: function(post){
 		var hours = post.get('hours');
 		var minutes = post.get('minutes');
@@ -52,8 +74,8 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		return totMin
 	},
 
-	renderBar: function (metric) {
-		var ctx = this.$el.find("#myChart")[0].getContext("2d");
+	renderBar: function (metric, chartType) {
+		this.getCtx();
 		this.getNetTime();
 		var data = {
 			
@@ -77,6 +99,6 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		        }
 		    ]
 		};
-		var myBarChart = new Chart(ctx).Bar(data,{responsive:true});
+		chartType.bind(this,data)();
 	}
 });
