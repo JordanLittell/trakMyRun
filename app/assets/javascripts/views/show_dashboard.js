@@ -3,16 +3,26 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	
 	render: function() {
 		var args = [].slice.call(arguments);
-		var type = args[0];
-		debugger;
-		if (!(typeof type === "string")) { 
-			type = "barChart"; 
+		this.type = this.type || args[0];
+		
+		if (!(typeof this.type === "string")) { 
+			this.type = "barChart"; 
+			args.shift();
 		}
+		debugger;
+		this.metric = this.metric || args[0];
+
+		if (!(typeof this.metric === "string")) { 
+			this.metric = "getMiles"; 
+			args.shift();
+		}
+		
 		var content = this.template({
 			posts: this.model.posts()
 		});
+
 		this.$el.html(content);
-		this.makeChart(this.getMileage, type);
+		this.makeChart(this.type, this.metric);
 		return this;
 	},
 
@@ -24,16 +34,24 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	events: {
 		"click #line": "handleChartChange",
 		"click #radar": "handleChartChange",
-		"click #bar": "handleChartChange"
+		"click #bar": "handleChartChange",
+		"click .change-metric": "changeMetric"
+	},
+
+	changeMetric: function(event) {
+		this.metric = undefined;
+		var method = $(event.currentTarget).data('metric-method');
+		this.render(method)
 	},
 
 	handleChartChange: function (event) {
 		event.preventDefault();
+		this.type = undefined;
 		var methodName = $(event.currentTarget).data('chart-type');
-		this.render(methodName);
+		this.render(methodName, this.metric);
 	},
 
-	getMileage: function() {
+	getMiles: function() {
 		var result = [];
 		var maps = this.model.maps();
 		maps.each(function(map){
@@ -90,7 +108,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		return totMin
 	},
 
-	makeChart: function (metric, chartType) {
+	makeChart: function (chartType, metric) {
 		this.getCtx();
 		this.getNetTime();
 		var data = {
@@ -103,7 +121,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		            strokeColor: "rgba(220,220,220,0.8)",
 		            highlightFill: "rgba(220,220,220,0.75)",
 		            highlightStroke: "rgba(220,220,220,1)",
-		            data: metric.apply(this),
+		            data: this[this.metric].apply(this),
 		        },
 		        {
 		            label: "My Second dataset",
@@ -111,7 +129,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		            strokeColor: "rgba(151,187,205,0.8)",
 		            highlightFill: "rgba(151,187,205,0.75)",
 		            highlightStroke: "rgba(151,187,205,1)",
-		            data: metric.apply(this),
+		            data: this[this.metric].apply(this),
 		        }
 		    ]
 		};
