@@ -9,6 +9,7 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		this.listenTo(this.model, "sync", this.render);
 		this.listenTo(this.model.posts(), "destroy", this.render)
 	},
+
 	render: function()  {
 		var view = this;
 		var content = this.template({

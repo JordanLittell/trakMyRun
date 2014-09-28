@@ -28,8 +28,9 @@
 label {
 	margin-top: 5%;
 }
-a {
-	cursor: pointer	
+a[href] {
+	cursor: pointer;
+	text-decoration: none;
 }
 .close-icon {
 	font-size: 20px;
@@ -178,7 +179,7 @@ hr {
 	color: black;
 }
 
-.glyphicon:hover{
+.glyphicon.active{
 	color: #FFA500;
 	cursor: pointer
 }
@@ -224,9 +225,6 @@ tr:hover {
 	color: blue;
 	cursor: pointer;
 	color: #428bca;
-}
-.side-nav-link:hover {
-	text-decoration: underline;
 }
 
 .visitor-link {

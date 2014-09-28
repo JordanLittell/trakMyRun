@@ -9,6 +9,7 @@ json.maps @user.maps do |map|
 end
 json.posts @posts do |post| 
 	json.id post.id
+	json.created_at post.created_at
 	json.user_id post.user_id
 	json.hours post.hours
 	json.minutes post.minutes 

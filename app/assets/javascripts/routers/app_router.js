@@ -11,7 +11,7 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		"users" : "userIndex",
 		"users/:id/routes/show": "mapShow",
 		"users/:id/routes/load": "loadMaps",
-		"users/:id" : "userShow",	
+		"users/:id" : "userShow"
 	},
 
 	loadMaps: function (id) {
@@ -60,7 +60,7 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		view.setSliders();
 	},
 
-	userIndex: function () {
+	userIndex: function (ev) {
 		TrakMyRun.Collections.users.fetch();
 		var view = new TrakMyRun.Views.UserIndex({
 			collection: TrakMyRun.Collections.users

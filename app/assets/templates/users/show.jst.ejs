@@ -40,42 +40,48 @@
 	    </div>
 
 	    <div class="panel panel-default">
-	        <div class="panel-heading">
-	            <h4 class="panel-title">
-	                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
-	                </span>Account</a>
-	            </h4>
-	        </div>
+	    	<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+		        <div class="panel-heading">
+		            <h4 class="panel-title">
+		                <span class="glyphicon glyphicon-user">
+		                </span>Account
+		            </h4>
+		        </div>
+	        </a>
 	        <div id="collapseThree" class="panel-collapse collapse">
 	            <div class="panel-body">
 	                <table class="table">
-	                	<tr>
+	                	<a href="/#users/<%= user.get('id') %>" id="home">
+							<tr>
+
+							    <td>
+							        <span class="glyphicon glyphicon-home text-info">
+							        	
+							        		Home
+							        	
+							        </span>
+							    </td>
+
+							</tr>
+	                    </a>
+	                	<tr id="changePhoto">
 	                        <td>
-	                            <span class="glyphicon glyphicon-home text-info" >
-	                            	<a href="/#users/<%= user.get('id') %>" id="home">
-	                            		Home
-	                            	</a>
-	                            </span>
+	                            <span class="side-nav-link" >Change Photo</span>
 	                        </td>
 	                    </tr>
-	                	<tr>
+	                    <tr id="changePassword">
 	                        <td>
-	                            <span class="side-nav-link" id="changePhoto">Change Photo</span>
+	                            <span class="side-nav-link" >Change Password</span>
 	                        </td>
 	                    </tr>
-	                    <tr>
+	                    <tr id="updateInfo">
 	                        <td>
-	                            <span class="side-nav-link" id="changePassword">Change Password</span>
+	                            <span class="side-nav-link">Update Info</span>
 	                        </td>
 	                    </tr>
-	                    <tr>
+	                    <tr id="changeAddress">
 	                        <td>
-	                            <span class="side-nav-link" id="updateInfo">Update Info</span>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <span class="side-nav-link" id="changeAddress">Update Address</span>
+	                            <span class="side-nav-link">Update Address</span>
 	                        </td>
 	                    </tr>
 	                </table>
@@ -103,8 +109,6 @@
 	
 	<div class="posts-container">
 		<h1 class="text-thin text-center feed">Activity</h1>	
-		<!-- Insert posts and edit views here here -->
-		<h3 class="text-thin text-center">No current Activity</h3>
 	</div>
 
 </section>
