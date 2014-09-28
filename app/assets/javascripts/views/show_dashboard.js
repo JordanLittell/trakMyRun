@@ -6,7 +6,8 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 			posts: this.model.posts()
 		});
 		this.$el.html(content);
-		this.renderBar();
+		var view = this;
+		this.renderBar(this.getMileage);
 		return this;
 	},
 	initialize: function() {
@@ -14,9 +15,48 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		this.listenTo(this.model.posts(), 'sync', this.render);
 	},
 
-	renderBar: function () {
+	getMileage: function() {
+		var result = [];
+		var maps = this.model.maps();
+		maps.each(function(map){
+			result.push(parseFloat(map.get('total_miles').substr(0,4)));
+		})
+		return result;
+	},
+
+	getCalories: function () {
+		var results = [];
+		var posts = this.model.posts();
+		posts.each(function(post){
+			results.push(post.get('calories'))
+		})
+		return results;
+	},
+
+	getNetTime: function () {
+		var results = [];
+		var that = this;
+		var posts = this.model.posts();
+		posts.each(function(post){
+			var mins = that.extractTime(post);
+			results.push(mins)
+		});
+		return results;
+	},
+
+	extractTime: function(post){
+		var hours = post.get('hours');
+		var minutes = post.get('minutes');
+		var seconds = post.get('seconds');
+		var totMin = parseInt(hours*60 + minutes + (seconds/60));
+		return totMin
+	},
+
+	renderBar: function (metric) {
 		var ctx = this.$el.find("#myChart")[0].getContext("2d");
+		this.getNetTime();
 		var data = {
+			
 		    labels: ["January", "February", "March", "April", "May", "June", "July"],
 		    datasets: [
 		        {
@@ -25,7 +65,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		            strokeColor: "rgba(220,220,220,0.8)",
 		            highlightFill: "rgba(220,220,220,0.75)",
 		            highlightStroke: "rgba(220,220,220,1)",
-		            data: [65, 59, 80, 81, 56, 55, 40]
+		            data: metric.apply(this),
 		        },
 		        {
 		            label: "My Second dataset",
@@ -33,16 +73,10 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		            strokeColor: "rgba(151,187,205,0.8)",
 		            highlightFill: "rgba(151,187,205,0.75)",
 		            highlightStroke: "rgba(151,187,205,1)",
-		            data: [28, 48, 40, 19, 86, 27, 90]
+		            data: metric.apply(this),
 		        }
 		    ]
 		};
-		
 		var myBarChart = new Chart(ctx).Bar(data,{responsive:true});
-
 	}
-		
-	
-
-
 });
