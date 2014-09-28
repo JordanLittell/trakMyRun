@@ -2,18 +2,35 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	template: JST["users/dashboard"],
 	
 	render: function() {
+		var args = [].slice.call(arguments);
+		var type = args[0];
+		debugger;
+		if (!(typeof type === "string")) { 
+			type = "barChart"; 
+		}
 		var content = this.template({
 			posts: this.model.posts()
 		});
 		this.$el.html(content);
-		var view = this;
-		this.renderBar(this.getMileage, this.barChart);
+		this.makeChart(this.getMileage, type);
 		return this;
 	},
 
 	initialize: function() {
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.posts(), 'sync', this.render);
+	},
+
+	events: {
+		"click #line": "handleChartChange",
+		"click #radar": "handleChartChange",
+		"click #bar": "handleChartChange"
+	},
+
+	handleChartChange: function (event) {
+		event.preventDefault();
+		var methodName = $(event.currentTarget).data('chart-type');
+		this.render(methodName);
 	},
 
 	getMileage: function() {
@@ -50,7 +67,6 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	},
 
 	barChart: function (data) {
-		debugger;
 		new Chart(this.ctx).Bar(data,{responsive:true});
 	},
 
@@ -74,7 +90,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		return totMin
 	},
 
-	renderBar: function (metric, chartType) {
+	makeChart: function (metric, chartType) {
 		this.getCtx();
 		this.getNetTime();
 		var data = {
@@ -99,6 +115,6 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		        }
 		    ]
 		};
-		chartType.bind(this,data)();
+		this[chartType].bind(this, data)();
 	}
 });
