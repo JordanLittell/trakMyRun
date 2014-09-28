@@ -1,12 +1,12 @@
 
 	<div class="row pannel well activity">
-	<% if (post.get('user_id') === TrakMyRun.CurrentUser) { %>
-		<span class="pull-right delete-view" data-post-id="<%=post.get('id')%>">
-			X
-		</span>
-	<% } %>
-		<div class="col-sm-6">
-			<h4>Workout Type: <%= post.get('workout_type') %></h4>
+		<% if (post.get('user_id') === TrakMyRun.CurrentUser) { %>
+			<span class="pull-right delete-view" data-post-id="<%=post.get('id')%>">
+				X
+			</span>
+		<% } %>
+		<div class="col-sm-6 text-thin">
+			<h1 class="text-thin"><%= post.get('workout_type') %></h1 class="text-thin">
 			<table class="table col-sm-6">
 				<tr>
 					<td>Hours</td>
@@ -28,11 +28,27 @@
 		</div>
 
 		<div class="col-sm-5 col-sm-offset-1">
-		<h3>Description</h3>
-			Lorem ipsum dolor sit amet, eget mollis velit elit vestibulum suspendisse lectus, non ut congue id ipsum, pellentesque consequat, at turpis malesuada in dictum mollis, luctus turpis dui tristique ut in a.
+			<h3>Description</h3>
+			<p>Lorem ipsum dolor sit amet, eget mollis velit elit vestibulum suspendisse lectus, non ut congue id ipsum, pellentesque consequat, at turpis malesuada in dictum mollis, luctus turpis dui tristique ut in a.</p>
 		</div>
-		
 
+		<div class="col-md-12">
+			<% if (post.comments().length > 0) { %>
+				<h3 class="text-thin text-center">
+					<a data-target-name=".comments" class="show-comments">
+						Show Comments
+					</a>
+				</h3>
+			<% } %>
+
+			<div class="comments">
+				<ul>	
+					<% post.comments().each(function(comment){ %>
+						<li> <%= comment.get('content') %></li>
+					<% }) %>
+				</ul>
+			</div>
+
+		</div>
 	</div>
-
 	
