@@ -90,14 +90,16 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	},
 
 	calculateElevationChange: function(elev) {
-		var acc = 0;
-		debugger;
+		var acc = 0,
+			pos = 0,
+			sub = 0;
 		elev.forEach(function(el,idx){
 			var diff = elev[idx+1] - el;
-			if (diff > 0 ) { acc += diff; }
+			if (diff > 0 ) { pos += diff; } 
+			if (diff < 0 ) { sub += diff; }
 			if (typeof elev[idx + 1] === "undefined") { acc += 0; }
 		});
-		return acc
+		return pos;
 	},
 
 	extendPath: function(evt, result, status) {
@@ -108,26 +110,32 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    
 		    this.$el.find('.distance-field').text(distanceString.concat(' miles'));
 		    this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(3)+'ft');
+		   
+		    this.placeMarker(evt);
+
 		    var newPath = result.routes[0].overview_path;
-		    var marker = new google.maps.Marker({ position: evt.latLng, map: this.map });
-		    //add marker
-		    this.markers.push(marker);
 		    for (var i = 0, len = newPath.length; i < len; i++) {
 		        this.path.push(result.routes[0].overview_path[i]);
 		    }
-		    var pathRequest = {
-		            locations: this.path.getArray()
-		        };
-		    this.elevations.getElevationForLocations(pathRequest,function(result, status){
-		    	if(status === google.maps.ElevationStatus.OK) {
-		    		view.elevationsAlongPath.push(_.map(result,function(res){
-		    			return res.elevation;
-		    		}));
-		    		var length = view.elevationsAlongPath.length
-		    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
-		    		debugger;
-		    	}
-		    });
+		    	
+		    this.updateElevations({
+	            path: this.path.getArray(),
+	            samples: 100
+		    });    
 		}
 	},
+
+	updateElevations: function (pathRequest) {
+		var view = this;
+		this.elevations.getElevationAlongPath(pathRequest,function(result, status){
+    		if(status === google.maps.ElevationStatus.OK) {
+    			view.elevationsAlongPath.push(_.map(result,function(res){
+    			return res.elevation;
+    		}));
+
+    		var length = view.elevationsAlongPath.length
+    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
+    	}
+    });
+	}
 });
