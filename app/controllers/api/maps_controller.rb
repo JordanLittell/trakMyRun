@@ -19,7 +19,7 @@ module Api
 		end
 
 		def map_params
-			params.require(:map).permit(:path, :total_miles, :name)
+			params.require(:map).permit(:path, :total_miles, :name, :elevations)
 		end
 
 	end

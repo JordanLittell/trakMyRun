@@ -38,15 +38,16 @@ Backbone.MapView = Backbone.View.extend({
     saveMap: function() {
   		var data = new TrakMyRun.Models.Map();
   		var view = this;
+      debugger;
   		data.set({
   			"path": (JSON.stringify(this.poly.getPath())),
-        "elevation": JSON.stringify(_.flatten(view.elevationsAlongPath)),
+        "elevations": JSON.stringify(_.flatten(view.elevationsAlongPath)),
   			"total_miles": view.distance
   		});
   		data.save({},{
         success: function(resp, msg){
           $('.message-success').css('display','block').fadeOut(3500);
-          this.restartPolyLine();
+          view.restartPolyLine();
           }
         });
   		

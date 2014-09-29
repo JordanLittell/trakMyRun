@@ -49,11 +49,10 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	parseToGmap: function (json) {
 		var latLnArray = [];
 		json.j.forEach(function(obj){
-			latLnArray.push( new google.maps.LatLng(obj.k , obj.A ))
+			latLnArray.push( new google.maps.LatLng(obj.k , obj.B ))
 		})
 		this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
 		this.poly.setMap(this.map);
-		debugger;
 		return this.poly
 	},
 

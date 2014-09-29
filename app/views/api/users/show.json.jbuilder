@@ -3,6 +3,7 @@ json.maps @user.maps do |map|
 	json.id map.id
 	json.name map.name
 	json.total_miles map.total_miles
+	json.elevations map.elevations
 	json.user_id map.user_id
 	json.path map.path
 	json.created_at map.created_at
