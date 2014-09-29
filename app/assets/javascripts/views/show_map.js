@@ -49,7 +49,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	parseToGmap: function (json) {
 		var latLnArray = [];
 		json.j.forEach(function(obj){
-			latLnArray.push( new google.maps.LatLng(obj.k , obj.B ))
+			latLnArray.push( new google.maps.LatLng(obj.lat() , obj.lng()) )
 		})
 		this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
 		this.poly.setMap(this.map);
@@ -89,6 +89,17 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
       	}
 	},
 
+	calculateElevationChange: function(elev) {
+		var acc = 0;
+		debugger;
+		elev.forEach(function(el,idx){
+			var diff = elev[idx+1] - el;
+			if (diff > 0 ) { acc += diff; }
+			if (typeof elev[idx + 1] === "undefined") { acc += 0; }
+		});
+		return acc
+	},
+
 	extendPath: function(evt, result, status) {
 		var view = this;
 		if (status == google.maps.DirectionsStatus.OK) {
@@ -96,6 +107,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    var distanceString = parseFloat(this.distance).toFixed(3);
 		    
 		    this.$el.find('.distance-field').text(distanceString.concat(' miles'));
+		    this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(3)+'ft');
 		    var newPath = result.routes[0].overview_path;
 		    var marker = new google.maps.Marker({ position: evt.latLng, map: this.map });
 		    //add marker
@@ -111,6 +123,9 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    		view.elevationsAlongPath.push(_.map(result,function(res){
 		    			return res.elevation;
 		    		}));
+		    		var length = view.elevationsAlongPath.length
+		    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
+		    		debugger;
 		    	}
 		    });
 		}
