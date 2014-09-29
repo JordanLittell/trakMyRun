@@ -8,15 +8,17 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		});
 		this.$el.html(content);
 		this.initializeMap();
-
+		window.BackboneMap = this.backboneMap;
 		var mapChart = new TrakMyRun.Views.MapChart({
-			collection: this.elevations
+			model: this.backboneMap
 		});
+
 		this.addSubview('.chart', mapChart)
 		return this;
 	},
 
 	initialize: function (options) {
+		this.backboneMap = new TrakMyRun.Models.Map()
 		this.listenTo(this.model,"sync", this.initializeMap);
 	},
 
@@ -127,7 +129,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	    var latLnArray = [];
 	    json.j.forEach(function(obj,el){
 	      latLnArray.push( new google.maps.LatLng(obj.k , obj.B ))
-	    })
+	    });
 	    this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
 	    this.poly.setMap(this.map);
 	    return this.poly
@@ -146,10 +148,16 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
     			view.elevationsAlongPath.push(_.map(result,function(res){
     				return res.elevation;
     			}));
-
+    			console.log(view.backboneMap._events);
+    			view.backboneMap.set({
+    				"elevations": JSON.stringify(_.flatten(view.elevationsAlongPath))	
+    			})
+    			console.log(view.backboneMap._events);
 	    		var length = view.elevationsAlongPath.length
 	    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
     		}
     	});
+
+    	
 	}
 });
