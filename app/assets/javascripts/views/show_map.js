@@ -17,7 +17,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 
 	events: {
 		"click .create-new-map": "reload",
-		"click #map": "updateDistance",
 		"click .save-map": "saveMap",
 		"click .create-new-map": "restartPolyLine",
 		"click .load-options": "displayLoaded",
@@ -59,7 +58,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	updatePage: function(evt) {
 		this.restartPolyLine();
 		var map = this.fetchMap(evt),
-			miles = map.get('total_miles');
+			miles = this.map.get('total_miles');
 
 		this.parseToGmap(JSON.parse(map.get('path')));
 		this.$el.find('.distance-field').html(miles);
@@ -74,15 +73,13 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
             position: evt.latLng,
             map: this.map
 	      });
-	      //add marker
+
 	      this.markers.push(marker);
 
 	    } else {
 
           this.service.route({
-	            //origin is previous point in array
 	            origin: this.path.getAt(this.path.getLength() - 1),
-	            //destination is point that has just been clicked
 	            destination: evt.latLng,
 	            travelMode: google.maps.DirectionsTravelMode.WALKING
            }, this.extendPath.bind(this, evt)) 
@@ -106,12 +103,8 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var view = this;
 		if (status == google.maps.DirectionsStatus.OK) {
 		    this.distance += result.routes[0].legs[0].distance.value*(0.000621371);
-		    var distanceString = parseFloat(this.distance).toFixed(3);
-		    
-		    this.$el.find('.distance-field').text(distanceString.concat(' miles'));
-		    this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(3)+'ft');
-		   
 		    this.placeMarker(evt);
+		    this.updateDisplays();
 
 		    var newPath = result.routes[0].overview_path;
 		    for (var i = 0, len = newPath.length; i < len; i++) {
@@ -125,17 +118,33 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		}
 	},
 
+	parseToGmap: function (json) {
+	    var latLnArray = [];
+	    json.j.forEach(function(obj,el){
+	      latLnArray.push( new google.maps.LatLng(obj.k , obj.B ))
+	    })
+	    this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
+	    this.poly.setMap(this.map);
+	    return this.poly
+	},
+
+	updateDisplays: function () {
+		var distanceString = parseFloat(this.distance).toFixed(3);
+		this.$el.find('.distance-field').text(distanceString.concat(' miles'));
+		this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(3)+'ft');   
+	},
+
 	updateElevations: function (pathRequest) {
 		var view = this;
 		this.elevations.getElevationAlongPath(pathRequest,function(result, status){
     		if(status === google.maps.ElevationStatus.OK) {
     			view.elevationsAlongPath.push(_.map(result,function(res){
-    			return res.elevation;
-    		}));
+    				return res.elevation;
+    			}));
 
-    		var length = view.elevationsAlongPath.length
-    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
-    	}
-    });
+	    		var length = view.elevationsAlongPath.length
+	    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
+    		}
+    	});
 	}
 });

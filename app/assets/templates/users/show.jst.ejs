@@ -1,7 +1,13 @@
 
 <aside class="left col-md-3">
 		<div class="pannel well">
-			<img src= "<%=user.get('image_url')%>" class="profile-pic">
+			<% if(user.get('image_url')) { %>
+				<img src= "<%=user.get('image_url')%>" class="profile-pic">
+			<%} else  { %>
+				<div class="changePhoto transparent-display" style="cursor: pointer">
+					Click to upload an epic running photo
+				</div>
+			<% } %>
 			
 			<div class="row">
 				<div class="col-sm-3">
@@ -59,22 +65,22 @@
 							    </td>
 							</tr>
 	                    </a>
-	                	<tr id="changePhoto">
+	                	<tr class="changePhoto">
 	                        <td>
 	                            <span class="side-nav-link" >Change Photo</span>
 	                        </td>
 	                    </tr>
-	                    <tr id="changePassword">
+	                    <tr class="changePassword">
 	                        <td>
 	                            <span class="side-nav-link" >Change Password</span>
 	                        </td>
 	                    </tr>
-	                    <tr id="updateInfo">
+	                    <tr class="updateInfo">
 	                        <td>
 	                            <span class="side-nav-link">Update Info</span>
 	                        </td>
 	                    </tr>
-	                    <tr id="changeAddress">
+	                    <tr class="changeAddress">
 	                        <td>
 	                            <span class="side-nav-link">Update Address</span>
 	                        </td>

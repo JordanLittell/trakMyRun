@@ -26,12 +26,12 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 	},
 
 	events: {
-		"click #changePhoto": "showPhotoEdit",
-		"click #changePassword" : "showPasswordChange",
-		"click #changeAddress" : "showAddressChange",
-		"click #updateInfo": "showChangeInfo",
+		"click .changePhoto": "showPhotoEdit",
+		"click .changePassword" : "showPasswordChange",
+		"click .changeAddress" : "showAddressChange",
+		"click .updateInfo": "showChangeInfo",
 		"click #home": "goHome",
-		"click #changePhoto": "displayPhotoForm",
+		"click .changePhoto": "displayPhotoForm",
 		"submit #personal-stat-form": "updateUser",
 	},
 

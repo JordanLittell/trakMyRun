@@ -24,7 +24,7 @@ module Api
 		private 
 
 			def post_params 
-				params.require(:post).permit(:user_id, :workout_type, :hours, :minutes, :seconds, :calories)
+				params.require(:post).permit(:user_id, :workout_type, :heart_rate, :hours, :minutes, :seconds, :calories)
 			end
 	end
 

@@ -13,13 +13,13 @@
 	<div class="col-md-3">
 
 		<div class="list-group">
-			<a href="#users/31/dashboard" class="list-group-item change-metric" data-metric-method="getMiles">
+			<a href="#users/<%=user.get('id')%>/dashboard" class="list-group-item change-metric" data-metric-method="getMiles">
 			Miles
 			</a>
-			<a href="#users/31/dashboard" data-metric-method="getNetTime" class="list-group-item change-metric">Duration</a>
-			<a href="#users/31/dashboard" class="list-group-item change-metric">Avg Heart Rate</a>
-			<a href="#users/31/dashboard" data-metric-method="getCalories"class="list-group-item change-metric">Calories</a>
-			<a href="#users/31/dashboard" class="list-group-item change-metric">Elevation Gain</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" data-metric-method="getNetTime" class="list-group-item change-metric">Duration</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" data-metric-method="getAverageHR" class="list-group-item change-metric">Avg Heart Rate</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" data-metric-method="getCalories" class="list-group-item change-metric">Calories</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" class="list-group-item change-metric">Elevation Gain</a>
 		</div>
 	</div>
 	<div class="col-md-9">

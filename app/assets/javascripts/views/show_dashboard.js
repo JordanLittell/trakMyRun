@@ -1,4 +1,4 @@
-TrakMyRun.Views.DashboardView = Backbone.View.extend({ 
+TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({ 
 	template: JST["users/dashboard"],
 	
 	render: function() {
@@ -15,16 +15,16 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 			args.shift();
 		}
 		var content = this.template({
-			posts: this.model.posts()
+			user: this.model
 		});
 		this.$el.html(content);
+		this.setRootEl("#myChart");
 		this.makeChart(this.type, this.metric);
 		return this;
 	},
 
 	initialize: function() {
-		this.listenTo(this.model, 'sync', this.render);
-		this.labels = [];
+		this.listenTo(this.model, 'sync add', this.render);
 	},
 
 	events: {
@@ -36,7 +36,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 
 	changeMetric: function(event) {
 		this.metric = undefined;
-		this.labels = [];
+		this._labels = [];
 		var method = $(event.currentTarget).data('metric-method');
 		this.render(method)
 	},
@@ -44,20 +44,31 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	handleChartChange: function (event) {
 		event.preventDefault();
 		this.type = undefined;
-		this.labels = [];
+		this._labels = [];
 		var methodName = $(event.currentTarget).data('chart-type');
 		this.render(methodName, this.metric);
+	},
+	getLabels: function () {
+		var view = this;
+		var maps = this.model.maps();
+		if(!view._labels || view._labels.length === 0 ) {
+			view._labels = [];
+			maps.each(function(map){
+				var date = new Date(map.get('created_at'));
+				view._labels.push(date.getMonth()+"/"+date.getDay());
+			});
+		} 
+		return view._labels;
 	},
 
 	getMiles: function() {
 		var result = [];
-		var maps = this.model.maps();
 		var view = this;
+		var maps = this.model.maps();
 		maps.each(function(map){
 			result.push(parseFloat(map.get('total_miles').substr(0,4)));
-			var date = new Date(map.get('created_at'));
-			view.labels.push(date.getMonth()+"/"+date.getDay());
-		})
+		});
+		this.labels = this.getLabels();
 		return result;
 	},
 
@@ -67,47 +78,41 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		var view = this;
 		posts.each(function(post){
 			results.push(post.get('calories'))
-			var date = new Date(post.get('created_at'));
-			view.labels.push(date.getMonth()+"/"+date.getDay());
 		})
 		return results;
 	},
 
+	getElevations: function () {
+		var results = [];
+		var that = this;
+		var maps = this.model.maps();
+		var view = this;
+		maps.each(function(map){
+			results.push(map.get('elevations'))
+		})
+	},
+
+	getAverageHR: function () {
+		var results= [];
+		var that = this; 
+		var posts = this.model.posts();
+		posts.each(function(post){
+			results.push(post.get('heart_rate'))
+		})
+		return results;
+	},
 	getNetTime: function () {
 		var results = [];
 		var that = this;
 		var posts = this.model.posts();
 		var view = this;
-
 		posts.each(function(post){
 			var mins = that.extractTime(post);
 			results.push(mins);
-
-			var date = new Date(post.get('created_at'));
-			view.labels.push(date.getMonth()+"/"+date.getDay());
 		});
 		return results;
 	},
 
-	getCtx: function() {
-		this.ctx = this.$el.find("#myChart")[0].getContext("2d");
-	},
-
-	barChart: function (data) {
-		new Chart(this.ctx).Bar(data,{responsive:true});
-	},
-
-	pieChart: function(data){
-		new Chart(this.ctx).Pie(data,{responsive:true});
-	},
-
-	radarChart: function(data) {
-		new Chart(this.ctx).Radar(data, {responsive: true});
-	},
-
-	lineChart: function(data) {
-		new Chart(this.ctx).Line(data, {responsive: true});
-	},
 
 	extractTime: function(post){
 		var hours = post.get('hours');
@@ -117,31 +122,5 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		return totMin
 	},
 
-	makeChart: function (chartType, metric) {
-		this.getCtx();
-		this.getNetTime();
-		var data = {
-			
-		    labels: this.labels,
-		    datasets: [
-		        {
-		            label: "My First dataset",
-		            fillColor: "rgba(220,220,220,0.5)",
-		            strokeColor: "rgba(220,220,220,0.8)",
-		            highlightFill: "rgba(220,220,220,0.75)",
-		            highlightStroke: "rgba(220,220,220,1)",
-		            data: this[this.metric].apply(this),
-		        },
-		        {
-		            label: "My Second dataset",
-		            fillColor: "rgba(151,187,205,0.5)",
-		            strokeColor: "rgba(151,187,205,0.8)",
-		            highlightFill: "rgba(151,187,205,0.75)",
-		            highlightStroke: "rgba(151,187,205,1)",
-		            data: this[this.metric].apply(this),
-		        }
-		    ]
-		};
-		this[chartType].bind(this, data)();
-	}
+	
 });

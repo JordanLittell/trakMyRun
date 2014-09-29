@@ -51,8 +51,9 @@ Backbone.MapView = Backbone.View.extend({
           $('.message-success').css('display','block').fadeOut(3500);
           view.restartPolyLine();
           }
-        });
-  		
-	},
+        });	
+	 }
+
+
 
 });
