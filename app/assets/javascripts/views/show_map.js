@@ -8,6 +8,11 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		});
 		this.$el.html(content);
 		this.initializeMap();
+
+		var mapChart = new TrakMyRun.Views.MapChart({
+			collection: this.elevations
+		});
+		this.addSubview('.chart', mapChart)
 		return this;
 	},
 

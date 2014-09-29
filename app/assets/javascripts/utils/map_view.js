@@ -1,4 +1,4 @@
-Backbone.MapView = Backbone.View.extend({ 
+Backbone.MapView = Backbone.CompositeView.extend({ 
 	restartPolyLine: function () {
 		this.initializeMap();
 		this.markers.forEach(function(marker) {

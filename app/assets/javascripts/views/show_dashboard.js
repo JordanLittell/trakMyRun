@@ -113,14 +113,11 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		return results;
 	},
 
-
 	extractTime: function(post){
 		var hours = post.get('hours');
 		var minutes = post.get('minutes');
 		var seconds = post.get('seconds');
 		var totMin = parseInt(hours*60 + minutes + (seconds/60));
 		return totMin
-	},
-
-	
+	},	
 });

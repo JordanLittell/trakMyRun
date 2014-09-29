@@ -67,10 +67,6 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		TrakMyRun.Collections.users.set(this.model);
 	},
 
-	showPhotoEdit: function(ev) {
-
-	},
-
 	showPasswordChange: function(ev) {
 		var content = this.passwordEditTemplate({
 			user: this.model
