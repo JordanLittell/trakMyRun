@@ -53,6 +53,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		})
 		this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
 		this.poly.setMap(this.map);
+		debugger;
 		return this.poly
 	},
 
@@ -90,6 +91,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	},
 
 	extendPath: function(evt, result, status) {
+		var view = this;
 		if (status == google.maps.DirectionsStatus.OK) {
 		    this.distance += result.routes[0].legs[0].distance.value*(0.000621371);
 		    var distanceString = parseFloat(this.distance).toFixed(3);
@@ -100,13 +102,18 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    //add marker
 		    this.markers.push(marker);
 		    for (var i = 0, len = newPath.length; i < len; i++) {
-		    
 		        this.path.push(result.routes[0].overview_path[i]);
-		        var pathRequest = {
-		            'path': this.path.getArray(),
-		            'samples': 256
-		        }     
 		    }
+		    var pathRequest = {
+		            locations: this.path.getArray()
+		        };
+		    this.elevations.getElevationForLocations(pathRequest,function(result, status){
+		    	if(status === google.maps.ElevationStatus.OK) {
+		    		view.elevationsAlongPath.push(_.map(result,function(res){
+		    			return res.elevation;
+		    		}));
+		    	}
+		    });
 		}
 	},
 });

@@ -4,23 +4,19 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	render: function() {
 		var args = [].slice.call(arguments);
 		this.type = this.type || args[0];
-		
 		if (!(typeof this.type === "string")) { 
 			this.type = "barChart"; 
 			args.shift();
 		}
-		debugger;
 		this.metric = this.metric || args[0];
 
 		if (!(typeof this.metric === "string")) { 
 			this.metric = "getMiles"; 
 			args.shift();
 		}
-		
 		var content = this.template({
 			posts: this.model.posts()
 		});
-
 		this.$el.html(content);
 		this.makeChart(this.type, this.metric);
 		return this;
@@ -28,7 +24,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 
 	initialize: function() {
 		this.listenTo(this.model, 'sync', this.render);
-		this.listenTo(this.model.posts(), 'sync', this.render);
+		this.labels = [];
 	},
 
 	events: {
@@ -40,6 +36,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 
 	changeMetric: function(event) {
 		this.metric = undefined;
+		this.labels = [];
 		var method = $(event.currentTarget).data('metric-method');
 		this.render(method)
 	},
@@ -47,6 +44,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	handleChartChange: function (event) {
 		event.preventDefault();
 		this.type = undefined;
+		this.labels = [];
 		var methodName = $(event.currentTarget).data('chart-type');
 		this.render(methodName, this.metric);
 	},
@@ -54,8 +52,11 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	getMiles: function() {
 		var result = [];
 		var maps = this.model.maps();
+		var view = this;
 		maps.each(function(map){
 			result.push(parseFloat(map.get('total_miles').substr(0,4)));
+			var date = new Date(map.get('created_at'));
+			view.labels.push(date.getMonth()+"/"+date.getDay());
 		})
 		return result;
 	},
@@ -63,8 +64,11 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 	getCalories: function () {
 		var results = [];
 		var posts = this.model.posts();
+		var view = this;
 		posts.each(function(post){
 			results.push(post.get('calories'))
+			var date = new Date(post.get('created_at'));
+			view.labels.push(date.getMonth()+"/"+date.getDay());
 		})
 		return results;
 	},
@@ -73,9 +77,14 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		var results = [];
 		var that = this;
 		var posts = this.model.posts();
+		var view = this;
+
 		posts.each(function(post){
 			var mins = that.extractTime(post);
-			results.push(mins)
+			results.push(mins);
+
+			var date = new Date(post.get('created_at'));
+			view.labels.push(date.getMonth()+"/"+date.getDay());
 		});
 		return results;
 	},
@@ -113,7 +122,7 @@ TrakMyRun.Views.DashboardView = Backbone.View.extend({
 		this.getNetTime();
 		var data = {
 			
-		    labels: ["January", "February", "March", "April", "May", "June", "July"],
+		    labels: this.labels,
 		    datasets: [
 		        {
 		            label: "My First dataset",

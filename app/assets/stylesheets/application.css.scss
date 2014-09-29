@@ -230,6 +230,14 @@ a {
 	cursor:pointer;
 }
 
+.message-success {
+	display: none;
+	color:white;
+	position: absolute;
+	top: 100px;
+	z-index: 100;
+	background-color: rgba(0,0,0,0.8);
+}
 .visitor-link {
 	color: white;
 	display:inline-block;
