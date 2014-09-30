@@ -12,7 +12,7 @@
 <div class="container">
 	
 	<section class="content">
-
+		<div id="loading"></div>	
 	</section>
 
 </div>
@@ -25,6 +25,12 @@
 	  $('body').removeClass("main-background");
 	});
 	window.TrakMyRun.CurrentUser = <%= current_user.id %>
+
+	$(function(){
+    $("#loading").spin({}).hide();
+    $('#loading').ajaxStart(function(){ $(this).fadeIn(); });
+    $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
+});
 
 </script>
 

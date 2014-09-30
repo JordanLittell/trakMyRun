@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require spinner
+//= require spinnerPlugin
 
 //= require bootstrap-sprockets
 //= require jquery-ui
@@ -29,4 +31,7 @@
 //= require_tree ./views
 //= require_tree ./routers
 //= require_tree .
+
+
+
 

@@ -1,4 +1,5 @@
 TrakMyRun.Views.MapChart = Backbone.ChartView.extend({
+	
 	template: JST["maps/chart"],
 	
 	render: function() {
@@ -15,11 +16,16 @@ TrakMyRun.Views.MapChart = Backbone.ChartView.extend({
 		this._labels = [];
 		this.listenTo(this.model, "change", this.render);
 		this.listenTo(this.model, "new", this.restart);
+		this.listenTo(this.model, "showElevations", this.showElevations);
+	},
+
+	showElevations: function () {
+		$('#map-chart').slideDown('slow');
 	},
 
 	restart: function () {
 		this._labels = [];
-		$('#map-chart').replaceWith("<canvas id='#map-chart'></canvas>");
+		$('#map-chart').remove();
 	},
 
 	renderElevation: function() {

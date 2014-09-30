@@ -28,7 +28,12 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		"click .create-new-map": "restart",
 		"click .load-options": "displayLoaded",
 		"click .map-show-link": "updatePage",
-		"click .close-icon": "closeView"
+		"click .close-icon": "closeView",
+		"click .elevation": "delegateShowElevations"
+	},
+
+	delegateShowElevations: function () {
+		this.backboneMap.trigger('showElevations');
 	},
 
 	restart: function () {
@@ -37,8 +42,9 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	},
 
 	save: function () {
-		$('#map-chart').replaceWith("<canvas id='#map-chart'></canvas>");
 		this.saveMap();
+		this.initialize();
+		this.render();
 	},
 
 	displayLoaded: function() {
