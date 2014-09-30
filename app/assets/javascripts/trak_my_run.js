@@ -4,7 +4,6 @@ window.TrakMyRun = {
   Views: {},
   Routers: {},
   initialize: function() {
-    console.log('Hello from Backbone!');
     new TrakMyRun.Routers.AppRouter({ rootEl: $(".content") });
   }
 };

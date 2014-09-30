@@ -20,17 +20,13 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-	  TrakMyRun.initialize();
-	  $('.dropdown-toggle').dropdown();
-	  $('body').removeClass("main-background");
+		TrakMyRun.initialize();
+		$('.dropdown-toggle').dropdown();
+		$('body').removeClass("main-background");
 	});
-	window.TrakMyRun.CurrentUser = <%= current_user.id %>
 
-	$(function(){
-    $("#loading").spin({}).hide();
-    $('#loading').ajaxStart(function(){ $(this).fadeIn(); });
-    $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
-});
+
+	window.TrakMyRun.CurrentUser = <%= current_user.id %>
 
 </script>
 

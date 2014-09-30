@@ -8,6 +8,15 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 		return this;
 	}, 
 
+	initialize: function() {
+		$('content').addClass('runner-background');
+		$(function() {
+			$( "#type" ).autocomplete({
+				source: Backbone.SportsList()
+			});	
+		})
+	},
+
 	events: {
 		"submit #new-post-form" : "savePost",
 		"slidechange .duration": "updateForm",
@@ -31,7 +40,6 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	},
 
 	updateForm: function (ev, ui) {
-
 	  var timeType = $(ev.currentTarget).data("time-type");
 	  var value = ui.value
 	  $("#"+timeType).html(value);
@@ -40,11 +48,10 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	  var weight = this.model.get('weight');
 	  var gender = this.model.get('gender');
 	  var time = this.totalMinutes();
-	  if (heartRate > 0) {
-		  var result = this.getCaloriesBurned(age, weight, heartRate, gender, time);
-		  $("#calories").html(result);
-		  $("#calories-input").val(result);
-
+		if (heartRate > 0) {
+			var result = this.getCaloriesBurned(age, weight, heartRate, gender, time);
+			$("#calories").html(result);
+			$("#calories-input").val(result);
 		}
 	},
 
