@@ -24,11 +24,21 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 
 	events: {
 		"click .create-new-map": "reload",
-		"click .save-map": "saveMap",
-		"click .create-new-map": "restartPolyLine",
+		"click .save-map": "save",
+		"click .create-new-map": "restart",
 		"click .load-options": "displayLoaded",
 		"click .map-show-link": "updatePage",
 		"click .close-icon": "closeView"
+	},
+
+	restart: function () {
+		this.restartPolyLine();
+		this.backboneMap.trigger("new");
+	},
+
+	save: function () {
+		$('#map-chart').replaceWith("<canvas id='#map-chart'></canvas>");
+		this.saveMap();
 	},
 
 	displayLoaded: function() {
@@ -120,7 +130,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    	
 		    this.updateElevations({
 	            path: this.path.getArray(),
-	            samples: 100
+	            samples: 2
 		    });    
 		}
 	},
@@ -149,10 +159,14 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
     				return res.elevation;
     			}));
     			console.log(view.backboneMap._events);
+
     			view.backboneMap.set({
-    				"elevations": JSON.stringify(_.flatten(view.elevationsAlongPath))	
-    			})
-    			console.log(view.backboneMap._events);
+    				"elevations": JSON.stringify(_.flatten(view.elevationsAlongPath)),
+    				"markers": view.markers.map(function(marker){ return marker.getPosition() }),	
+    				"total_miles": view.distance
+    			});
+
+    			
 	    		var length = view.elevationsAlongPath.length
 	    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
     		}

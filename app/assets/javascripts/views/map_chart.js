@@ -12,14 +12,31 @@ TrakMyRun.Views.MapChart = Backbone.ChartView.extend({
 	},
 
 	initialize: function () {
-		console.log(this.model._events);
-		this.listenTo(this.model, "change", this.renderElevation);
-		console.log(this.model._events);
+		this._labels = [];
+		this.listenTo(this.model, "change", this.render);
+		this.listenTo(this.model, "new", this.restart);
+	},
+
+	restart: function () {
+		this._labels = [];
+		$('#map-chart').replaceWith("<canvas id='#map-chart'></canvas>");
 	},
 
 	renderElevation: function() {
-		console.log("yay");
+		this.metric = 'parseElevations'
+		this.makeChart('lineChart', {showScale: false, scaleBeginAtZero: true});
+	},
+
+	getLabels: function() {
+		if(this.model.get('elevations')){
+			var str = String(this.model.get('total_miles')).substr(0,4)+" mi";
+			this._labels.push(str);
+			return this._labels;
+		} 
+		return [];
+	},
+
+	parseElevations: function () {
+		return JSON.parse(this.model.get('elevations'));
 	}
-
-
 })

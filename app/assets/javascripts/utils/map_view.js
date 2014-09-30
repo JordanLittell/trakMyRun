@@ -1,6 +1,7 @@
 Backbone.MapView = Backbone.CompositeView.extend({ 
 	restartPolyLine: function () {
-		this.initializeMap();
+		
+    this.initializeMap();
 		this.markers.forEach(function(marker) {
 			marker.setMap(null);
 		});
@@ -50,7 +51,7 @@ Backbone.MapView = Backbone.CompositeView.extend({
           $('.message-success').css('display','block').fadeOut(2500);
           view.restartPolyLine();
           }
-        });	
+      });	
 	 }
 
 

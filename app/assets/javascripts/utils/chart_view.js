@@ -21,10 +21,10 @@ Backbone.ChartView = Backbone.View.extend({
 	},
 
 	lineChart: function(data) {
-		new Chart(this.ctx).Line(data, {responsive: true});
+		new Chart(this.ctx).Line(data, {responsive: true}, {animation:false});
 	},
 
-	makeChart: function (chartType, metric) {
+	makeChart: function (chartType, options) {
 		this._getCtx();
 		if(this.getLabels().length > 0) {
 			var data = {
@@ -41,7 +41,7 @@ Backbone.ChartView = Backbone.View.extend({
 			        }
 			    ]
 			};
-			this[chartType].bind(this, data)();
+			this[chartType].bind(this, data, options)();
 		}
 	}
 });

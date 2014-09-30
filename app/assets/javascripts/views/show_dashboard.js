@@ -46,7 +46,7 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		this.type = undefined;
 		this._labels = [];
 		var methodName = $(event.currentTarget).data('chart-type');
-		this.render(methodName, this.metric);
+		this.render(methodName);
 	},
 	getLabels: function () {
 		var view = this;
