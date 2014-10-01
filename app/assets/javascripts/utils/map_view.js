@@ -50,7 +50,8 @@ Backbone.MapView = Backbone.CompositeView.extend({
         success: function(resp, msg){
           $('.message-success').css('display','block').fadeOut(2500);
           view.restartPolyLine();
-          }
+          view.render();
+        }
       });	
 	 }
 

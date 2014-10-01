@@ -20,6 +20,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	initialize: function (options) {
 		this.backboneMap = new TrakMyRun.Models.Map()
 		this.listenTo(this.model,"sync", this.initializeMap);
+		this.listenTo(this.model.maps(), "add", this.addMap);
 	},
 
 	events: {
@@ -36,6 +37,10 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		this.backboneMap.trigger('showElevations');
 	},
 
+	addMap: function () {
+		console.log('map added');
+	},
+
 	restart: function () {
 		this.restartPolyLine();
 		this.backboneMap.trigger("new");
@@ -44,6 +49,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	save: function () {
 		this.saveMap();
 		this.initialize();
+		this.model.fetch();
 		this.render();
 	},
 
