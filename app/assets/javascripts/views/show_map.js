@@ -177,7 +177,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
     				"markers": view.markers.map(function(marker){ return marker.getPosition() }),	
     				"total_miles": view.distance
     			});
-
     			
 	    		var length = view.elevationsAlongPath.length
 	    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
