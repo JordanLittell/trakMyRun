@@ -34,16 +34,25 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	},
 
 	redoPt: function () {
-		this.path.push(this.pathCache.shift());
-		this.markers.push(this.markerCache.shift());
+		if(this.pathCache.length > 1) {
+			this.path.push(this.pathCache.shift());
+			this.markers.push(this.markerCache.shift());
+		} else {
+			console.log('none left');	
+		}
 	},
 
 	undoPt: function () {
 		//need to update distance, elevation, markers, path
 		//unshift removed into respective caches
 		var path = this.poly.getPath();
-		this.pathCache.unshift(path.pop());
-		this.markerCache.unshift(this.markers.pop());
+		if (path.length > 1){
+			this.pathCache.unshift(path.pop());
+			this.markerCache.unshift(this.markers.pop());	
+		} else {
+			console.log('none left');	
+		}
+		
 	},
 
 	editCurrentMap: function (event) {
