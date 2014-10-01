@@ -10,48 +10,62 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 
 	initialize: function() {
 		$('content').addClass('runner-background');
+		var list = Backbone.SportsList();
 		$(function() {
 			$( "#type" ).autocomplete({
-				source: Backbone.SportsList()
+				source: list
 			});	
-		})
+		});
 	},
 
 	events: {
-		"submit #new-post-form" : "savePost",
+		"submit #new-post-form": "savePost",
+		"click #map-it": "goToMap",
 		"slidechange .duration": "updateForm",
-		"click .close-view": "closeView"
+		"release .infinte": "cacheMinutes",
+		"click .cache": "updateForm",
 	}, 
 
-	savePost: function (event) {
-		event.preventDefault();
-		var inputs = [".hours-value",".minutes-value",".seconds-value"];
-		["#hours","#minutes", "#seconds"].forEach(function(typeDiv, ind){
-			$(inputs[ind]).val($(typeDiv).text());
+	goToMap: function(){
+		this.savePost();
+		Backbone.history.navigate('users/'+this.model.get('id')+"/routes/show", { trigger: true})
+	},
+
+	validate: function(data) {
+		var values = ['heart_rate','workout_type','minutes'];
+		values.forEach(function(value){
+			if (data[value].split('').length === 0) {
+				console.log('error error');
+			}
 		});
-		var formData = $('#new-post-form').serializeJSON();
+	},
+
+	savePost: function () {
+		event.preventDefault();
+		var $form = this.$el.find($('#new-post-form'));
+		var formData = $form.serializeJSON();
+		this.validate(formData.post);
 		var post = new TrakMyRun.Models.Post(formData);
 		post.save();
 		Backbone.history.navigate("", { trigger: true });
 	},
 
-	closeView: function() {
-		Backbone.history.navigate("", { trigger: true });
-	},
-
-	updateForm: function (ev, ui) {
-	  var timeType = $(ev.currentTarget).data("time-type");
-	  var value = ui.value
-	  $("#"+timeType).html(value);
-	  var age = this.model.get('age');
-	  var heartRate = $("#heartRate").val();
-	  var weight = this.model.get('weight');
-	  var gender = this.model.get('gender');
-	  var time = this.totalMinutes();
-		if (heartRate > 0) {
-			var result = this.getCaloriesBurned(age, weight, heartRate, gender, time);
-			$("#calories").html(result);
-			$("#calories-input").val(result);
+	updateForm: function (event) {
+		var elName = $(event.currentTarget).data('cache');
+		var value  = $('.infinite').val();
+		this.$el.find($(elName)).val(value);
+		var calories = this.getCaloriesBurned(
+								this.model.get('age'),
+								this.model.get('weight'),
+								$('#heart-rate').val(),
+								this.model.get('gender'),
+								value
+								);
+		if (typeof calories === "NaN") {
+			return false;
+		} else {
+			$('#calories').val(calories)
+			return true;
 		}
 	},
 
@@ -73,16 +87,6 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	        range: "min",
 	        animate: true    
         });
-	},
-
-	totalMinutes: function() {
-		var types = ["#hours","#minutes","#seconds"];
-		var factors = [60, 1, (1/60)];
-		var sum = 0;
-		types.forEach(function(el, idx){
-			sum += (parseInt($(el).text()) * factors[idx]);
-		});
-		return sum;
 	},
 
 	getCaloriesBurned: function (age, weight, heartRate, gender, totTime) {

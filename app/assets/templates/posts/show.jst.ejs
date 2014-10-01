@@ -8,22 +8,20 @@
 		<div class="col-sm-6 text-thin">
 			<h1 class="text-thin"><%= post.get('workout_type') %></h1 class="text-thin">
 			<table class="table col-sm-6">
-				<tr>
-					<td>Hours</td>
-					<td><%=post.get('hours')%></td>
-				</tr>
+		
 				<tr>
 					<td>Minutes</td>
-					<td><%=post.get('minutes')%></td>
-				</tr>
-				<tr>
-					<td>Seconds</td>
-					<td><%=post.get('seconds')%></td>
+					<td><%=post.get('minutes')%> minutes</td>
 				</tr>
 				<tr>
 					<td>Calories</td>
-					<td><%=post.get('calories')%></td>
+					<td><%=post.get('calories')%> kcal</td>
 				</tr>
+				<tr>
+					<td>Heart Rate</td>
+					<td><%=post.get('heart_rate')%> bpm</td>
+				</tr>
+
 			</table>	
 		</div>
 

@@ -3,7 +3,11 @@ module Api
 		def create 
 			@post = Post.new(post_params)
 			@post.user_id = current_user.id
-			redirect_to root_url if @post.save
+			if @post.save
+				redirect_to root_url
+			else
+				render "users/show"
+			end
 		end
 
 		def new 
@@ -24,7 +28,7 @@ module Api
 		private 
 
 			def post_params 
-				params.require(:post).permit(:user_id, :workout_type, :heart_rate, :hours, :minutes, :seconds, :calories)
+				params.require(:post).permit(:user_id, :workout_type, :workout_type, :heart_rate, :minutes, :calories)
 			end
 	end
 

@@ -19,6 +19,7 @@
 //= require jquery-ui
 //= require underscore
 //= require chartJS
+//= require jquery_knob
 //= require gmaps_api
 //= require gmaps_util_lib
 //= require backbone

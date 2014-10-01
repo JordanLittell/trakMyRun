@@ -39,10 +39,10 @@ Backbone.MapView = Backbone.CompositeView.extend({
 
     saveMap: function() {
   		var view = this;
-
   		this.backboneMap.set({
   			"path": (JSON.stringify(this.poly.getPath())),
         "elevations": JSON.stringify(_.flatten(view.elevationsAlongPath)),
+        "elevation_gain": this.elevationGain,
   			"total_miles": view.distance
   		});
 

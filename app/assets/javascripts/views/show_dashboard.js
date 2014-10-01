@@ -68,7 +68,6 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		maps.each(function(map){
 			result.push(parseFloat(map.get('total_miles').substr(0,4)));
 		});
-		this.labels = this.getLabels();
 		return result;
 	},
 
@@ -88,8 +87,10 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		var maps = this.model.maps();
 		var view = this;
 		maps.each(function(map){
-			results.push(map.get('elevations'))
-		})
+			results.push(map.get('elevation_gain'))
+		});
+		debugger;
+		return results;
 	},
 
 	getAverageHR: function () {

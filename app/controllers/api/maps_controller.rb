@@ -15,11 +15,10 @@ module Api
 
 		def show 
 			@map = Map.find(params[:id])
-			
 		end
 
 		def map_params
-			params.require(:map).permit(:path, :total_miles, :name, :markers, :elevations)
+			params.require(:map).permit(:path, :total_miles, :name, :elevations, :markers, :elevation_gain)
 		end
 
 	end

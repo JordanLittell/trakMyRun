@@ -5,10 +5,8 @@ json.array! @users do |user|
 	json.image_url user.image_url 
 	json.posts user.posts do |post| 
 		json.id post.id
-		json.hours post.hours
 		json.heart_rate post.heart_rate
 		json.minutes post.minutes 
-		json.seconds post.seconds 
 		json.calories post.calories
 		json.workout_type post.workout_type
 		json.comments post.comments do |comment|

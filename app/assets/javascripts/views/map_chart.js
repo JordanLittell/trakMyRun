@@ -9,6 +9,7 @@ TrakMyRun.Views.MapChart = Backbone.ChartView.extend({
 		this.$el.html(content);
 		this.setRootEl("#map-chart");
 		this.renderElevation();
+		$('#map-chart').css('display', 'hidden');
 		return this;
 	},
 

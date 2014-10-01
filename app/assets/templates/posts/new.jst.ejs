@@ -1,44 +1,157 @@
-<section class="modal-form text-center">
-<span class="pull-right close-view">X</span>
-	<h1 class="text-thin">Log Your Activity</h1>
-
-	<form class="form" id="new-post-form" >
-		<div class="form-group col-md-3 col-md-offset-1">
-			<label for="type"><h1 class="text-thin">Type</h1></label>
-			<input class="form-control col-md-3" id="type" placeholder="Cycling, Running, Biking..." name="post[workout_type]">
+<div id="new-post-bg">
+	<div class="container">
+		<div class="stepwizard">
+		    <div class="stepwizard-row setup-panel">
+		        <div class="stepwizard-step">
+		            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+		            <p>Step 1</p>
+		        </div>
+		        <div class="stepwizard-step">
+		            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+		            <p>Step 2</p>
+		        </div>
+		        <div class="stepwizard-step">
+		            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+		            <p>Step 3</p>
+		        </div>
+		        <div class="stepwizard-step">
+		            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+		            <p>Step 4</p>
+		        </div>
+		    </div>
 		</div>
 
-		<div class="form-group col-md-3 ">
-			<label for="type"><h1 class="text-thin">Heart Rate</h1></label>
-			<input class="form-control col-md-3" id="heartRate" name="post[heart_rate]"placeholder="Average Heart Rate">
-		</div>
-		<div class="form-group col-md-4 calories">
-			<h1 class="text-thin">Calories Burned</h1>
-			<input id="calories-input" name="post[calories]" type="hidden" value="0">
-			<span class="transparent-display" id="calories">0</span>
-		</div>
+		<form role="form" id="new-post-form">
+		    <div class="row setup-content" id="step-1">
+		        <div class="col-xs-12">
+		            <div class="col-xs-6 col-xs-offset-3 text-center">
+		                <h1 class="text-thin"> Workout Type</h1>
+		                <div class="form-group">
+		                    <input  maxlength="100" type="text" required="required" class="form-control" name="post[workout_type]" placeholder="Running, biking..."/>
+		                </div>
+		                
+		                <button class="btn btn-primary nextBtn btn-lg" type="button">Next</button>
+		            </div>
+		        </div>
+		    </div>
 
-		<div class="row text-center">
-			<span class="transparent-display col-md-4"> 
-				<span id="hours">0</span> Hours   |  
-				<span id="minutes">0</span> Minutes | 
-				<span id="seconds">0</span> Seconds 
-			</span>
-		</div>
 
-		<input type="hidden" class="hours-value" name="post[hours]">
-		<input type="hidden" class="minutes-value" name="post[minutes]">
-		<input type="hidden" class="seconds-value" name="post[seconds]">
+		    <div class="row setup-content" id="step-2">
+		        <div class="col-xs-6 col-xs-offset-3 text-center">
+		                <h1 class='text-thin'>Heart Rate</h1>
+		                <div class="form-group">
+		                    <input maxlength="200" id="heart-rate" type="text" required="required" class="form-control" name="post[heart_rate]" placeholder="Enter Average Heart Rate" />
+		                </div>
+		                <button class="btn btn-primary nextBtn btn-lg" type="button" >Next</button>
+		        </div>
+		    </div>
 
-		<div class="row">
-			<div class="duration" id="hour"  data-time-type="hours"></div>
-			
-			<div class="duration"  data-time-type="minutes"></div>
-			
-			<div class="duration"  data-time-type="seconds"></div>
-		</div>
-		<br>
-		<input type="submit" class="modal-submit" value="Save Workout">
-		
-	</form>
-</section>
+
+		    <div class="row setup-content" id="step-3">
+		        <div class="col-xs-12 text-center">
+		            <div class="row">
+						<span class="col-md-12"> 
+							<span class="text-thin super-big">
+								Enter Total Minutes
+							</span>
+						</span>
+						<input type="hidden" 
+								id="minutes"
+								class="minutes-value" 
+								name="post[minutes]">
+					</div>
+
+					<div class="row text-center">	
+						<input type="text" class="infinite">
+					</div>
+					<br>
+					<br>
+
+					<button class="btn btn-primary nextBtn btn-lg cache" type="button" data-cache="#minutes">Next</button>
+
+		        </div>
+		    </div>
+
+		    <div class="row setup-content text-thin text-center" id="step-4">
+		    	<span class="calorie-display"></span>
+		        <div class="row">
+		        	<input type="hidden" id="calories" name="post[calories]">
+		        	<div class="col-xs-5">
+						<input type="submit" id="create-post" class="modal-submit" value="Save It">
+					</div>
+					<div class="col-xs-2">
+						<div class="super-big">OR</div>
+					</div>
+					<div class="col-xs-5">
+						<button type="submit" id="map-it" class="modal-submit"> 	Map It! 
+						</button>
+					</div>
+				</div>
+		    </div>
+
+
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('.infinite').val(0);
+    var navListItems = $('div.setup-panel div a'),
+            allWells = $('.setup-content'),
+            allNextBtn = $('.nextBtn');
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+                $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-primary').addClass('btn-default');
+            $item.addClass('btn-primary');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for(var i=0; i < curInputs.length; i++){
+            if (!curInputs[i].validity.valid){
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (isValid)
+            nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-primary').trigger('click');
+
+	$(".infinite").knob({
+		'min': 0,
+		'max':300,
+	    'bgColor': '#121212',
+	    'fontWeight': 100,
+	    'skin': 'tron',
+	    'thickness': 0.2,
+	    'width': '300',
+	    'height':'300',
+	    'cursor': true,
+	    'release': function() {
+	    	console.log(this.val());
+	    }
+	    
+	});
+});
+</script>
