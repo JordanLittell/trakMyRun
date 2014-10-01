@@ -1,21 +1,21 @@
 
 <aside class="left col-md-3">
-		<div class="pannel well">
-			<% if(user.get('image_url')) { %>
-				<img src= "<%=user.get('image_url')%>" class="profile-pic">
-			<%} else  { %>
-				<div class="changePhoto transparent-display" style="cursor: pointer">
-					Click to upload an epic running photo
-				</div>
-			<% } %>
-			
-			<div class="row">
-				<div class="col-sm-3">
-					<%= user.get('username') %>
-				</div>
+	<div class="pannel well">
+		<% if(user.get('image_url')) { %>
+			<img src= "<%=user.get('image_url')%>" class="profile-pic">
+		<%} else  { %>
+			<div class="changePhoto transparent-display" style="cursor: pointer">
+				Click to upload an epic running photo
+			</div>
+		<% } %>
+		
+		<div class="row">
+			<div class="col-sm-3">
+				<%= user.get('username') %>
 			</div>
 		</div>
-<% if (TrakMyRun.CurrentUser === user.get('id')) { %>
+	</div>
+	<% if (TrakMyRun.CurrentUser === user.get('id')) { %>
 		<div class="panel-group" id="accordion">
 		  <div class="panel panel-default">
 	        <div class="panel-heading">
@@ -26,15 +26,14 @@
 	        
 	            <div class="panel-body">
 	                <table class="table">
+	                	<tr>
+	                		<td>
+	                            <a href= <%= "#users/" + user.get('id') + "/routes/show"%> >Create Route</a>
+	                        </td>
+	                    </tr>
 	                    <tr>
 	                        <td>
 	                            <a href="/#users">The Hub</a>
-	                        </td>
-	                    </tr>
-	           
-	                    <tr>
-	                        <td>
-	                           <a href="http://www.jquery2dotnet.com">Profile</a>
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -57,14 +56,14 @@
 	        
 	    </div>
 
+	    <br>
 	    <div class="panel panel-default">
 	    	<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-		        <div class="panel-heading">
+		        <div class="panel-heading carrot-animation">
 		            <h4 class="panel-title">
-						Edit 
+						Settings
 						<span class="glyphicon glyphicon-chevron-down pull-right"></span>
 		            </h4>
-
 		        </div>
 	        </a>
 	        <div id="collapseThree" class="panel-collapse collapse">
@@ -94,18 +93,13 @@
 	            </div>
 	        </div>
 	    </div>
-	    <% } %>
-		<aside class="left pannel well">
-			<h1 class='text-center'>Recent Routes</h1>
-			<% user.maps().each(function(map){ %>
-				<li> <a href=<%="#maps/"+map.get('id')%>>
-						<% map.get('name') %> <%= map.get('id')%>th run 
-						<%= map.get('total_miles') %> Miles at 
-						<%=map.get('created_at')%> 
-					</a>
-				</li>
-			<%	}) %>
-		</aside>
+    <% } %>
+    <br>
+	<form class="pannel well" role="search">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Search for people">
+		</div>
+	</form>
 </aside>
 
 

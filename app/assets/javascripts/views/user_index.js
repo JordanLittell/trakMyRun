@@ -18,16 +18,26 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 	},
 
 	events: {
-		"mouseover .heart": "activateAnimations"
+		"mouseover tr": "activateAnimations"
 	},
 
 	initialize: function() {
 		this.listenTo(this.collection, "sync", this.render)
 	},
 	activateAnimations: function(ev) {
-		console.log(ev.currentTarget);
-		var heart = $(ev.currentTarget).find('.heart');
-			heart.animate({opacity: 0.2}, 500, 'linear')
-			.animate({opacity: 1}, 500, 'linear');
+		var heart = $(ev.currentTarget).find($('.heart'));
+		var originalSize = heart.css('font-size');
+		window.setTimeout(this.throb(heart, originalSize, this.backDown), 3000);
 	},
+
+	throb: function (heart, originalSize, callback) {
+		for(var i = 14; i < 50; i++) {
+			heart.css('font-size', 30);
+		}
+		window.setTimeout(callback(heart, originalSize), 4000);
+	},
+
+	backDown: function(heart, originalSize) {
+		heart.css('font-size', originalSize);
+	}
 });

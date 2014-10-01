@@ -88,8 +88,7 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		var view = this;
 		maps.each(function(map){
 			results.push(map.get('elevation_gain'))
-		});
-		debugger;
+		});		
 		return results;
 	},
 
@@ -107,18 +106,11 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		var that = this;
 		var posts = this.model.posts();
 		var view = this;
+		debugger;
 		posts.each(function(post){
-			var mins = that.extractTime(post);
+			var mins = parseInt(post.get('minutes'))
 			results.push(mins);
 		});
 		return results;
 	},
-
-	extractTime: function(post){
-		var hours = post.get('hours');
-		var minutes = post.get('minutes');
-		var seconds = post.get('seconds');
-		var totMin = parseInt(hours*60 + minutes + (seconds/60));
-		return totMin
-	},	
 });
