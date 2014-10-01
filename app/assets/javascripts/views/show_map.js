@@ -42,33 +42,32 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		}
 	},
 
-	undoPt: function () {
-		//need to update distance, elevation, markers, path
-		//unshift removed into respective caches
-		var path = this.poly.getPath()
-		if (path.length > 1){
-			return path.pop();
-		} else {
-			return false;
-		}	
+	// undoPt: function (path) {
+	// 	//need to update distance, elevation, markers, path
+	// 	//unshift removed into respective cache
+	// 	if (path.length > 1){
+	// 		return path.pop();
+	// 	} else {
+	// 		return false;
+	// 	}	
+	// },
+
+	removePointsAlongPath: function(path) {
+		var array = this.poly.getPath().getArray();
+		this.endMarker = this.markers[this.markers.length-1];	
+		path.forEach(function(point){
+			var idx = array.indexOf(point);
+			array.splice(idx, 1);
+		});
+		return this.poly.getPath();
 	},
 
 	undoPath: function () {
-		var array = this.poly.getPath().getArray(),
-			endMarker = this.markers[this.markers.length-1],
-			lastMarker = this.markers[this.markers.length-2],
-			lastPt = lastMarker.position,
-			lastPathPt = array[array.length-1];
-			console.log(this.path);
-		while(this.getDistance(lastPt, lastPathPt)>100) {
-			if(!this.undoPt()){
-				console.log("breaking");
-				break;
-			}
-			lastPathPt = array[array.length-1];
-		}
-		this.poly.setPath(this.path)
-		endMarker.setMap(null);
+		var lastPath = this.pathCache.pop();
+		var arr = this.removePointsAlongPath(lastPath);
+		this.poly.setPath(arr);
+		this.endMarker.setMap(null);
+		this.markers.pop();
 	},
 
 	editCurrentMap: function (event) {
@@ -78,10 +77,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 
 	delegateShowElevations: function () {
 		this.backboneMap.trigger('showElevations');
-	},
-
-	addMap: function () {
-		console.log('map added');
 	},
 
 	restart: function () {
@@ -141,7 +136,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	    if (this.path.getLength() === 0) {
 	      this.path.push(evt.latLng);
 	      this.poly.setPath(this.path);
-	   
+	   		
 	      var marker = new google.maps.Marker({
             position: evt.latLng,
             map: this.map
@@ -151,8 +146,9 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 
 	    } else {
 
+	    debugger;
           this.service.route({
-	            origin: this.path.getAt(this.path.getLength() - 1),
+	            origin: this.path.getAt(this.path.getArray().length - 1),
 	            destination: evt.latLng,
 	            travelMode: google.maps.DirectionsTravelMode.WALKING
            }, this.extendPath.bind(this, evt)) 
@@ -180,11 +176,11 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    this.updateDisplays();
 
 		    var newPath = result.routes[0].overview_path;
-		    
+		    this.pathCache.push(newPath);		
+
 		    for (var i = 0, len = newPath.length; i < len; i++) {
-		        this.path.push(result.routes[0].overview_path[i]);
+		        this.path.push(newPath[i]);
 		    }
-		    this.pathCache.push(this.path)
 		    this.updateElevations({
 	            path: this.path.getArray(),
 	            samples: 2
@@ -216,8 +212,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
     			view.elevationsAlongPath.push(_.map(result,function(res){
     				return res.elevation;
     			}));
-    			console.log(view.backboneMap._events);
-
     			view.backboneMap.set({
     				"elevations": JSON.stringify(_.flatten(view.elevationsAlongPath)),
     				"markers": view.markers.map(function(marker){ return marker.getPosition() }),	

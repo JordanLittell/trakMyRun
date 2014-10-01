@@ -21,6 +21,7 @@ gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'underscore-rails'
 gem 'figaro'
+gem 'kaminari'
 gem 'ejs'
 gem 'jquery-ui-rails'
 
