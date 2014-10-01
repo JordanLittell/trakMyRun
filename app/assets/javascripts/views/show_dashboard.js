@@ -38,9 +38,8 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 	},
 
 	changeTimePeriod: function () {
-		var filterFunction = $("option:selected").data('filter');
-		var dateInterval = $("option:selected").data('date-interval');
-		this.filter = this.getDateInterval(dateInterval);
+		this.dateInterval = $("option:selected").data('date-interval');
+		this.filter = this.getDateInterval(this.dateInterval);
 		this.metric = 'getMiles';
 		this.render();
 	},
@@ -83,29 +82,32 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		this.render(methodName);
 	},
 
+	updateLabels: function () {
+		var view = this;
+		view._labels = [];
+		view.filter.forEach(function(map){
+			var date = new Date(map.get('created_at'));
+			if(view.dateInterval === 1) {
+				view._labels.push(date.toTimeString().substr(0,8));
+			} else {
+				view._labels.push(date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear());
+			}
+		});
+	},
+
 	getLabels: function () {
 		var view = this;
 		console.log(this.filter);
-		if(this.filter) {
-			var maps = this.filter
-			var update = true;
-		} else {
-			var maps = this.model.maps();	
-		}
-		if((!view._labels || view._labels.length === 0)) {
+		if(this.filter) { var update = true; } 
+		var maps = this.model.maps();	
+		if(!view._labels || view._labels.length === 0) {
 			view._labels = [];
 			maps.forEach(function(map){
 				var date = new Date(map.get('created_at'));
 				view._labels.push(date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear());
 			});
 		} 
-		if(update) {
-			view._labels = [];
-			this.filter.forEach(function(map){
-				var date = new Date(map.get('created_at'));
-				view._labels.push(date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear());
-			});
-		}
+		if(update) { this.updateLabels(); }
 		return view._labels;
 	},
 
