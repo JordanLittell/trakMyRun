@@ -19,6 +19,10 @@ Backbone.MapView = Backbone.CompositeView.extend({
           this.distance = 0; //accumulator used to get total distance
           this.markers = [];
           this.elevationsAlongPath = [];
+          this.pathCache = [];
+          this.distanceCache = [];
+          this.elevationCache = [];
+          this.markerCache = [];
           this.mapOptions = {
     		zoom: 14,
     		center: new google.maps.LatLng(37.7749300, -122.4194200)

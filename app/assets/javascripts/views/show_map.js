@@ -8,7 +8,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		});
 		this.$el.html(content);
 		this.initializeMap();
-		window.BackboneMap = this.backboneMap;
 		var mapChart = new TrakMyRun.Views.MapChart({
 			model: this.backboneMap
 		});
@@ -30,7 +29,26 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		"click .load-options": "displayLoaded",
 		"click .map-show-link": "updatePage",
 		"click .close-icon": "closeView",
-		"click .elevation": "delegateShowElevations"
+		"click .elevation": "delegateShowElevations",
+		"click .modal-submit": "editCurrentMap"
+	},
+
+	redoPt: function () {
+		this.path.push(this.pathCache.shift());
+		this.markers.push(this.markerCache.shift());
+	},
+
+	undoPt: function () {
+		//need to update distance, elevation, markers, path
+		//unshift removed into respective caches
+		var path = this.poly.getPath();
+		this.pathCache.unshift(path.pop());
+		this.markerCache.unshift(this.markers.pop());
+	},
+
+	editCurrentMap: function (event) {
+		var action = $(event.currentTarget).data("action");
+		this[action]();
 	},
 
 	delegateShowElevations: function () {
@@ -177,7 +195,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
     				"markers": view.markers.map(function(marker){ return marker.getPosition() }),	
     				"total_miles": view.distance
     			});
-    			
+
 	    		var length = view.elevationsAlongPath.length
 	    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
     		}
