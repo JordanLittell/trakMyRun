@@ -21,14 +21,13 @@ Backbone.ChartView = Backbone.View.extend({
 	},
 
 	lineChart: function(data) {
-		new Chart(this.ctx).Line(data, {responsive: true}, {animation:false});
+		new Chart(this.ctx).Line(data, {responsive: true});
 	},
 
 	makeChart: function (chartType, options) {
 		this._getCtx();
 		if(this.getLabels().length > 0) {
 			var data = {
-				
 			    labels: this.getLabels(),
 			    datasets: [
 			        {
@@ -37,7 +36,7 @@ Backbone.ChartView = Backbone.View.extend({
 			            strokeColor: "rgba(151,187,205,0.8)",
 			            highlightFill: "rgba(151,187,205,0.75)",
 			            highlightStroke: "rgba(151,187,205,1)",
-			            data: this[this.metric].apply(this),
+			            data: this[this.metric].apply(this, this.filter),
 			        }
 			    ]
 			};

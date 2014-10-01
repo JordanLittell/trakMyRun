@@ -1,7 +1,7 @@
 TrakMyRun.Collections.Maps = Backbone.Collection.extend({
 	model: TrakMyRun.Models.Map,
 	url: "api/maps",
-	
+	comparator: "created_at",
 	getOrFetch: function(id) {
 		var maps = this;
 		var map = maps.get(id);

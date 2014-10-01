@@ -23,7 +23,11 @@ end
 def generate_elevations
 	return "[16.13083839416504,22.42033958435059,16.13083839416504,47.81328964233398,16.13083839416504,61.13340377807617,16.13083839416504,32.51473236083984,16.13083839416504,15.61405181884766,16.13083839416504,57.91910171508789,16.13083839416504,54.29335403442383,16.13083839416504,59.28741455078125,16.13083839416504,21.13821792602539,16.13083839416504,15.68410491943359]"
 end
-
+def generate_date
+	year = 1990 + Random.rand(10)
+	month = 1+Random.rand(10)
+	return [year, month]
+end
 
 20.times do 
 	image_url = images[Random.rand(images.length)]
@@ -35,7 +39,8 @@ end
 				weight: Random.rand(180), 
 				gender: "m", 
 				height: Random.rand(7), 
-				image_url: image_url
+				image_url: image_url,
+				created_at: Date.new(*generate_date)
 	)
 end
 20.times do
@@ -48,27 +53,31 @@ end
 				weight: Random.rand(145), 
 				gender: "f", 
 				height: Random.rand(6),
-				image_url: image_url
+				image_url: image_url,
+				created_at: Date.new(*generate_date)
 	)
 end
 
-1000.times do |i|
+1700.times do |i|
 	Post.create(
 				user_id: (1+i%41),
 				minutes: Random.rand(60),
 				calories: Random.rand(2000),
 				heart_rate: (120 + Random.rand(40)),
-				workout_type: Faker::Lorem.word
+				workout_type: Faker::Lorem.word,
+				created_at: Date.new(*generate_date)
 		)
 	Comment.create(
 				content: Faker::Lorem.sentence,
-				user_id: (1+i%31),
-				post_id: Random.rand(100)
+				user_id: (1+i%41),
+				post_id: Random.rand(100),
+				created_at: Date.new(*generate_date)
 		)
 	Map.create(
 		user_id: (1+i%41),
 		path: generate_path,
 		total_miles: Random.rand(10),
-		elevations: generate_elevations
+		elevations: generate_elevations,
+		created_at: Date.new(*generate_date)
 		)
 end

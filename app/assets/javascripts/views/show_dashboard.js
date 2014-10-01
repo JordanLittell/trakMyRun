@@ -14,9 +14,11 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 			this.metric = "getMiles"; 
 			args.shift();
 		}
+
 		var content = this.template({
 			user: this.model
 		});
+
 		this.$el.html(content);
 		this.setRootEl("#myChart");
 		this.makeChart(this.type, this.metric);
@@ -31,14 +33,53 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		"click #line": "handleChartChange",
 		"click #radar": "handleChartChange",
 		"click #bar": "handleChartChange",
-		"click .change-metric": "changeMetric"
+		"click .change-metric": "changeMetric",
+		"change .time-period": "changeTimePeriod"
+	},
+
+	changeTimePeriod: function () {
+		var filterFunction = $("option:selected").data('filter');
+		this.filter = this[filterFunction]();
+		this.metric = 'getMiles';
+		this.render();
+	},
+
+	getMonthly: function () {
+		console.log(this.model.maps());
+	},
+
+	getYearly: function () {
+		console.log(this.model.maps());
+	},
+
+	getWeekly: function() {
+		var results = [];
+		function toDate(map){
+			return new Date(map.get('created_at'));
+		};
+		var maps = this.model.maps(),
+			date = new Date(maps.last().get('created_at')),
+			today = date.valueOf(),
+			weekAgo = date.setDate(date.getDate() - 7).valueOf();
+		maps.each(function(map){
+			var val = toDate(map);
+			if(val.valueOf() > weekAgo) {
+				results.push(map);
+			}
+		});
+		console.log(results);
+		return results;
+	},
+
+	getDaily: function () {
+		console.log(this.model.maps());
 	},
 
 	changeMetric: function(event) {
 		this.metric = undefined;
 		this._labels = [];
 		var method = $(event.currentTarget).data('metric-method');
-		this.render(method)
+		this.render(method);
 	},
 
 	handleChartChange: function (event) {
@@ -48,6 +89,7 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		var methodName = $(event.currentTarget).data('chart-type');
 		this.render(methodName);
 	},
+
 	getLabels: function () {
 		var view = this;
 		var maps = this.model.maps();
@@ -64,8 +106,13 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 	getMiles: function() {
 		var result = [];
 		var view = this;
-		var maps = this.model.maps();
-		maps.each(function(map){
+		if (arguments.length > 0) {
+			var maps = arguments;
+		} else  {
+			var maps = this.model.maps();	
+		}
+		
+		this.model.maps().each(function(map){
 			result.push(parseFloat(map.get('total_miles').substr(0,4)));
 		});
 		return result;
