@@ -39,20 +39,14 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 
 	changeTimePeriod: function () {
 		var filterFunction = $("option:selected").data('filter');
-		this.filter = this[filterFunction]();
+		var dateInterval = $("option:selected").data('date-interval');
+		this.filter = this.getDateInterval(dateInterval);
 		this.metric = 'getMiles';
 		this.render();
 	},
 
-	getMonthly: function () {
-		console.log(this.model.maps());
-	},
-
-	getYearly: function () {
-		console.log(this.model.maps());
-	},
-
-	getWeekly: function() {
+	//if week num = 7, for month, num = 31, etc.
+	getDateInterval: function(num) {
 		var results = [];
 		function toDate(map){
 			return new Date(map.get('created_at'));
@@ -60,14 +54,13 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		var maps = this.model.maps(),
 			date = new Date(maps.last().get('created_at')),
 			today = date.valueOf(),
-			weekAgo = date.setDate(date.getDate() - 7).valueOf();
+			weekAgo = date.setDate(date.getDate() - num).valueOf();
 		maps.each(function(map){
 			var val = toDate(map);
 			if(val.valueOf() > weekAgo) {
 				results.push(map);
 			}
 		});
-		console.log(results);
 		return results;
 	},
 
@@ -97,7 +90,7 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 			view._labels = [];
 			maps.each(function(map){
 				var date = new Date(map.get('created_at'));
-				view._labels.push(date.getMonth()+"/"+date.getDay());
+				view._labels.push(date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear());
 			});
 		} 
 		return view._labels;
@@ -106,13 +99,13 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 	getMiles: function() {
 		var result = [];
 		var view = this;
+		
 		if (arguments.length > 0) {
-			var maps = arguments;
+			var maps = [].slice.call(arguments)
 		} else  {
 			var maps = this.model.maps();	
 		}
-		
-		this.model.maps().each(function(map){
+		maps.forEach(function(map){
 			result.push(parseFloat(map.get('total_miles').substr(0,4)));
 		});
 		return result;
@@ -153,7 +146,6 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		var that = this;
 		var posts = this.model.posts();
 		var view = this;
-		debugger;
 		posts.each(function(post){
 			var mins = parseInt(post.get('minutes'))
 			results.push(mins);
