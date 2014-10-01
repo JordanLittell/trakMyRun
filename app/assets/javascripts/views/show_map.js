@@ -36,6 +36,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	redoPt: function () {
 		if(this.pathCache.length > 1) {
 			this.path.push(this.pathCache.shift());
+
 			this.markers.push(this.markerCache.shift());
 		} else {
 			console.log('none left');	
@@ -46,9 +47,13 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		//need to update distance, elevation, markers, path
 		//unshift removed into respective caches
 		var path = this.poly.getPath();
+		var marker = this.markers.pop();
 		if (path.length > 1){
-			this.pathCache.unshift(path.pop());
-			this.markerCache.unshift(this.markers.pop());	
+			marker.setMap(null);
+
+			debugger;
+			this.pathsCache.pop();
+			this.poly.setPath(this.pathsCache);
 		} else {
 			console.log('none left');	
 		}
@@ -163,6 +168,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    this.updateDisplays();
 
 		    var newPath = result.routes[0].overview_path;
+		    this.pathsCache.push(newPath);
 		    for (var i = 0, len = newPath.length; i < len; i++) {
 		        this.path.push(result.routes[0].overview_path[i]);
 		    }
@@ -172,6 +178,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	            samples: 2
 		    });    
 		}
+		console.log(this.pathsCache);
 	},
 
 	parseToGmap: function (json) {
