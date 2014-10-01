@@ -85,14 +85,27 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 
 	getLabels: function () {
 		var view = this;
-		var maps = this.model.maps();
-		if(!view._labels || view._labels.length === 0 ) {
+		console.log(this.filter);
+		if(this.filter) {
+			var maps = this.filter
+			var update = true;
+		} else {
+			var maps = this.model.maps();	
+		}
+		if((!view._labels || view._labels.length === 0)) {
 			view._labels = [];
-			maps.each(function(map){
+			maps.forEach(function(map){
 				var date = new Date(map.get('created_at'));
 				view._labels.push(date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear());
 			});
 		} 
+		if(update) {
+			view._labels = [];
+			this.filter.forEach(function(map){
+				var date = new Date(map.get('created_at'));
+				view._labels.push(date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear());
+			});
+		}
 		return view._labels;
 	},
 
