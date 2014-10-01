@@ -22,6 +22,9 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		this.$el.html(content);
 		this.setRootEl("#myChart");
 		this.makeChart(this.type, this.metric);
+		this._activeElement = this._activeElement || $('#miles');
+		console.log(this._activeElement);
+		this._activeElement.addClass('active');
 		return this;
 	},
 
@@ -34,44 +37,50 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 		"click #radar": "handleChartChange",
 		"click #bar": "handleChartChange",
 		"click .change-metric": "changeMetric",
-		"change .time-period": "changeTimePeriod"
+		"change .time-period": "changeTimePeriod",
+		"click a": "activate"
+	},
+
+	activate: function (event) {
+		var target = $(event.currentTarget);
+		target.css('color','red');
+		this._activeElement = target;
 	},
 
 	changeTimePeriod: function () {
 		this.dateInterval = $("option:selected").data('date-interval');
 		this.filter = this.getDateInterval(this.dateInterval);
-		this.metric = 'getMiles';
 		this.render();
 	},
 
 	//if week num = 7, for month, num = 31, etc.
 	getDateInterval: function(num) {
 		var results = [];
+
 		function toDate(map){
 			return new Date(map.get('created_at'));
 		};
+
 		var maps = this.model.maps(),
 			date = new Date(maps.last().get('created_at')),
 			today = date.valueOf(),
-			weekAgo = date.setDate(date.getDate() - num).valueOf();
+			timePeriodAgo = date.setDate(date.getDate() - num).valueOf();
+		
 		maps.each(function(map){
 			var val = toDate(map);
-			if(val.valueOf() > weekAgo) {
+			if(val.valueOf() > timePeriodAgo) {
 				results.push(map);
 			}
 		});
-		return results;
-	},
 
-	getDaily: function () {
-		console.log(this.model.maps());
+		return results;
 	},
 
 	changeMetric: function(event) {
 		this.metric = undefined;
 		this._labels = [];
-		var method = $(event.currentTarget).data('metric-method');
-		this.render(method);
+		this.method = $(event.currentTarget).data('metric-method');
+		this.render(this.method);
 	},
 
 	handleChartChange: function (event) {
@@ -97,7 +106,6 @@ TrakMyRun.Views.DashboardView = Backbone.ChartView.extend({
 
 	getLabels: function () {
 		var view = this;
-		console.log(this.filter);
 		if(this.filter) { var update = true; } 
 		var maps = this.model.maps();	
 		if(!view._labels || view._labels.length === 0) {

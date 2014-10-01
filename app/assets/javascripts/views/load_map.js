@@ -9,7 +9,6 @@ TrakMyRun.Views.MapLoad = Backbone.View.extend({
 		this.$el.html(content);
 		return this;
 	},
-
 	initialize: function () {
 		this.listenTo(this.model, "sync", this.render);
 	}

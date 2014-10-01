@@ -1,7 +1,9 @@
 TrakMyRun.Collections.Maps = Backbone.Collection.extend({
 	model: TrakMyRun.Models.Map,
 	url: "api/maps",
-	comparator: "created_at",
+	comparator: function(model) {
+		return Date.parse(model.get('created_at'));
+	},
 	getOrFetch: function(id) {
 		var maps = this;
 		var map = maps.get(id);
@@ -16,7 +18,14 @@ TrakMyRun.Collections.Maps = Backbone.Collection.extend({
 			map.fetch();
 		}
 		return map;
-	}
+	},
+
+	reverse: function() {
+     	this.models = this.sortBy(function(model){
+        	return -Date.parse(model.get('created_at'));
+        }, this);
+      return this;
+    },
 
 });
 

@@ -36,7 +36,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	redoPt: function () {
 		if(this.pathCache.length > 1) {
 			this.path.push(this.pathCache.shift());
-
 			this.markers.push(this.markerCache.shift());
 		} else {
 			console.log('none left');	
@@ -46,18 +45,30 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	undoPt: function () {
 		//need to update distance, elevation, markers, path
 		//unshift removed into respective caches
-		var path = this.poly.getPath();
-		var marker = this.markers.pop();
+		var path = this.poly.getPath()
 		if (path.length > 1){
-			marker.setMap(null);
-
-			debugger;
-			this.pathsCache.pop();
-			this.poly.setPath(this.pathsCache);
+			return path.pop();
 		} else {
-			console.log('none left');	
+			return false;
+		}	
+	},
+
+	undoPath: function () {
+		var array = this.poly.getPath().getArray(),
+			endMarker = this.markers[this.markers.length-1],
+			lastMarker = this.markers[this.markers.length-2],
+			lastPt = lastMarker.position,
+			lastPathPt = array[array.length-1];
+			console.log(this.path);
+		while(this.getDistance(lastPt, lastPathPt)>100) {
+			if(!this.undoPt()){
+				console.log("breaking");
+				break;
+			}
+			lastPathPt = array[array.length-1];
 		}
-		
+		this.poly.setPath(this.path)
+		endMarker.setMap(null);
 	},
 
 	editCurrentMap: function (event) {
@@ -85,11 +96,12 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		this.render();
 	},
 
+
 	displayLoaded: function() {
 		// user jquery slideDown to display saved maps
 		this.collection = this.model.maps();
 		var content = this.mapLoadTemplate({
-			maps: this.collection
+			maps: this.collection.reverse()
 		});
 		$('.previous-maps').html(content).slideDown("slow");
 	},
@@ -168,17 +180,16 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		    this.updateDisplays();
 
 		    var newPath = result.routes[0].overview_path;
-		    this.pathsCache.push(newPath);
+		    
 		    for (var i = 0, len = newPath.length; i < len; i++) {
 		        this.path.push(result.routes[0].overview_path[i]);
 		    }
-		    	
+		    this.pathCache.push(this.path)
 		    this.updateElevations({
 	            path: this.path.getArray(),
 	            samples: 2
 		    });    
 		}
-		console.log(this.pathsCache);
 	},
 
 	parseToGmap: function (json) {
@@ -187,6 +198,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	      latLnArray.push( new google.maps.LatLng(obj.k , obj.B ))
 	    });
 	    this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
+	    this.polyCache.push(this.poly);
 	    this.poly.setMap(this.map);
 	    return this.poly
 	},
@@ -216,7 +228,21 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	    		view.elevationGain += view.calculateElevationChange(view.elevationsAlongPath[length - 1]);
     		}
     	});
+	},
 
-    	
+	getDistance: function(p1, p2) {
+		function rad(x) {
+	  		return x * Math.PI / 180;
+		};
+
+		var R = 6378137, // Earth’s mean radius in meter
+		dLat = rad(p2.lat() - p1.lat()),
+		dLong = rad(p2.lng() - p1.lng()),
+		a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+		Math.sin(dLong / 2) * Math.sin(dLong / 2);
+		 c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		 d = R * c;
+		return d; // returns the distance in meter
 	}
 });

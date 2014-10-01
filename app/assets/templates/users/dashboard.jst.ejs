@@ -13,14 +13,31 @@
 	<div class="col-md-3">
 
 		<div class="list-group">
-			<a href="#users/<%=user.get('id')%>/dashboard" class="list-group-item change-metric" data-metric-method="getMiles">
+			<a href="#users/<%=user.get('id')%>/dashboard" class="list-group-item change-metric" id="miles" data-metric-method="getMiles">
 			Miles
 			</a>
-			<a href="#users/<%=user.get('id')%>/dashboard" data-metric-method="getNetTime" class="list-group-item change-metric">Duration</a>
-			<a href="#users/<%=user.get('id')%>/dashboard" data-metric-method="getAverageHR" class="list-group-item change-metric">Avg Heart Rate</a>
-			<a href="#users/<%=user.get('id')%>/dashboard" data-metric-method="getCalories" class="list-group-item change-metric">Calories</a>
-			<a href="#users/<%=user.get('id')%>/dashboard" class="list-group-item change-metric" data-metric-method="getElevations">Elevation Gain</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" 
+				data-metric-method="getNetTime" 
+				id="duation" class="list-group-item change-metric">
+				Duration
+			</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" 
+				data-metric-method="getAverageHR" 
+				class="list-group-item change-metric" 
+				>Avg Heart Rate
+			</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" 
+				data-metric-method="getCalories" 
+				class="list-group-item change-metric"
+				>Calories
+			</a>
+			<a href="#users/<%=user.get('id')%>/dashboard" 
+				class="list-group-item change-metric" 
+				data-metric-method="getElevations"
+				>Elevation Gain
+			</a>
 		</div>
+
 		<div class="form-group">
 			<h1 class="text-thin">Time Period</h1>
             <div class="icon-addon addon-lg">
