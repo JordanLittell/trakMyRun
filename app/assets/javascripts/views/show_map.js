@@ -194,7 +194,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	      latLnArray.push( new google.maps.LatLng(obj.k , obj.B ))
 	    });
 	    this.poly = new google.maps.Polyline({ path: latLnArray, map: this.map, strokeColor: "#0066FF" }); 
-	    this.polyCache.push(this.poly);
 	    this.poly.setMap(this.map);
 	    return this.poly
 	},
