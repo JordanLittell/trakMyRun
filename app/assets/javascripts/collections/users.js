@@ -17,11 +17,14 @@ TrakMyRun.Collections.Users = Backbone.Collection.extend({
 		}
 		return user;
 	},
-	
 
-	parse: function(resp) {		
-		return resp
+	parse: function(resp) {
+		this.page = resp.page;
+        this.total_pages = resp.total_pages;
+        console.log(this.total_pages);
+        return resp.users;
 	}
 });
 
 TrakMyRun.Collections.users = new TrakMyRun.Collections.Users();
+

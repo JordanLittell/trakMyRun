@@ -1,4 +1,4 @@
-json.array! @users do |user|
+json.users @users do |user|
 	json.id user.id
 	json.username user.username
 	json.gender user.gender
@@ -17,3 +17,9 @@ json.array! @users do |user|
 		end
 	end
 end
+
+json.page params[:page]
+json.total_pages @users.total_pages
+
+
+

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).includes(:maps, :posts, :comments)
     if @user.update(user_params)
       flash[:success] = ["Request completed"]
       redirect_to :root
