@@ -2,22 +2,20 @@
 		class UsersController < ApplicationController
 			def show 
 				redirect_to new_sessions_url unless current_user
-				User.includes(:maps, :comments, :posts)
+				User.includes(:maps, :posts)
 				@user = User.find(params[:id])
-				@posts = @user.posts
+				@posts = @user.posts.includes(:comments)
 				render "show"	
 			end
 
 			def index 
-				User.delay.includes(:maps, :comments, :posts)
-				@users = User.page(params[:page]).per(10)
+				@users = User.page(params[:page])
 				@page = params[:page]
 				render "index"
-
 			end
 
 			def update 
-				User.includes(:maps, :comments, :posts)
+				User.includes(:maps, :posts)
 				@user = User.find(params[:id])
 				@posts = @user.posts
 				if params[:old_password]
@@ -39,7 +37,7 @@
 			end
 
 			def edit 
-				User.includes(:maps, :comments, :posts)
+				User.includes(:maps, :posts)
 				@user = User.find(params[:id])
 			end
 

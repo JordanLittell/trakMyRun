@@ -7,5 +7,3 @@ window.TrakMyRun = {
     new TrakMyRun.Routers.AppRouter({ rootEl: $(".content") });
   }
 };
-
-

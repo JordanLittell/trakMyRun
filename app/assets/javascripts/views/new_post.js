@@ -89,6 +89,76 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
         });
 	},
 
+	setup: function () {
+		var view = this;
+			$(function(){
+			var navListItems = $('div.setup-panel div a'),
+		        allWells = $('.setup-content'),
+		        allNextBtn = $('.nextBtn');
+
+			allWells.hide();
+
+			navListItems.click(function (e) {
+			    e.preventDefault();
+			    var $target = $($(this).attr('href')),
+			            $item = $(this);
+
+			    if (!$item.hasClass('disabled')) {
+			        navListItems.removeClass('btn-primary').addClass('btn-default');
+			        $item.addClass('btn-primary');
+			        allWells.hide();
+			        $target.show();
+			        $target.find('input:eq(0)').focus();
+			    }
+			});
+
+			allNextBtn.click(function(){
+			    var curStep = $(this).closest(".setup-content"),
+			        curStepBtn = curStep.attr("id"),
+			        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+			        curInputs = curStep.find("input[type='text'],input[type='url']"),
+			        isValid = true;
+
+			    $(".form-group").removeClass("has-error");
+			    for(var i=0; i < curInputs.length; i++){
+			        if (!curInputs[i].validity.valid){
+			            isValid = false;
+			            $(curInputs[i]).closest(".form-group").addClass("has-error");
+			        }
+			    }
+
+			    if (isValid)
+			        nextStepWizard.removeAttr('disabled').trigger('click');
+			});
+
+			$('div.setup-panel div a.btn-primary').trigger('click');
+
+			$(".infinite").knob({
+				'min': 0,
+				'max':300,
+			    'bgColor': '#121212',
+			    'fontWeight': 100,
+			    'skin': 'tron',
+			    'thickness': 0.2,
+			    'width': '300',
+			    'height':'300',
+			    'cursor': true,
+			    'value': 0,
+			    'release': function() {
+			    	console.log(this.val());
+			    }
+			    
+			});
+			$(".close-form").on('click', function(event){
+				event.preventDefault();
+				var formId = $(event.currentTarget).data('form-id');
+				$(formId).slideUp('slow');
+			});
+			view.setSliders();
+		});
+		
+	},
+
 	getCaloriesBurned: function (age, weight, heartRate, gender, totTime) {
 		if (gender==='m') {
 			var ageConst = 0.2017,
@@ -105,4 +175,5 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 						+ (heartRate * hrConst) - subt) * totTime)
 		return Math.round(numerator/4.184)
 	}
+
 });

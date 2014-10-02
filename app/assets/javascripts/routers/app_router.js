@@ -67,6 +67,7 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 			model: user
 		});
 		this.swapView(view);
+		view.setup();
 		view.setSliders();
 	},
 

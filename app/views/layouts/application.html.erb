@@ -3,18 +3,18 @@
 <head>
   <title>TrakMyRun</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application'%>
-  <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
 </head>
-<script type="text/javascript">
-	filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
-</script>
 	<body class="main-background">
 
 	<%= render "layouts/header" %>
 	<%= yield %>
 
 	</body>
-	<%= render "layouts/footer" %>
+	<%= javascript_include_tag 'application'%>
+	<%= filepicker_js_include_tag %>
+<script>
+	window.TrakMyRun.CurrentUser = <%= current_user.id %>
+	filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
+</script>
 </html>

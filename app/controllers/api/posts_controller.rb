@@ -10,12 +10,16 @@ module Api
 			end
 		end
 
+		def index
+			@posts = Post.includes(:comments).all
+		end
+
 		def new 
 			@post = Post.new()
 		end
 
 		def destroy 
-			@post = Post.find(params[:id])
+			@post = Post.includes(:comments).find.(params[:id])
 			@user = current_user
 			@posts = @user.posts
 			if @post.delete
@@ -28,7 +32,7 @@ module Api
 		private 
 
 			def post_params 
-				params.require(:post).permit(:user_id, :workout_type, :workout_type, :heart_rate, :minutes, :calories)
+				params.require(:post).permit(:user_id, :workout_type, :heart_rate, :minutes, :calories)
 			end
 	end
 

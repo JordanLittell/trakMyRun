@@ -7,6 +7,8 @@ gem 'rails', '4.1.4'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bullet'
+
 gem 'filepicker-rails'
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -39,6 +41,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 group :development do
+  gem 'lol_dba'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
