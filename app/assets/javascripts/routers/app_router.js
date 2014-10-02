@@ -79,11 +79,14 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		this.swapView(view);
 	},
 
+
+	
+
 	swapView: function(view) {
 		if (this._currentView) {
 			this._currentView.remove();
 		} 
-
+		TrakMyRun.updateURL(window.location.hash);		
 		this.$rootEl.html(view.render().$el);
 		this._currentView = view;
 	}	

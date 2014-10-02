@@ -9,7 +9,7 @@
 			end
 
 			def index 
-				@users = User.page(params[:page])
+				@users = User.page(params[:page]).per(5)
 				@page = params[:page]
 				render "index"
 			end

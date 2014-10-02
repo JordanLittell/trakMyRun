@@ -1,4 +1,3 @@
-
 <aside class="left col-md-3">
 	<div class="pannel well">
 		<% if(user.get('image_url')) { %>
@@ -94,12 +93,15 @@
 	        </div>
 	    </div>
     <% } %>
+
     <br>
+
 	<form class="pannel well" role="search">
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Search for people">
+			<input type="text" class="form-control search" placeholder="Search for people">
 		</div>
 	</form>
+	<div class="pannel well search-results"></div>
 </aside>
 
 

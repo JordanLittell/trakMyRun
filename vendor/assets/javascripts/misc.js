@@ -1,13 +1,23 @@
 $(document).ready(function () {
-  $('.nav li').click(function(ev){
-    $('.nav').find('li.active').removeClass('active');
-    $('.nav').find('.glyphicon.active').removeClass('active');
-    $(ev.currentTarget).addClass('active');
-    $(ev.currentTarget).find('.glyphicon').addClass('active');
-  })
 	TrakMyRun.initialize();
+
+  if(TrakMyRun.CurrentUser) {
+    $('body').removeClass("main-background"); 
+    $('.close-form').on('click',function(ev) {
+      ev.preventDefault();
+      $("#filepicker-form").slideUp();
+    });
+  }
+
 	$('.dropdown-toggle').dropdown();
-	$('body').removeClass("main-background");	
 	$('.infinite').val(0);
 	
-});
+  });
+
+TrakMyRun.updateURL = function (fragment) {
+  $('.nav').children().removeClass('active');
+  $("a[href*='#'").find('.glyphicon').removeClass('active');
+  var item = $("a[href$='"+fragment+"']");
+  item.parent().addClass('active');
+  item.find('.glyphicon').addClass('active');
+}

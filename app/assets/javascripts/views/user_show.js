@@ -33,7 +33,18 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		"click #home": "goHome",
 		"click .changePhoto": "displayPhotoForm",
 		"submit #personal-stat-form": "updateUser",
-		"click .carrot-animation": "animateCarrot"
+		"click .carrot-animation": "animateCarrot",
+		"keydown .search": "handleSearch",
+		"blur .search": "hideSearch"
+	},
+
+	hideSearch: function () {
+		$(".search-results").slideUp();
+	},
+
+	handleSearch: function(event) {
+		var loading = $('<div class="loading"></div>');
+		$(".search-results").slideDown();
 	},
 
 	displayPhotoForm: function () {

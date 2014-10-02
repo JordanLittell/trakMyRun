@@ -25,16 +25,20 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 	listenForScroll: function () {
 		var view = this;
 		$(window).off("scroll"); // remove past view's listeners
-    	var throttledCallback = _.throttle(this.nextPage.bind(this), 300);
+    	var throttledCallback = _.throttle(this.nextPage.bind(this), 100);
 		$(window).on("scroll", throttledCallback);
 	},
 
 	nextPage: function () {
 		var view = this;
 		var height = $(window).scrollTop()
-		if( height > $(document).height() - ($(window).height() + 40)) {
+		if( height > $(document).height() - ($(window).height() + 100)) {
 			if (parseInt(this.collection.page) <= this.collection.total_pages){
-				
+				//append loading thingy to the bottom
+				var loading = $('<div class="loading"></div>');
+				if(this.$el.find('.loading').length === 0){
+					this.$el.append(loading);
+				}
 				this.collection.fetch({
 					remove: false, 
 					data:  { page: parseInt(view.collection.page) + 1 },
@@ -54,9 +58,6 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 		});
 	},
 
-	renderLoading: function () {
-		console.log("ajax loading");
-	},
 
 	activateAnimations: function(ev) {
 		var heart = $(ev.currentTarget).find($('.heart'));

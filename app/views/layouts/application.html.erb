@@ -13,8 +13,11 @@
 	</body>
 	<%= javascript_include_tag 'application'%>
 	<%= filepicker_js_include_tag %>
-<script>
-	window.TrakMyRun.CurrentUser = <%= current_user.id %>
-	filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
-</script>
+	<%if current_user %> 
+		<script>
+			window.TrakMyRun.CurrentUser = <%= current_user.id %>
+			filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
+		</script>
+	<% end %>
+
 </html>
