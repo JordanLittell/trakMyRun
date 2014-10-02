@@ -18,7 +18,7 @@ json.users @users do |user|
 	end
 end
 
-json.page params[:page]
+json.page @page
 json.total_pages @users.total_pages
 
 

@@ -30,12 +30,15 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 	},
 
 	nextPage: function () {
+		var view = this;
 		var height = $(window).scrollTop()
-		if( height > $(document).height() - ($(window).height() + 50)) {
+		if( height > $(document).height() - ($(window).height() + 100)) {
+			debugger;
 			if (parseInt(this.collection.page) <= this.collection.total_pages){
+				
 				this.collection.fetch({
 					remove: false, 
-					data:  { page: this.collection.page + 1 },
+					data:  { page: parseInt(view.collection.page) + 1 },
 					wait: true,
 					success: function () {
 						console.log('success!')
@@ -49,7 +52,7 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 		this.listenTo(this.collection, "sync", this.render)
 		this.collection.fetch({
 			remove: false, 
-			data:  { page: this.collection.page },
+			data:  { page: 1 },
 			success: function () {console.log('success!')}
 		});
 	},

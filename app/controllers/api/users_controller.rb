@@ -10,7 +10,8 @@
 
 			def index 
 				User.includes(:maps, :comments, :posts)
-				@users = User.page(params[:page])
+				@users = User.page(params[:page]).per(10)
+				@page = params[:page]
 				render "index"
 
 			end
