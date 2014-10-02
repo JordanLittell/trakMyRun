@@ -24,6 +24,8 @@ gem 'figaro'
 gem 'kaminari'
 gem 'rails_12factor'
 gem 'ejs'
+gem 'delayed_job_active_record'
+gem 'foreman'
 gem 'jquery-ui-rails'
 
 gem 'backbone-on-rails'

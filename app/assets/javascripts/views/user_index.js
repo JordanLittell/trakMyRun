@@ -33,7 +33,6 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 		var view = this;
 		var height = $(window).scrollTop()
 		if( height > $(document).height() - ($(window).height() + 100)) {
-			debugger;
 			if (parseInt(this.collection.page) <= this.collection.total_pages){
 				
 				this.collection.fetch({
@@ -50,11 +49,16 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 
 	initialize: function() {
 		this.listenTo(this.collection, "sync", this.render)
+		this.listenTo(this.collection, "sync", this.renderLoading)
 		this.collection.fetch({
 			remove: false, 
 			data:  { page: 1 },
 			success: function () {console.log('success!')}
 		});
+	},
+
+	renderLoading: function () {
+		console.log("ajax loading");
 	},
 
 	activateAnimations: function(ev) {

@@ -19,7 +19,6 @@ TrakMyRun.Collections.Users = Backbone.Collection.extend({
 	},
 
 	parse: function(resp) {
-		debugger;
 		this.page = resp.page;
         this.total_pages = resp.total_pages;
         console.log(this.total_pages);
