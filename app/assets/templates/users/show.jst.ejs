@@ -25,29 +25,38 @@
 	        
 	            <div class="panel-body">
 	                <table class="table">
+	                	
 	                	<tr>
 	                		<td>
-	                            <a href= <%= "#users/" + user.get('id') + "/routes/show"%> >Create Route</a>
+	                        	<a href= <%= "#users/" + user.get('id') + "/routes/show"%>>Create Route</a>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                    	
+		                        <td>
+		                        	<a href="#users">
+		                            	The Hub
+		                            </a>
+		                        </td>
+	                        
+	                    </tr>
+	                    <tr>
+	                    	
+		                        <td>
+			                        <a href= <%="#users/" + user.get('id') + "/dashboard" %>>
+			                           Dashboard
+			                         </a>
+		                        </td>
+	                        
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                           <a href="##">Notifications</a>
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td>
-	                            <a href="/#users">The Hub</a>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                           <a href="http://www.jquery2dotnet.com">Dashboard</a>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                           <a href="http://www.jquery2dotnet.com">Notifications</a>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                           <a href="http://www.jquery2dotnet.com">Followers</a>
+	                           <a href="##">Followers</a>
 	                        </td>
 	                    </tr>
 	                </table>
@@ -103,8 +112,6 @@
 	</form>
 	<div class="pannel well search-results"></div>
 </aside>
-
-
 
 <section class="feed-content col-md-8  col-md-offset-1 ">
 	<div class="posts-container">

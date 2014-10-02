@@ -45,6 +45,8 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 	handleSearch: function(event) {
 		var loading = $('<div class="loading"></div>');
 		$(".search-results").slideDown();
+		var text = $(event.currentTarget).val();
+		console.log(TrakMyRun.Collections.users.get(41));
 	},
 
 	displayPhotoForm: function () {
