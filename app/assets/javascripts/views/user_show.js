@@ -35,7 +35,8 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 		"submit #personal-stat-form": "updateUser",
 		"click .carrot-animation": "animateCarrot",
 		"keydown .search": "handleSearch",
-		"blur .search": "hideSearch"
+		"blur .search": "hideSearch",
+		"click .close": "goHome"
 	},
 
 	hideSearch: function () {

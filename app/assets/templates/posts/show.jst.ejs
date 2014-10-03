@@ -1,9 +1,9 @@
 
 	<div class="row pannel well activity">
 		<% if (post.get('user_id') === TrakMyRun.CurrentUser) { %>
-			<span class="pull-right delete-view" 
+			<span class="pull-right delete-view close"
 					data-post-id="<%=post.get('id')%>"
-					class="close"
+					
 					aria-hidden="true">&times;
 			</span>
 		<% } %>
