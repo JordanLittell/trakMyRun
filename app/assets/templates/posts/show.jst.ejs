@@ -43,10 +43,14 @@
 			<% } %>
 
 			<div class="comments">
-				<ul>	
-					<% post.comments().each(function(comment){ %>
-						<li> <%= comment.get('content') %></li>
-					<% }) %>
+				<ul class="comment-list">
+					
+						<% post.comments().each(function(comment){ %>
+						<div class="pannel well">
+							<li> <%= comment.get('content') %></li>
+						</div>	
+						<% }) %>
+					
 				</ul>
 			</div>
 
