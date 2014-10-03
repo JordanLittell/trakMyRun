@@ -20,7 +20,7 @@
 						<td>Time</td>
 					</tr>
 					<% var count = 0,
-						ranking = user.posts()/100;%>
+						ranking = parseInt(user.posts().length/20);%>
 
 					<% user.posts().forEach(function(post){ %>
 						<% if (count < 5) { %>
@@ -68,7 +68,6 @@
 							
 						<% } %>
 					</div>
-					<%= user.get('id') %>
 					<h3 class="text-thin">Points </h3> <br> <h4 ><%=user.posts().length%></h4>
 				</div>
 			</div>
