@@ -97,6 +97,23 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 		        allNextBtn = $('.nextBtn');
 
 			allWells.hide();
+			$('.infinite').val(0);
+			$(".infinite").knob({
+				'min': 0,
+				'max':300,
+			    'bgColor': '#121212',
+			    'fontWeight': 100,
+			    'skin': 'tron',
+			    'thickness': 0.2,
+			    'width': '300',
+			    'height':'300',
+			    'cursor': true,
+			    'value': 0,
+			    'release': function() {
+			    	console.log(this.val());
+			    }
+			    
+			});
 
 			navListItems.click(function (e) {
 			    e.preventDefault();
@@ -133,22 +150,7 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 
 			$('div.setup-panel div a.btn-primary').trigger('click');
 
-			$(".infinite").knob({
-				'min': 0,
-				'max':300,
-			    'bgColor': '#121212',
-			    'fontWeight': 100,
-			    'skin': 'tron',
-			    'thickness': 0.2,
-			    'width': '300',
-			    'height':'300',
-			    'cursor': true,
-			    'value': 0,
-			    'release': function() {
-			    	console.log(this.val());
-			    }
-			    
-			});
+			
 			$(".close-form").on('click', function(event){
 				event.preventDefault();
 				var formId = $(event.currentTarget).data('form-id');
