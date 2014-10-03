@@ -311,7 +311,12 @@ a {
 	}
 }
 
-
+.hidden-information-box {
+	display: none;
+	background: rgba(0,0,0,0.8);
+	color: white;
+	font-weight: 100;
+}
 
 /*Text wizard*/
 

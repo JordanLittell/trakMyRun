@@ -52,20 +52,9 @@
           <button type="submit" class="btn btn-default">Submit</button>
         </form> -->
         <ul class="nav navbar-nav navbar-right">
-          
           <li><a href="#users/<%=current_user.id%>" 
-                class="glyphicon glyphicon-home icon-hover blue"></a></li>
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.username%><span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="">Edit</a></li>
-              <li><a href="">Settings</a></li>
-              <li><a href="">Goals</a></li>
-              <li class="divider"></li>
-              <li><%= link_to "Log Out", sessions_url, method: :delete%></li>
-            </ul>
-          </li>
-
+            class="glyphicon glyphicon-home icon-hover blue"></a></li>
+          <li><%= link_to "Log Out", sessions_url, method: :delete%></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

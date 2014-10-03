@@ -8,30 +8,66 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		});
 		this.$el.html(content);
 		this.initializeMap();
+		
 		var mapChart = new TrakMyRun.Views.MapChart({
 			model: this.backboneMap
 		});
-
 		this.addSubview('.chart', mapChart)
+
 		return this;
 	},
 
+	initializeSearch: function () {
+		var input = document.getElementById('search-field');
+		// debugger;
+		var autocomplete = new google.maps.places.Autocomplete(input);
+  		// autocomplete.bindTo('bounds', this.map);
+  		this.bindPlaceChange(autocomplete);
+	},
+
 	initialize: function (options) {
+		if (parseInt(this.model.get('id')) !== TrakMyRun.CurrentUser) {
+			Backbone.history.navigate('users/' + TrakMyRun.CurrentUser + '/routes/show');
+		}
 		this.backboneMap = new TrakMyRun.Models.Map()
 		this.listenTo(this.model,"sync", this.initializeMap);
 		this.listenTo(this.model.maps(), "add", this.addMap);
 	},
 
+	bindPlaceChange: function (autocomplete) {
+		var view = this;
+		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+		    var place = autocomplete.getPlace();
+		    if (!place.geometry) {
+		      return;
+		    }
+		    // If the place has a geometry, then present it on a map.
+		    if (place.geometry.viewport) {
+		      view.map.fitBounds(place.geometry.viewport);
+		    } else {
+		      view.map.setCenter(place.geometry.location);
+		      view.map.setZoom(17);  // Why 17? Because it looks good.
+		    }
+		})
+	},
+
+	setCenter: function (lat, lng) {
+		this.mapOptions = {
+    		    zoom: 14,
+    		    center: new google.maps.LatLng(lat, lng)
+          };
+	},
+
 	events: {
 		"click .create-new-map": "reload",
-		
 		"click .create-new-map": "restart",
 		"click .load-options": "displayLoaded",
 		"click .map-show-link": "updatePage",
 		"click .close-icon": "closeView",
 		"click .elevation": "delegateShowElevations",
 		"click .edit": "editCurrentMap",
-		"click .save-map": "save"
+		"click .save-map": "save",
+		"focus .searchbar": "initializeSearch"
 	},
 
 	redoPt: function () {
@@ -232,6 +268,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		Math.sin(dLong / 2) * Math.sin(dLong / 2);
 		 c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		 d = R * c;
-		return d; // returns the distance in meter
+		return d; // returns the distance in meters
 	}
 });

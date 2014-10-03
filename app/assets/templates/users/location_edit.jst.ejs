@@ -7,25 +7,17 @@
 	<form id="personal-stat-form">
 		<div class="form-group">
 			<div class="row">
-				<div class="col-md-3 col-md-offset-3">
-					<label for="age">Country</label>
-					<input id="age" class="form-control" name="user[country]">
-					<label for="weight">Street Address</label>
-					<input id="weight" class="form-control" name="user[street_address]">
+				<div class="col-md-6 col-md-offset-3">
+					<label for="city">City</label>
+					<input id="city" class="form-control" name="user[city]">
+					<label for="state">State</label>
+					<input id="state" class="form-control" name="user[state]"><br>
+					<input type="submit" value="Set Your City!" class="btn btn-primary form-control">
 				</div>
-
-				<div class="col-md-3">
-					<label for="gender">Zip Code</label>
-					<input id="gender" class="form-control" name="user[zip_code]">
-					<label for="height">State</label>
-					<input id="height" class="form-control" name="user[state]">
-				</div>
-			</div>
-			<br>
-			<div class="row">
-				<input type="submit" class="btn btn-primary col-md-6 col-md-offset-3">
 			</div>
 		</div>
-		
 	</form>
+	<div class="hidden-information-box">
+		<p>This information will only be used to map a starting point of your runs.</p>
+	</div>
 </div>

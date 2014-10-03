@@ -24,10 +24,9 @@ Backbone.MapView = Backbone.CompositeView.extend({
           this.elevationCache = [];
           this.markerCache = [];
           this.mapOptions = {
-    		zoom: 14,
-    		center: new google.maps.LatLng(37.7749300, -122.4194200)
-        };
-
+    		    zoom: 14,
+    		    center: new google.maps.LatLng(37.7749300, -122.4194200)
+          };
         google.maps.event.addListener(this.map, "click", this.mapUpdated.bind(this));
     },
 
@@ -39,7 +38,6 @@ Backbone.MapView = Backbone.CompositeView.extend({
             this.markers.push(marker);
             this.map.panTo(evt.latLng);
     },
-
 
     saveMap: function() {
   		var view = this;
@@ -58,7 +56,4 @@ Backbone.MapView = Backbone.CompositeView.extend({
         }
       });	
 	 }
-
-
-
 });
