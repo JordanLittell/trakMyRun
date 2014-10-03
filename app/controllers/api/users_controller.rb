@@ -49,7 +49,9 @@
 					:age, 
 					:weight, 
 					:gender, 
-					:height
+					:height,
+					:city,
+					:state
 				)
 			end
 		end

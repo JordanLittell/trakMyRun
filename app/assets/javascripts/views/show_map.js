@@ -12,17 +12,32 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var mapChart = new TrakMyRun.Views.MapChart({
 			model: this.backboneMap
 		});
-		this.addSubview('.chart', mapChart)
-
+		this.addSubview('.chart', mapChart);
 		return this;
 	},
 
 	initializeSearch: function () {
 		var input = document.getElementById('search-field');
-		// debugger;
 		var autocomplete = new google.maps.places.Autocomplete(input);
-  		// autocomplete.bindTo('bounds', this.map);
   		this.bindPlaceChange(autocomplete);
+	},
+
+	handleLocationChange: function () {
+		this.changeLocation(this.model.get('city'), this.model.get('state'));	
+	},
+
+	changeLocation: function (city, state) {
+		city = city.replace(" ", "+");
+		var query = city + '+' + state;
+		view = this;
+		$.ajax({
+		  url: 'https://maps.googleapis.com/maps/api/geocode/json?address='+query,
+		  complete: function (xhr) {
+		  	var center = (xhr.responseJSON).results[0].geometry.location;
+		  	view.setCenter(center.lat, center.lng);
+		  	view.render();
+		  }
+		});
 	},
 
 	initialize: function (options) {
@@ -32,6 +47,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		this.backboneMap = new TrakMyRun.Models.Map()
 		this.listenTo(this.model,"sync", this.initializeMap);
 		this.listenTo(this.model.maps(), "add", this.addMap);
+		this.listenTo(this.model, "sync", this.handleLocationChange);
 	},
 
 	bindPlaceChange: function (autocomplete) {

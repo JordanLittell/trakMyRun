@@ -77,7 +77,6 @@ TrakMyRun.Views.UserShow = Backbone.CompositeView.extend({
 	updateUser: function (ev) {
 		ev.preventDefault();
 		var data = $(ev.currentTarget).serializeJSON();
-		console.log(data);
 		this.model.save(data.user);
 		TrakMyRun.Collections.users.set(this.model);
 	},
