@@ -53,14 +53,17 @@ a[href] {
 }
 .close-icon {
 	font-size: 20px;
-	padding: 5px;
+	width: 20px;
+	padding:10px;
 	cursor: pointer;
 	transition: color .4s ease-in;
+	transition: border .4s ease-in;
 	transition: background-color .4s ease-in;
 }
 .close-icon:hover {
 	color:white;
 	background-color: #BFBFBF;
+	border: 1px solid black;
 }
 .previous-maps {
 	display:none;

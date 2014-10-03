@@ -24,13 +24,14 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 
 	events: {
 		"click .create-new-map": "reload",
-		"click .save-map": "save",
+		
 		"click .create-new-map": "restart",
 		"click .load-options": "displayLoaded",
 		"click .map-show-link": "updatePage",
 		"click .close-icon": "closeView",
 		"click .elevation": "delegateShowElevations",
-		"click .modal-submit": "editCurrentMap"
+		"click .edit": "editCurrentMap",
+		"click .save-map": "save"
 	},
 
 	redoPt: function () {
@@ -41,16 +42,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 			console.log('none left');	
 		}
 	},
-
-	// undoPt: function (path) {
-	// 	//need to update distance, elevation, markers, path
-	// 	//unshift removed into respective cache
-	// 	if (path.length > 1){
-	// 		return path.pop();
-	// 	} else {
-	// 		return false;
-	// 	}	
-	// },
 
 	removePointsAlongPath: function(path) {
 		var array = this.poly.getPath().getArray();
@@ -85,10 +76,17 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	},
 
 	save: function () {
+		var loading = $("<div class='loading'></div>");
+
 		this.saveMap();
 		this.initialize();
-		this.model.fetch();
+		this.model.fetch({
+			success: function() {
+				loading.remove()
+			}
+		});
 		this.render();
+		$('.sidebar').append(loading);
 	},
 
 
@@ -145,8 +143,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	      this.markers.push(marker);
 
 	    } else {
-
-	    debugger;
           this.service.route({
 	            origin: this.path.getAt(this.path.getArray().length - 1),
 	            destination: evt.latLng,

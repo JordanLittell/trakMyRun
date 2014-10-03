@@ -11,6 +11,7 @@ json.users @users do |user|
 		json.minutes post.minutes 
 		json.calories post.calories
 		json.workout_type post.workout_type
+		json.created_at post.created_at
 		json.comments post.comments do |comment|
 			json.content comment.content
 			json.user_id comment.user_id

@@ -5,21 +5,22 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 		var content = view.template({
 			users: view.collection
 		});
-		view.collection.each(function(user){
-			user.posts().each(function(post) {
-				var subview = new TrakMyRun.Views.PostShow({
-					model: post
-				});
-				view.addSubview('.posts-container', subview);
-			})
-		});
 		view.$el.html(content);
 		view.listenForScroll();
+		window.setTimeout(function(){
+		view.collection.each(function(user){
+			var chart = new TrakMyRun.Views.StatsView({
+				model: user
+			});
+			var selector = '.stats-display#'+user.get('id');
+			view.addSubview(selector, chart);
+		});},0);
 		return view;
 	},
 
 	events: {
 		"mouseover tr": "activateAnimations",
+		"click tr": "displayStats"
 	},
 
 	listenForScroll: function () {
@@ -34,7 +35,6 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 		var height = $(window).scrollTop()
 		if( height > $(document).height() - ($(window).height() + 100)) {
 			if (parseInt(this.collection.page) <= this.collection.total_pages){
-				//append loading thingy to the bottom
 				var loading = $('<div class="loading"></div>');
 				if(this.$el.find('.loading').length === 0){
 					this.$el.append(loading);

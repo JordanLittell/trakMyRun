@@ -6,7 +6,7 @@
 			<div class="col-md-4 text-center">
 				<img src="<%=user.get('image_url')%>" class="profile-pic">
 				<a href=<%="#users/" + user.get('id')%>>	
-					<h3 class="text-thin"><%= user.get('username') %></h3>
+					<h3 class="text-thin"><%= user.get('username')%></h3>
 				</a>
 			</div>
 
@@ -44,7 +44,8 @@
 
 			<div class="col-md-4 text-center text-thin">
 				<h1 class="text-thin">Stats</h1>
-				<p>Click on a user's recent activity to see the stats.</p>
+				<!-- add chart, create chart view, give it a metric and chart type weekly filter-->
+				<div class="stats-display"></div>
 			</div>
 
 		</div>

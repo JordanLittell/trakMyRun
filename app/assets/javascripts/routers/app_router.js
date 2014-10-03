@@ -5,6 +5,7 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		console.log(this.$rootEl);
 		Backbone.history.start();
 	},
+	
 	routes: {
 		"" : "currentUserShow",
 		"posts/new":"newPost",
@@ -78,9 +79,6 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		});
 		this.swapView(view);
 	},
-
-
-	
 
 	swapView: function(view) {
 		if (this._currentView) {
