@@ -32,22 +32,18 @@
 	                        </td>
 	                    </tr>
 	                    <tr>
-	                    	
-		                        <td>
-		                        	<a href="#users">
-		                            	The Hub
-		                            </a>
-		                        </td>
-	                        
+	                        <td>
+	                        	<a href="#users">
+	                            	The Hub
+	                            </a>
+	                        </td>
 	                    </tr>
 	                    <tr>
-	                    	
-		                        <td>
-			                        <a href= <%="#users/" + user.get('id') + "/dashboard" %>>
-			                           Dashboard
-			                         </a>
-		                        </td>
-	                        
+	                        <td>
+		                        <a href= <%="#users/" + user.get('id') + "/dashboard" %>>
+		                           Dashboard
+		                         </a>
+	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td>
@@ -112,11 +108,15 @@
 	<div class="pannel well search-results"></div>
 </aside>
 
+<% if (user.posts().length > 0) {%>
 <section class="feed-content col-md-8  col-md-offset-1 ">
 	<div class="posts-container">
 		<h1 class="text-thin text-center feed">Activity</h1>	
 	</div>
 </section>
-
-
+<% } else {%>
+<div class="col-md-8  col-md-offset-1">
+	<h2>Oh snap! Doesn't look like you have activities <a href="#posts/new">click here</a> to make one.</h2>
+</div>
+<% } %>
 

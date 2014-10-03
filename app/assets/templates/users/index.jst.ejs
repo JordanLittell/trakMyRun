@@ -19,33 +19,40 @@
 						<td>Average HR</td>
 						<td>Time</td>
 					</tr>
+					<% var count = 0 %>
 
 					<% user.posts().forEach(function(post){ %>
-						<tr>
-							<td class="text-thin">
-								<%=post.get('workout_type')%>
-							</td>
-					
-							<td>
-								<%=post.get('calories')%>
-							</td>
-							<td>
-								<span class="glyphicon glyphicon-heart-empty heart red"></span> 
-								<%=post.get('heart_rate')%>
-							</td>
-					
-							<td>
-								<%=post.get('minutes')%> m 
-							</td>
-						</tr>
+						<% if (count < 5) { %>
+							<tr>
+								<td class="text-thin">
+									<%=post.get('workout_type')%>
+								</td>
+						
+								<td>
+									<%=post.get('calories')%>
+								</td>
+								<td>
+									<span class="glyphicon glyphicon-heart-empty heart red"></span> 
+									<%=post.get('heart_rate')%>
+								</td>
+						
+								<td>
+									<%=post.get('minutes')%> m 
+								</td>
+							</tr>
+							<% count += 1 %>
+						<% } %>
 					<% }); %>
 				</table>
 			</div>
 
 			<div class="col-md-4 text-center text-thin">
-				<h1 class="text-thin">Stats</h1>
 				<!-- add chart, create chart view, give it a metric and chart type weekly filter-->
-				<div class="stats-display"></div>
+				<div class="stats-display">
+					<h3 class="text-thin">Followers </h3> <br>
+					<h3 class="text-thin">Ranking </h3> <br>
+					<h3 class="text-thin">Points </h3> <br> <h4 class="badge"><%=user.posts().length%></h4>
+				</div>
 			</div>
 
 		</div>
