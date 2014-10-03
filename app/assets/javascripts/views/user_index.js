@@ -20,7 +20,7 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 
 	events: {
 		"mouseover tr": "activateAnimations",
-		"click tr": "displayStats"
+		"mouseout tr": "deactivateAnimations",
 	},
 
 	listenForScroll: function () {
@@ -60,9 +60,15 @@ TrakMyRun.Views.UserIndex = Backbone.CompositeView.extend({
 
 
 	activateAnimations: function(ev) {
-		var heart = $(ev.currentTarget).find($('.heart'));
-		var originalSize = heart.css('font-size');
-		window.setTimeout(this.throb(heart, originalSize, this.backDown), 3000);
+	
+		// $(ev.currentTarget).addClass("animated pulse");
+		$(ev.currentTarget).find('.heart').addClass("animated rubberBand pulse");
+
+	},
+
+	deactivateAnimations: function(ev) {
+		// $(ev.currentTarget).removeClass("animated pulse");
+		$(ev.currentTarget).find('.heart').removeClass("animated rubberBand pulse");
 	},
 
 	throb: function (heart, originalSize, callback) {

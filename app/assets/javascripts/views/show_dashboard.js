@@ -22,8 +22,7 @@ TrakMyRun.Views.DashboardView = Backbone.DynamicChart.extend({
 		this.$el.html(content);
 		this.setRootEl("#myChart");
 		this.makeChart(this.type);
-		this._activeElement = this._activeElement || $('#miles');
-		this._activeElement.addClass('active');
+		this.displayChartName('.name-display');
 		return this;
 	},
 
@@ -37,14 +36,33 @@ TrakMyRun.Views.DashboardView = Backbone.DynamicChart.extend({
 		"click #radar": "handleChartChange",
 		"click #bar": "handleChartChange",
 		"click .change-metric": "changeMetric",
-		"change .time-period": "changeTimePeriod",
-		"click a": "activate"
+		"change .time-period": "changeTimePeriod"
 	},
 
-	activate: function (event) {
-		var target = $(event.currentTarget);
-		target.css('color','red');
-		this._activeElement = target;
-	}
+	displayChartName: function(el) {
+		var typeDisplay = $(el).find('.type-display');
+		var timeDisplay = $(el).find('.time-display');
+		var content;
+		debugger;
+		switch(this.dateInterval) {
+			case 1:
+				content = 'Day'
+				break;
+			case 7:
+				content = 'Week'
+				break;
+			case 31:
+				content = 'Month'
+				break;
+			case 365:
+				content = 'Year'
+				break;
+			default: 
+				content = 'Year'
+				break;
+		}
+		typeDisplay.text(this.metric.substr(3));
+		timeDisplay.text(content);
+	},	
 	
 });

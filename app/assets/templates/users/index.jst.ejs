@@ -50,25 +50,28 @@
 			<div class="col-md-4 text-center text-thin">
 				<!-- add chart, create chart view, give it a metric and chart type weekly filter-->
 				<div class="stats-display">
-					<h3 class="text-thin">Followers </h3> <br>
+					
+					<h3 class="text-thin">Followers</h3>
 					<h3>20</h3>
-					<h3 class="text-thin">Ranking </h3> <br>
+					<hr>
+					<h3 class="text-thin">Ranking </h3>
 					<div class="row">
 						<% if (ranking === 0) {%>
 							
 								<img src="assets/slow.jpeg" class="ranking-icon">
-							
+								<h3 class="text-thin">Slow Poke</h3>
 						<% } else if(ranking === 1) { %> 
 							
 								<img src="assets/medium.png" class="ranking-icon">
-							
+								<h3 class="text-thin">Speedy</h3>
 						<% } else {%>
 							
 								<img src="assets/elite.jpeg" class="ranking-icon">
-							
+								<h3 class="text-thin">Elite</h3>
 						<% } %>
-					</div>
+					</div><hr>
 					<h3 class="text-thin">Points </h3> <br> <h4 ><%=user.posts().length%></h4>
+					<hr> 
 				</div>
 			</div>
 
