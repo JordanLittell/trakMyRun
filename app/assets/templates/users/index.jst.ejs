@@ -19,7 +19,8 @@
 						<td>Average HR</td>
 						<td>Time</td>
 					</tr>
-					<% var count = 0 %>
+					<% var count = 0,
+						ranking = user.posts()/100;%>
 
 					<% user.posts().forEach(function(post){ %>
 						<% if (count < 5) { %>
@@ -53,17 +54,21 @@
 					<h3>20</h3>
 					<h3 class="text-thin">Ranking </h3> <br>
 					<div class="row">
-						<div class="col-sm-4">
-							<img src="assets/slow.jpeg" class="ranking-icon">
-						</div>
-						<div class="col-sm-4">
-							<img src="assets/medium.png" class="ranking-icon">
-						</div>
-						<div class="col-sm-4">
-							<img src="assets/elite.jpeg" class="ranking-icon">
-						</div>
+						<% if (ranking === 0) {%>
+							
+								<img src="assets/slow.jpeg" class="ranking-icon">
+							
+						<% } else if(ranking === 1) { %> 
+							
+								<img src="assets/medium.png" class="ranking-icon">
+							
+						<% } else {%>
+							
+								<img src="assets/elite.jpeg" class="ranking-icon">
+							
+						<% } %>
 					</div>
-					
+					<%= user.get('id') %>
 					<h3 class="text-thin">Points </h3> <br> <h4 ><%=user.posts().length%></h4>
 				</div>
 			</div>

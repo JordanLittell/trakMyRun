@@ -52,8 +52,9 @@ end
 end
 
 1700.times do |i|
+	randNum = Random.rand(41)
 	Post.create(
-				user_id: (1+i%41),
+				user_id: (randNum),
 				minutes: Random.rand(60),
 				calories: Random.rand(2000),
 				heart_rate: (120 + Random.rand(40)),
@@ -62,12 +63,12 @@ end
 		)
 	Comment.create(
 				content: Faker::Lorem.sentence,
-				user_id: (1+i%41),
+				user_id: (randNum),
 				post_id: Random.rand(100),
 				created_at: Date.new(*generate_date)
 		)
 	Map.create(
-		user_id: (1+i%41),
+		user_id: randNum,
 		path: generate_path,
 		total_miles: Random.rand(10),
 		elevations: generate_elevations,
