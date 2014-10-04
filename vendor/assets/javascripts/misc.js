@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	TrakMyRun.initialize();
-
   if(TrakMyRun.CurrentUser) {
     $('body').removeClass("main-background"); 
     $('.close-form').on('click',function(ev) {
@@ -16,7 +15,7 @@ $(document).ready(function () {
 
 TrakMyRun.updateURL = function (fragment) {
   $('.nav').children().removeClass('active');
-  $("a[href*='#'").find('.glyphicon').removeClass('active');
+  $("a[href*='#']").find('.glyphicon').removeClass('active');
   var item = $("a[href$='"+fragment+"']");
   item.parent().addClass('active');
   item.find('.glyphicon').addClass('active');

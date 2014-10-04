@@ -2,7 +2,6 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 
 	initialize: function(options) {
 		this.$rootEl = options.rootEl;
-		console.log(this.$rootEl);
 		Backbone.history.start();
 	},
 	
