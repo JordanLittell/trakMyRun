@@ -10,12 +10,6 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 
 	initialize: function() {
 		$('content').addClass('runner-background');
-		var list = Backbone.SportsList();
-		$(function() {
-			$( "#type" ).autocomplete({
-				source: list
-			});	
-		});
 	},
 
 	events: {
@@ -108,11 +102,7 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 			    'width': '300',
 			    'height':'300',
 			    'cursor': true,
-			    'value': 0,
-			    'release': function() {
-			    	console.log(this.val());
-			    }
-			    
+			    'value': 0
 			});
 
 			navListItems.click(function (e) {
