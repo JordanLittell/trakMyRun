@@ -15,8 +15,6 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 	events: {
 		"submit #new-post-form": "savePost",
 		"click #map-it": "goToMap",
-		"slidechange .duration": "updateForm",
-		"release .infinte": "cacheMinutes",
 		"click .cache": "updateForm",
 	}, 
 
@@ -46,12 +44,12 @@ TrakMyRun.Views.NewPost = Backbone.View.extend({
 
 	updateForm: function (event) {
 		var elName = $(event.currentTarget).data('cache');
-		var value  = $('.infinite').val();
+		var value  = $(event.currentTarget).parent().find('.infinite').val();
 		this.$el.find($(elName)).val(value);
 		var calories = this.getCaloriesBurned(
 								this.model.get('age'),
 								this.model.get('weight'),
-								$('#heart-rate').val(),
+								$('#heart_rate').val(),
 								this.model.get('gender'),
 								value
 								);
