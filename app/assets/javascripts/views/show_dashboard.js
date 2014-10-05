@@ -43,7 +43,6 @@ TrakMyRun.Views.DashboardView = Backbone.DynamicChart.extend({
 		var typeDisplay = $(el).find('.type-display');
 		var timeDisplay = $(el).find('.time-display');
 		var content;
-		debugger;
 		switch(this.dateInterval) {
 			case 1:
 				content = 'Day'

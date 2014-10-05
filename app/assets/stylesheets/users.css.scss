@@ -1,8 +1,36 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
 .recent-activities-display {
 	max-height: 200px;
-	overflow: scroll;
+}
+
+.comment-list {
+	list-style: none;
+}
+
+.profile-pic {
+	max-width: 200px;
+	width: 100%;
+	border-radius: 3px;
+}
+
+tr {
+	transition: background .4s ease-in;
+}
+
+tr:hover {
+	background-color: #EDEDED;
+	cursor: pointer;
+}
+
+.recent-activities-display {
+	display: block;
+	min-height: 350px;
+}
+
+.ranking-icon {
+	width: 100%;
+	max-width: 70px;
+	min-height: 70px;
+	border-radius: 30% 20%;
+	border: 1px solid #ACACAC;
 }

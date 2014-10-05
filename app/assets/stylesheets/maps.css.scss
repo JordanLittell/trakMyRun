@@ -1,3 +1,21 @@
-// Place all the styles related to the maps controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#map-chart {
+	padding: 10px;
+}
+
+.previous-maps {
+	display:none;
+	background-color: #F2F2F2;
+	height: 250px;
+	overflow: scroll;
+}
+
+.map-display {
+	height: 200px;
+	padding: 10px;
+}
+.map-show-link {
+	cursor: pointer;
+}
+.map-show-link:hover {
+	color:lightblue
+}
