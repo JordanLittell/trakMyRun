@@ -27,7 +27,7 @@ Backbone.MapView = Backbone.CompositeView.extend({
     		    zoom: 14,
     		    center: new google.maps.LatLng(37.7749300, -122.4194200)
           };
-        google.maps.event.addListener(this.map, "click", this.mapUpdated.bind(this));
+        google.maps.event.addListener(this.map, "click", tgit his.mapUpdated.bind(this));
     },
 
     placeMarker: function(evt) {

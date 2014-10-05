@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	TrakMyRun.initialize();
+	
   if(TrakMyRun.CurrentUser) {
     $('body').removeClass("main-background"); 
     $('.close-form').on('click',function(ev) {
