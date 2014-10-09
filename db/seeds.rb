@@ -67,7 +67,7 @@ end
 end
 
 1700.times do |i|
-	randNum = Random.rand(41)
+	randNum = Random.rand(42)
 	Post.create(
 				user_id: (randNum),
 				minutes: Random.rand(60),
