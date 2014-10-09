@@ -1,28 +1,4 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+TrakMyRun is a social media and fitness tracking platform that allows users to map their runs, save them, and share them with others.
+By using the directions service, polylines, and intercepting user clicks, I was able to draw routes between clicks that snap to roads
+and sidewalks. I also included save and load features by storing coordinates in a text format and writing a custom method to parse 
+the text into Gmap LatLng objects. 
