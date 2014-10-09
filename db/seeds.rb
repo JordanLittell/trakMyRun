@@ -51,6 +51,21 @@ end
 	)
 end
 
+1.time do
+	image_url = images[Random.rand(images.length)]
+	User.create(
+				username: 'GuestUser', 
+				password_digest: BCrypt::Password.create('guestuser2691'),
+				session_token: SecureRandom.urlsafe_base64,
+				age: Random.rand(50), 
+				weight: Random.rand(145), 
+				gender: "f", 
+				height: Random.rand(6),
+				image_url: image_url,
+				created_at: Date.new(*generate_date)
+	)
+end
+
 1700.times do |i|
 	randNum = Random.rand(41)
 	Post.create(
