@@ -51,7 +51,7 @@ end
 	)
 end
 
-1.time do
+1.times do
 	image_url = images[Random.rand(images.length)]
 	User.create(
 				username: 'GuestUser', 
