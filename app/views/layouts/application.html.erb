@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>TrakMyRun</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
-	<body>
-    
-    	<%= render "layouts/header" %>
-    	<%= yield %>
-    
-	</body>
-	<%= javascript_include_tag 'application'%>
+
+<body>
+  	<%= render "layouts/header" %>
+  	<%= yield %>
+</body>
+	
+  <%= javascript_include_tag 'application'%>
 	<%= filepicker_js_include_tag %>
-	<%if current_user %>
-		<script>
-			window.TrakMyRun.CurrentUser = <%= current_user.id %>
-			TrakMyRun.initialize();
-			filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
-        
-		</script>
-		<% p current_user %>
-	<% end %>
+	
+  <%if current_user %>
+  	<script>
+  		window.TrakMyRun.CurrentUser = <%= current_user.id %>
+  		TrakMyRun.initialize();
+  		filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
+  	</script>
+  <% end %>
 </html>

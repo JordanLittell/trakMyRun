@@ -6,9 +6,9 @@ default: &default
 
 development:
   <<: *default
-  database: trakMyRun_development
+  database: trakMyRun_development2
 
 test:
   <<: *default
-  database: trakMyRun_test
+  database: trakMyRun_test2
 
