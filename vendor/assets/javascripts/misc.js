@@ -20,3 +20,9 @@ TrakMyRun.updateURL = function (fragment) {
   item.parent().addClass('active');
   item.find('.glyphicon').addClass('active');
 }
+
+$('.feature-box').hover(function(){
+  $(this).find('.transparent-cover').slideUp();
+}, function(){
+  $(this).find('.transparent-cover').slideDown();
+})

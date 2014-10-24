@@ -4,7 +4,6 @@
  *= require jquery-ui
  */
 
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "animate";
@@ -12,8 +11,11 @@
 
 
 .main-background {
+  position: absolute;
+  width: 100%;
 	background-image: url('backdropPic.jpg');
 	background-size: cover;
+
 }
 
 #loading {
@@ -30,12 +32,19 @@
 	display: none;
 }
 
-.sign-up, .sign-in {
+.auth-form {
 	min-height: 400px;
 	margin-top: 10%;
 	background: rgba(0,0,0,0.6);
 	color:white;
 	padding: 40px;
+}
+
+.main-background:after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 300px;
 }
 
 label {
@@ -54,11 +63,11 @@ a[href] {
 	transition: color .4s ease-in;
 	transition: background-color .4s ease-in;
 }
+
 .close-icon:hover {
 	color:white;
 	background-color: #BFBFBF;
 }
-
 
 ul.alert {
 	font-size: 20px;
@@ -73,7 +82,6 @@ ul.alert {
 	height: 200px;
 }
 
-
 .transparent-display {
 	color: white;
 	font-weight: 100;
@@ -83,6 +91,7 @@ ul.alert {
 	padding: 10px;
 	background: rgba(0,0,0,0.7);
 }
+
 .text-thin {
 	font-weight: 100;
 }
@@ -164,7 +173,7 @@ ul.alert {
 	color: black;
 	cursor:pointer;
 	font-size: 30px;
-	transition: color .4s ease-in
+	transition: color .4s ease-in;
 }
 
 .delete-view:hover {
@@ -244,7 +253,6 @@ a {
 	background-color: rgba(155,155,155,0.2);
 }
 
-
 /*Nav bar addon */
 .icon-addon.addon-lg .form-control {
     line-height: 1.33;
@@ -290,7 +298,97 @@ a {
     color: #2580db;
 }
 
+.feature-box:before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.feature-box {
+  
+  background-size: cover;  
+  height: 300px;
+  position: relative;
+}
 
+.feature-box:hover {
+  cursor: pointer;
+}
 
+.feature-box#one {
+  background-image: url('running-group.jpg');
+}
 
-	
+.feature-box#two {
+  background-image: url('track-run-small.jpg');
+}
+
+.feature-box#three {
+  background-image: url('beach-running-small.jpeg');
+}
+
+.feature-description {
+  font-size: 22px;
+  font-weight: 100;
+}
+
+.transparent-cover {
+  background-color: rgba(0,0,0,0.4);
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  transition: opacity 1s ease-in-out;
+}
+
+.box-content:before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.box-content {
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  font-size: 30px;
+  color: white;
+}
+
+.logo-background {
+  background-image: url('TRlogo.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+}
+.logo-text {
+  letter-spacing: 10px;
+
+}
+
+.feature-icon {
+  padding: 10px;
+  max-height: 300px;
+}
+.logo-banner {
+  background-color: rgba(0,0,0,0.7);
+  position: absolute;
+  color:white;
+  top:50px;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 222px;
+}
+.home-background {
+  background-color: #282828; 
+  color: #F0F0F0; 
+}
+footer {
+  text-align: center;
+  height: 200px;
+  background-color: black;
+  color:white;
+}

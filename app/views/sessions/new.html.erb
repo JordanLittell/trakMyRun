@@ -1,28 +1,30 @@
+<div class="main-background">
+	<%= render 'layouts/auth_header' %>
+	<div class="container">
+		<section class="col-sm-4 col-sm-offset-4 auth-form text-center"> <!--may want to wrap this around yield, just want to get full back pic-->
+			<h1 class="text-thin">Sign In</h1>
+			<%= render :partial => "layouts/errors"%>
+			<form action="<%=sessions_url%>" method="post">
+				<div class="form-group">
+					<label for="username" class="text-thin">Username</label>
+					<input id="username" placeholder="Username" name="user[username]" class="form-control">
+				</div>
 
-<div class=".container">
-<section class="col-sm-4 col-sm-offset-4 sign-in text-center"> <!--may want to wrap this around yield, just want to get full back pic-->
-	<h1 class="text-thin">Sign In</h1>
-	<%= render :partial => "layouts/errors"%>
-	<form action="<%=sessions_url%>" method="post">
-		<div class="form-group">
-			<label for="username" class="text-thin">Username</label>
-			<input id="username" placeholder="Username" name="user[username]" class="form-control">
-		</div>
+				<div class="form-group">
+					<label for="password" class="text-thin">Password</label>
+					<input id="password" placeholder="Password" type="password" name="user[password]" class="form-control">
+				</div>
 
-		<div class="form-group">
-			<label for="password" class="text-thin">Password</label>
-			<input id="password" placeholder="Password" type="password" name="user[password]" class="form-control">
-		</div>
-
-		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-		<input type="submit" value="Sign In" class="btn btn-default">
-	</form>
-	<br>
-	<form action="<%=sessions_url%>" method="post" class="form">
-		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-		<input type="hidden" name="user[username]" value="GuestUser">
-		<input type="hidden" name="user[password]" value="guestuser2691">
-		<input type="submit" value="Sign In As Guest User" class="btn btn-primary">
-	</form>
-</section>
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+				<input type="submit" value="Sign In" class="btn btn-default">
+			</form>
+			<br>
+			<form action="<%=sessions_url%>" method="post" class="form">
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+				<input type="hidden" name="user[username]" value="GuestUser">
+				<input type="hidden" name="user[password]" value="guestuser2691">
+				<input type="submit" value="Sign In As Guest User" class="btn btn-primary">
+			</form>
+		</section>
+	</div>
 </div>

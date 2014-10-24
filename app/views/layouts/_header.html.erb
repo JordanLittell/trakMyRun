@@ -89,16 +89,7 @@
 </div>
 
 <% else %>
-<div class="row">
-  <span class="text-thin col-md-3 col-md-offset-1 super-big">TrakMyRun</span>
-  <div class="col-md-3 pull-right">
-    <% if !current_page?(new_sessions_path) %>
-      <a href="<%=new_sessions_path%>" class="visitor-link">Sign In</a>
-    <% else %>
-      <a href="<%=new_user_path%>" class="visitor-link">Sign Up</a>
-    <% end %>
-  </div>
-</div>
+
 <% end %>
 
 

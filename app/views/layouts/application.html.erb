@@ -6,11 +6,11 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
-	<body class="main-background">
-
-	<%= render "layouts/header" %>
-	<%= yield %>
-
+	<body>
+    
+    	<%= render "layouts/header" %>
+    	<%= yield %>
+    
 	</body>
 	<%= javascript_include_tag 'application'%>
 	<%= filepicker_js_include_tag %>
@@ -19,6 +19,7 @@
 			window.TrakMyRun.CurrentUser = <%= current_user.id %>
 			TrakMyRun.initialize();
 			filepicker.setKey('A4B3VdZ8XT4GGoDJmELANz');
+        
 		</script>
 		<% p current_user %>
 	<% end %>
