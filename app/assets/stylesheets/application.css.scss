@@ -363,29 +363,29 @@ a {
   background-position: center;
   height: 200px;
 }
+
 .logo-text {
   letter-spacing: 10px;
-
 }
 
-.feature-icon {
+.feature-icon img {
   padding: 10px;
   max-height: 300px;
 }
+
 .logo-banner {
-  background-color: rgba(0,0,0,0.7);
-  position: absolute;
-  color:white;
-  top:50px;
-  left: 0;
+  color:black;
   z-index: 4;
   width: 100%;
-  height: 222px;
+  height: 122px;
+  padding: 10px;
 }
+
 .home-background {
   background-color: #282828; 
   color: #F0F0F0; 
 }
+
 footer {
   text-align: center;
   height: 200px;
