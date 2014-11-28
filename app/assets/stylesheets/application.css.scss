@@ -17,12 +17,102 @@
     background-size: cover;
 }
 
+#show-settings {
+  position: relative; 
+}
+.searchbar {
+  z-index: 2000;
+}
+
+#settings-list {
+  position: absolute; 
+  padding: 0; 
+  display: none;
+  margin: 0;
+  bottom: -220px;
+  left: 5px;
+  list-style: none;
+  z-index: 100;
+  padding: 15px; 
+  background-color: rgba(0,0,0,0.8);
+  color: #efefef;
+  transition: color 1s ease-in-out; 
+  li {
+    padding: 10px 0;
+    text-align: center;
+  }
+}
+#settings-list li:hover {
+  cursor: pointer; 
+  color: #1E90FF;
+}
+
 .fyi {
   background-color: rgba(30,144,255,.3);
   letter-spacing: 1px;
   padding: 1em;
   border-radius: 5px;
   color:white;
+}
+
+.map-display {
+  position: absolute;
+  bottom: -30px;
+  left: 10.5px;
+  width: 20%;
+  min-width: 260px;
+  height: 140px;
+  overflow: hidden;
+  z-index: 100;
+}
+
+#main-controls {
+  position: absolute;
+  width: 50%;
+  top:150px;
+  left: 120px;
+  z-index: 1000;
+  button {
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    transition: .5s 'background-color' ease-in-out;
+  }
+  button:hover {
+    color: #121212;
+    background-color: #efefef;
+  }
+  .icon {
+    padding: 10px;
+    margin-left: 3%;
+    background-color: rgba(0,0,0,0.8);
+    border: 1px solid black;
+    color: white;
+    border-radius: 50%;
+    transition: .5s 'background-color' ease-in-out;
+  }
+  .icon:hover {
+    color: #121212;
+    background-color: #efefef;
+  }
+}
+
+.map-content {
+  background-color: rgba(0,0,0,0.7);
+  padding: 10px;
+  position:relative;
+  overflow: hidden;
+}
+
+.icon-container {
+  color: #efefef;
+  padding: 1.5em;
+  border-radius:0.3em;
+
+  .icon:hover {
+    color: #1E90FF
+  }
 }
 
 #contact-info {
@@ -51,6 +141,10 @@
     border-radius: 5px;
     font-size: 1.3em;
 }
+
+.searchbar {
+  background-color: rgba(0,0,0,0.7);
+}
 .searchbar:nth-child(1n+0) {
     display: inline-block
 }
@@ -76,6 +170,9 @@
     height: 1.3em;
     display: none;
     border-radius: 4px;
+    background-color: #121212;
+    color: #ccc;
+    text-align: center;
     position: absolute;
     border: 1px solid #4FC3AA;
     font-size: .8em;
@@ -86,10 +183,6 @@
 
 .searchbar #searchfield {
     display: none;
-}
-
-.searchbar .icon:hover {
-    background-color: #efefef;
 }
 
 .searchbar input[type="text"] {
@@ -177,7 +270,6 @@ ul.alert {
 .transparent-display {
 	color: white;
 	font-weight: 100;
-	width: 100%;
 	font-size: 1.5em;
 	margin: 3% 0%;
 	padding: 10px;

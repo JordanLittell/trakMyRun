@@ -12,9 +12,17 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var mapChart = new TrakMyRun.Views.MapChart({
 			model: this.backboneMap
 		});
-		
+		$(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
 		this.addSubview('.chart', mapChart);
+		console.log('iniaitlized');
+		this.updateDisplays();
 		return this;
+	},
+
+	initialize: function () {
+		this.listenTo(this.model, "new", this.render);
 	},
 
 	initializeSearch: function () {
@@ -81,6 +89,7 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		"click #setTime": "setTime",
 		"blur #setHeartRate": "hideHeartRate",
 		"blur #setTime": "hideTime",
+		"click #toggle-list": "toggleList",
 		"keyup #hrField": "validateInput",
 		"keyup #timeField": "validateInput",
 		"click #show-search": "showSearch",
@@ -95,6 +104,16 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		"focus .searchbar": "initializeSearch"
 	},
 
+	toggleList: function () {		
+		var list = $('#settings-list');
+		debugger;
+		if (list.css('display') === 'none') {
+			$('#settings-list').fadeIn('slow');
+		} else {
+			$('#settings-list').fadeOut('slow');
+		}
+	},
+
 	validateInput: function (event) {
 		var field = $(event.currentTarget);		
 		if(event.keyCode === 13) {
@@ -103,22 +122,26 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 				//attach these values to the object so that they
 				//survive page refreshes 
 				if(field.attr('id') === 'hrField') {
-					field.parent().prop('title', 'heart rate: ' + field.val() + ' bpm');
+					$('#hrDisplay').text(field.val() + ' bpm');
+					$('.map-display').find('#hrDisplay').text(field.val() + ' bpm');
+					this.heartRate = field.val();
+
 					$(field.parent()).animate({
 						color: '#CD2626',
 						duration: 2,
 						easing: 'ease-in-out'
-					})	
+					});	
 				}
 				if(field.attr('id') ==='timeField') {
-					field.parent().prop('title', 'Time: ' + field.val() + ' minutes');
+					$('#timeDisplay').text(field.val() + ' min');
+					$('.map-display').find('#timeDisplay').text(field.val() + ' min');
+					this.time = field.val();
 					$(field.parent()).animate({
 						color: '#32CD32',
 						duration: 2,
 						easing: 'ease-in-out'
-					})	
-				}
-				
+					});
+				}				
 			}
 		}
 		if(48>event.keyCode || event.keyCode>57) {
@@ -323,6 +346,8 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var distanceString = parseFloat(this.distance).toFixed(2);
 		this.$el.find('.distance-field').text(distanceString.concat(' mi'));
 		this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(2)+' ft');   
+		this.$el.find('#timeDisplay').text(this.time);
+		this.$el.find('#hrDisplay').text(this.heartRate);
 	},
 
 	updateElevations: function (pathRequest) {
