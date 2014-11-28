@@ -5,29 +5,34 @@
 			<h1 class="text-thin">Sign Up</h1>
 			<%= render :partial => "layouts/errors"%>
 			<form action="<%=users_url%>" method="POST" class="form">
-				<div class="form-group">
-					<label for="username" class="text-thin">Username</label>
-					<input id="username" placeholder="Username" value="<%=@user.username%>" name="users[username]" class="form-control">
+				<div id="required-info">
+					<div class="form-group">
+						<label for="username" class="text-thin">Username</label>
+						<input id="username" placeholder="Username" value="<%=@user.username%>" name="users[username]" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="password" class="text-thin">Password</label>
+						<input id="password" placeholder="Password" type="password" name="users[password]" class="form-control">
+					</div>
+					<button id="show-contact-info" class="btn btn-primary">Okay</button>
 				</div>
 
-				<div class="form-group">
-					<label for="password" class="text-thin">Password</label>
-					<input id="password" placeholder="Password" type="password" name="users[password]" class="form-control">
-				</div>
+				<div id="contact-info">
+					<div class="fyi">Enter your contact info to send messages to other runners and recieve messages from groups</div>
+					
+					<div class="form-group">
+						<label for="number" class="text-thin">Number</label>
+						<input id="number" placeholder="Phone Number" type="text" name="users[phone_number]" class="form-control">
+					</div>
 
-				<div class="form-group">
-					<label for="number" class="text-thin">Number</label>
-					<input id="number" placeholder="Phone Number" type="text" name="users[phone_number]" class="form-control">
+					<div class="form-group">
+						<label for="email" class="text-thin">Email</label>
+						<input id="email" placeholder="Email" type="email" name="users[email]" class="form-control">
+					</div>
+					<input type="submit" value="Sign Up" class="btn btn-default">
 				</div>
-
-				<div class="form-group">
-					<label for="email" class="text-thin">Email</label>
-					<input id="email" placeholder="Email" type="email" name="users[email]" class="form-control">
-				</div>
-
 				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-				<input type="submit" value="Sign Up" class="btn btn-default">
+				
 			</form>
 			<br>
 			<form action="<%=sessions_url%>" method="post" class="form">

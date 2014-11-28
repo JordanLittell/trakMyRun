@@ -17,6 +17,18 @@
     background-size: cover;
 }
 
+.fyi {
+  background-color: rgba(30,144,255,.3);
+  letter-spacing: 1px;
+  padding: 1em;
+  border-radius: 5px;
+  color:white;
+}
+
+#contact-info {
+  display: none;
+}
+
 .text-theme {
     font-weight: 100;
     color: white;
