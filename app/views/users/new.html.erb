@@ -1,9 +1,7 @@
 <div class="main-background">
 	<%= render 'layouts/auth_header' %>
 	<div class="container">
-		
 			<section class="col-sm-4 col-sm-offset-4 auth-form text-center">
-
 			<h1 class="text-thin">Sign Up</h1>
 			<%= render :partial => "layouts/errors"%>
 			<form action="<%=users_url%>" method="POST" class="form">
@@ -17,6 +15,16 @@
 					<input id="password" placeholder="Password" type="password" name="users[password]" class="form-control">
 				</div>
 
+				<div class="form-group">
+					<label for="number" class="text-thin">Number</label>
+					<input id="number" placeholder="Phone Number" type="text" name="users[phone_number]" class="form-control">
+				</div>
+
+				<div class="form-group">
+					<label for="email" class="text-thin">Email</label>
+					<input id="email" placeholder="Email" type="email" name="users[email]" class="form-control">
+				</div>
+
 				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
 				<input type="submit" value="Sign Up" class="btn btn-default">
@@ -26,10 +34,10 @@
 				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 				<input type="hidden" name="users[username]" value="GuestUser">
 				<input type="hidden" name="users[password]" value="guestuser2691">
+				<input type="hidden" name="users[phone_number]" value="6507738616">
+				<input type="hidden" name="users[email]" value="jordanlittell2@gmail.com">
 				<input type="submit" value="Sign In As Guest User" class="btn btn-primary">
 			</form>
-				
-			
 		</section>
 	</div>
 </div>

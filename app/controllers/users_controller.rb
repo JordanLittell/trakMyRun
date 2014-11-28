@@ -6,6 +6,10 @@ class UsersController < ApplicationController
 
   def create 
   	@user = User.new(user_params)
+    if @user.phone_number 
+      @client = twilio
+      send_message("Hello! Welcome to TrakMyRun", @user.phone_number, @client)
+    end
   	if @user.save 
   		log_in!(@user)
   		redirect_to root_url
@@ -29,6 +33,6 @@ class UsersController < ApplicationController
   private
 
   def user_params 
-  	params.require(:users).permit(:username, :password, :image_url)
+  	params.require(:users).permit(:username, :password, :image_url, :email, :phone_number)
   end
 end
