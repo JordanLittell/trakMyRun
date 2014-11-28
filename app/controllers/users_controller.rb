@@ -6,12 +6,15 @@ class UsersController < ApplicationController
 
   def create 
   	@user = User.new(user_params)
-    if @user.phone_number 
-      @client = twilio
-      send_message("Hello! Welcome to TrakMyRun", @user.phone_number, @client)
-    end
+    
   	if @user.save 
   		log_in!(@user)
+
+      if @user.phone_number 
+        @client = twilio
+        send_message("Hello! Welcome to TrakMyRun", @user.phone_number, @client)
+      end
+      
   		redirect_to root_url
   	else 
   		flash.now[:errors] = @user.errors.full_messages

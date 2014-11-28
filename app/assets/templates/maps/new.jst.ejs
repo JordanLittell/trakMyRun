@@ -54,11 +54,11 @@
             <div class="previous-maps">
                 <!-- render user's previous maps on request -->
             </div>
-            <div class="transparent-display map-display text-center">
-                Total Distance: <br>
-                <span class="distance-field">0 Miles</span><br>
-                Elevation Change: <br> 
-                <span class="elevation-field">0 ft</span>
+            <div class="transparent-display map-display">
+                Distance: <span class="distance-field">0 mi</span><br>
+                Elevation: <span class="elevation-field">0 ft</span><br>
+                Heart Rate: <span id="heartRate">0 bpm</span><br>
+                Time: <span id="time">00:00:00</span><br>
             </div>
         </div>
     </div> 
@@ -70,9 +70,7 @@
             </h1>
         </div>  
             
-        <div id="map" style='width: 100%; height: 500px; position: relative;'>
-            
-        </div>
+        <div id="map" style='width: 100%; height: 500px; position: relative;'></div>
         <div class="loading-container col-md-12">
                 <div class="loader">
                     <div class="spinner"></div>
@@ -88,5 +86,6 @@
                 <button class="modal-submit save-map" data-action="redoPath">Save</button>
             </div> 
         </div>  
+
     </div>  
 </div>

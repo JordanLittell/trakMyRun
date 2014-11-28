@@ -85,6 +85,9 @@ TrakMyRun.Routers.AppRouter = Backbone.Router.extend({
 		} 
 		TrakMyRun.updateURL(window.location.hash);		
 		this.$rootEl.html(view.render().$el);
+		$(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
 		this._currentView = view;
 	}	
 	

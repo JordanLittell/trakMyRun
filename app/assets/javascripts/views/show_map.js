@@ -12,9 +12,6 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var mapChart = new TrakMyRun.Views.MapChart({
 			model: this.backboneMap
 		});
-		$(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-      })
 		
 		this.addSubview('.chart', mapChart);
 		return this;
@@ -323,9 +320,9 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 	},
 
 	updateDisplays: function () {
-		var distanceString = parseFloat(this.distance).toFixed(3);
-		this.$el.find('.distance-field').text(distanceString.concat(' miles'));
-		this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(3)+'ft');   
+		var distanceString = parseFloat(this.distance).toFixed(2);
+		this.$el.find('.distance-field').text(distanceString.concat(' mi'));
+		this.$el.find('.elevation-field').text(parseFloat(this.elevationGain).toFixed(2)+' ft');   
 	},
 
 	updateElevations: function (pathRequest) {
