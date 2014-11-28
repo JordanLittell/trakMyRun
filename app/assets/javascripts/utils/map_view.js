@@ -8,8 +8,9 @@ Backbone.MapView = Backbone.CompositeView.extend({
 		this.$el.find('.distance-field').text('0 Miles');
     this.$el.find('.elevation-field').text('0 ft');
 	},
-
+  
 	initializeMap: function() {
+          // this.getUserLocation();
           this.map = new google.maps.Map(this.$el.find('#map')[0], this.mapOptions);
           this.service = new google.maps.DirectionsService();
           this.path = new google.maps.MVCArray();
@@ -24,8 +25,8 @@ Backbone.MapView = Backbone.CompositeView.extend({
           this.elevationCache = [];
           this.markerCache = [];
           this.mapOptions = {
-    		    zoom: 14,
-    		    center: new google.maps.LatLng(37.7749300, -122.4194200)
+    		    zoom: 3,
+    		    center: new google.maps.LatLng(37.7833, -122.4167)
           };
         google.maps.event.addListener(this.map, "click", this.mapUpdated.bind(this));
     },

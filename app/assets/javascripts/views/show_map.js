@@ -12,6 +12,10 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		var mapChart = new TrakMyRun.Views.MapChart({
 			model: this.backboneMap
 		});
+		$(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      })
+		
 		this.addSubview('.chart', mapChart);
 		return this;
 	},
@@ -76,6 +80,14 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 
 	events: {
 		"click .create-new-map": "reload",
+		"click #setHeartRate": "setHeartRate",
+		"click #setTime": "setTime",
+		"blur #setHeartRate": "hideHeartRate",
+		"blur #setTime": "hideTime",
+		"keyup #hrField": "validateInput",
+		"keyup #timeField": "validateInput",
+		"click #show-search": "showSearch",
+		"click #setToCurrentLocation": "geoLocate",
 		"click .create-new-map": "restart",
 		"click .load-options": "displayLoaded",
 		"click .map-show-link": "updatePage",
@@ -84,6 +96,70 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		"click .edit": "editCurrentMap",
 		"click .save-map": "save",
 		"focus .searchbar": "initializeSearch"
+	},
+
+	validateInput: function (event) {
+		var field = $(event.currentTarget);		
+		if(event.keyCode === 13) {
+			field.hide();
+			if(field.val() > 0 ) {
+				//attach these values to the object so that they
+				//survive page refreshes 
+				if(field.attr('id') === 'hrField') {
+					field.parent().prop('title', 'heart rate: ' + field.val() + ' bpm');
+					$(field.parent()).animate({
+						color: '#CD2626',
+						duration: 2,
+						easing: 'ease-in-out'
+					})	
+				}
+				if(field.attr('id') ==='timeField') {
+					field.parent().prop('title', 'Time: ' + field.val() + ' minutes');
+					$(field.parent()).animate({
+						color: '#32CD32',
+						duration: 2,
+						easing: 'ease-in-out'
+					})	
+				}
+				
+			}
+		}
+		if(48>event.keyCode || event.keyCode>57) {
+			field.val("");
+		} 
+		
+	},
+	hideHeartRate: function () {
+		$('#hrField').hide();
+	},
+
+	hideTime: function () {
+		$('#timeField').hide();
+	},
+	setHeartRate: function(event) {
+		$('#hrField').show().focus();
+		$('#timeField').hide();
+	},
+	setTime: function (event) {
+		$('#timeField').show().focus();
+		$('#hrField').hide();
+	},
+
+	showSearch: function () {
+		$('#search-field').fadeIn('fast');
+	},
+
+	geoLocate: function() {   
+		var state = this;
+    	if (navigator.geolocation) {
+        	navigator.geolocation.getCurrentPosition(function(position){
+          	console.log('%o', position);
+            state.setCenter(position.coords.latitude, position.coords.longitude);
+            $('.loading-container').hide();
+      			state.render();
+          	});
+          $('.loading-container').show();
+      }
 	},
 
 	redoPt: function () {

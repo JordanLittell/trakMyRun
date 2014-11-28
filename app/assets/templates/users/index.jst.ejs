@@ -1,15 +1,12 @@
 <div class="pannel well">
 <% users.each(function(user) {  %>
-	
 		<div class="row">
-
 			<div class="col-md-4 text-center">
 				<img src="<%=user.get('image_url')%>" class="profile-pic">
 				<a href=<%="#users/" + user.get('id')%>>	
 					<h3 class="text-thin"><%= user.get('username')%></h3>
 				</a>
 			</div>
-
 			<div class="col-md-4 text-thin recent-activities-display">
 				<h1 class="text-thin text-center">Recent Activities</h1>
 				<table class="table">
@@ -74,10 +71,8 @@
 					<hr> 
 				</div>
 			</div>
-
 		</div>
 		<hr>
-
 <% }); %>
 </div>
 

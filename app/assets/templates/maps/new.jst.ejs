@@ -1,36 +1,59 @@
 
 <div class="row">
-    <div class="col-md-3 sidebar">
-        <div class="searchbar text-center pannel well">
-            <h3 class="text-thin" id="tags">Search by City:</h3>
-            <input type="text" id="search-field" class="form-control" placeholder="Enter City Name">
-        </div>
+    <div class="searchbar col-md-12 form-group">
+        <span class="glyphicon glyphicon-search search-icon icon"></span>
+        <input type="text" id="search-field" placeholder="Search For Location">
+        <span class="glyphicon glyphicon-map-marker icon" id="setToCurrentLocation" data-toggle="tooltip" title="Use Current Location">
+        </span>
+        <span class="icon-container">
+            <span class='glyphicon glyphicon-heart icon' style="position:relative" data-toggle="tooltip" data-placement="top" title="Set Heart Rate" id="setHeartRate">
+                <input class="small-input" id="hrField"></input>
+            </span>
+        </span>
+        
+        <span class="icon-container">
+            <i class="fa fa-clock-o icon" data-toggle="tooltip" data-placement="top" title="Set Time" id="setTime">
+                <input class="small-input" id="timeField"></input>
+            </i>
+            
+        </span>
+
+        <span data-toggle="tooltip" title="Show Elevation Chart">
+            <i class="fa fa-area-chart icon"></i>
+        </span>
+
+        <span data-toggle="tooltip" title="Invite User"><i class="fa fa-user icon"></i>
+
+        </span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2 sidebar">
         <div class="mini-submenu">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </div>
+
         <div class="list-group">
             <a  class="list-group-item active">
-                <i class="fa fa-search"></i>Map Pannel
+                Map Pannel
             </a>
             <a  class="list-group-item create-new-map">
-                <i class="fa fa-search"></i>Restart
+                Restart
             </a>
    
             <a  class="list-group-item load-options">
-                <i class="fa fa-comment-o"></i>Load
+                Load
             </a>
             
             <a  class="list-group-item save-map">
-                <i class="fa fa-user"></i>Save
+                Save
             </a>
             
             <div class="previous-maps">
                 <!-- render user's previous maps on request -->
             </div>
-
-
             <div class="transparent-display map-display text-center">
                 Total Distance: <br>
                 <span class="distance-field">0 Miles</span><br>
@@ -40,14 +63,22 @@
         </div>
     </div> 
        
-    <div class="col-md-9 map-content pannel well">
+    <div class="col-md-10 map-content pannel well">
         <div class="message-success col-md-5 col-md-offset-2">
             <h1 class="text-thin text-center" style="color:white">
              Save Successful
             </h1>
         </div>  
             
-        <div id="map" style='width: 100%; height: 500px;'></div>
+        <div id="map" style='width: 100%; height: 500px; position: relative;'>
+            
+        </div>
+        <div class="loading-container col-md-12">
+                <div class="loader">
+                    <div class="spinner"></div>
+                </div>
+                <h1 class="text-theme text-center">Loading Current Location</h1>
+        </div>
         
         <div class="row transparent-display text-center">    
             <div class="col-md-6">
