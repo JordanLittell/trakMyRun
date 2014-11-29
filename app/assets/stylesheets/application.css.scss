@@ -20,14 +20,15 @@
 #show-settings {
   position: relative; 
 }
-.searchbar {
-  z-index: 2000;
-}
 
+#postForm {
+  display: inline;
+}
 #settings-list {
   position: absolute; 
   padding: 0; 
   display: none;
+  z-index: 3000;
   margin: 0;
   bottom: -220px;
   left: 5px;

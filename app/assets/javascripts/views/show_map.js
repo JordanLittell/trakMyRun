@@ -53,7 +53,8 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 		if (parseInt(this.model.get('id')) !== TrakMyRun.CurrentUser) {
 			Backbone.history.navigate('users/' + TrakMyRun.CurrentUser + '/routes/show');
 		}
-		this.backboneMap = new TrakMyRun.Models.Map()
+		this.backboneMap = new TrakMyRun.Models.Map();
+		this.post = new TrakMyRun.Models.Post();
 		this.listenTo(this.model,"sync", this.initializeMap);
 		this.listenTo(this.model.maps(), "add", this.addMap);
 		this.listenTo(this.model, "sync", this.handleLocationChange);
@@ -122,26 +123,27 @@ TrakMyRun.Views.MapShow = Backbone.MapView.extend({
 				//attach these values to the object so that they
 				//survive page refreshes 
 				if(field.attr('id') === 'hrField') {
-					$('#hrDisplay').text(field.val() + ' bpm');
-					$('.map-display').find('#hrDisplay').text(field.val() + ' bpm');
 					this.heartRate = field.val();
-
+					$('#hrDisplay').text(this.heartRate + ' bpm');
+					$('.map-display').find('#hrDisplay').text(this.heartRate + ' bpm');
 					$(field.parent()).animate({
 						color: '#CD2626',
 						duration: 2,
 						easing: 'ease-in-out'
 					});	
 				}
+
 				if(field.attr('id') ==='timeField') {
-					$('#timeDisplay').text(field.val() + ' min');
-					$('.map-display').find('#timeDisplay').text(field.val() + ' min');
 					this.time = field.val();
+					$('#timeDisplay').text(this.time + ' min');
+					$('.map-display').find('#timeDisplay').text(this.time + ' min');
 					$(field.parent()).animate({
 						color: '#32CD32',
 						duration: 2,
 						easing: 'ease-in-out'
 					});
-				}				
+				}	
+
 			}
 		}
 		if(48>event.keyCode || event.keyCode>57) {

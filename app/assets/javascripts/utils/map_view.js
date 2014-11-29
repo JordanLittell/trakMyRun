@@ -42,15 +42,37 @@ Backbone.MapView = Backbone.CompositeView.extend({
             this.map.panTo(evt.latLng);
     },
 
+    getCaloriesBurned: function (age, weight, heartRate, gender, totTime) {
+    if (gender==='m') {
+      var ageConst = 0.2017,
+        weightConst = 0.09036,
+        hrConst = 0.6309,
+        subt = 55.0969;
+    } else {
+       ageConst = 0.2017;
+       weightConst = 0.09036;
+       hrConst = 0.6309;
+       subt = 55.0969;
+    }
+    var numerator = (((age * ageConst) - ((weight/2.2) * weightConst) 
+            + (heartRate * hrConst) - subt) * totTime)
+    return Math.round(numerator/4.184)
+  },
+
     saveMap: function() {
   		var view = this;
-  		this.backboneMap.set({
+      var calories = this.getCaloriesBurned(21, 150, this.heartRate, 'm', this.time);
+  		debugger;
+      this.backboneMap.set({
   			"path": (JSON.stringify(this.poly.getPath())),
+        'heart_rate': this.heartRate,
+        'minutes': this.time,
         "elevations": JSON.stringify(_.flatten(view.elevationsAlongPath)),
         "elevation_gain": this.elevationGain,
-  			"total_miles": view.distance
+  			"total_miles": view.distance,
+        "calories": calories 
   		});
-
+      
   		this.backboneMap.save({},{
         success: function(resp, msg){
           $('.message-success').css('display','block').fadeOut(2500);
@@ -58,5 +80,8 @@ Backbone.MapView = Backbone.CompositeView.extend({
           view.render();
         }
       });	
-	 }
+	 },
+
+   
 });
+

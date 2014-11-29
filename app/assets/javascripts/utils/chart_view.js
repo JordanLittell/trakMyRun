@@ -114,11 +114,11 @@ Backbone.ChartView = Backbone.View.extend({
 
 	getCalories: function () {
 		var results = [];
-		var posts = this.model.posts();
+		var maps = this.model.maps();
 		var view = this;
 		debugger;
-		posts.each(function(post){
-			results.push(post.get('calories'))
+		maps.each(function(map){
+			results.push(map.get('calories'))
 		})
 		return results;
 	},
@@ -137,9 +137,9 @@ Backbone.ChartView = Backbone.View.extend({
 	getAverageHR: function () {
 		var results= [];
 		var that = this; 
-		var posts = this.model.posts();
-		posts.each(function(post){
-			results.push(post.get('heart_rate'))
+		var maps = this.model.maps();
+		maps.each(function(map){
+			results.push(map.get('heart_rate'))
 		})
 		return results;
 	},
@@ -147,10 +147,11 @@ Backbone.ChartView = Backbone.View.extend({
 	getNetTime: function () {
 		var results = [];
 		var that = this;
-		var posts = this.model.posts();
+		var maps = this.model.maps();
 		var view = this;
-		posts.each(function(post){
-			var mins = parseInt(post.get('minutes'))
+		debugger;
+		maps.each(function(map){
+			var mins = parseInt(map.get('minutes'))
 			results.push(mins);
 		});
 		return results;

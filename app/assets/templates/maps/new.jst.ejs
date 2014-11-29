@@ -4,15 +4,20 @@
         <span class="icon-container">
             <span class="glyphicon glyphicon-search search-icon icon"></span>
             <input type="text" id="search-field" placeholder="Search For Location">
-            <span class='glyphicon glyphicon-heart icon' style="position:relative" data-toggle="tooltip" data-placement="top" title="Set Heart Rate" id="setHeartRate">
-                <input class="small-input" id="hrField">
-            </span>
-            <span id="hrDisplay" style="color:#CD2626">0 bpm</span>
-            <i class="fa fa-clock-o icon" data-toggle="tooltip" data-placement="top" title="Set Time" id="setTime">
-                <input class="small-input" id="timeField">
-            </i>
-            <span id="timeDisplay" style="color:#32CD32">0 minutes</span>
-            <i class="fa fa-area-chart icon" data-toggle="tooltip" title="Show Elevation Chart"></i>
+            <form id="postForm">
+                <span class='glyphicon glyphicon-heart icon' style="position:relative" data-toggle="tooltip" data-placement="top" title="Set Heart Rate" id="setHeartRate">
+                    <input class="small-input" id="hrField" name="post[heart_rate]">
+                </span>
+
+                <span id="hrDisplay" style="color:#CD2626">0 bpm</span>
+                <i class="fa fa-clock-o icon" data-toggle="tooltip" data-placement="top" title="Set Time" id="setTime">
+                    <input class="small-input" id="timeField" name="post[minutes]">
+                </i>
+
+                <span id="timeDisplay" style="color:#32CD32">0 minutes</span>
+                <i class="fa fa-area-chart icon" data-toggle="tooltip" title="Show Elevation Chart"></i>
+
+            </form>
             <span id="show-settings">
                 <i class="fa fa-cog icon" id="toggle-list"></i>
                 <ul id="settings-list">

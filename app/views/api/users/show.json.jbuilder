@@ -7,6 +7,9 @@ json.maps @user.maps do |map|
 	json.elevations map.elevations
 	json.user_id map.user_id
 	json.path map.path
+	json.minutes map.minutes 
+	json.calories map.calories
+	json.heart_rate map.heart_rate
 	json.elevation_gain map.elevation_gain
 	json.created_at map.created_at
 end

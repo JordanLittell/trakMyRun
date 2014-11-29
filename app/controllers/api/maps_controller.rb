@@ -7,7 +7,7 @@ module Api
 			@map = Map.new(map_params)
 			@map.user_id = current_user.id
 			@map.name = "map"
-			p @map
+			
 			if @map.save
 				render :new
 			end
@@ -15,10 +15,10 @@ module Api
 
 		def show 
 			@map = Map.find(params[:id])
-		end
+		end 
 
 		def map_params
-			params.require(:map).permit(:path, :total_miles, :name, :elevations, :markers, :elevation_gain)
+			params.require(:map).permit(:path, :total_miles, :name, :elevations, :markers, :elevation_gain, :calories, :minutes, :heart_rate)
 		end
 
 	end
