@@ -23,6 +23,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'eventmachine', '~> 1.2', '>= 1.2.0.1'
 gem 'newrelic_rpm'
 gem 'underscore-rails'
 gem 'figaro'
