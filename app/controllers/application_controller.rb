@@ -12,16 +12,16 @@ class ApplicationController < ActionController::Base
 
   def twilio
     # To find these visit https://www.twilio.com/user/account
-    require 'twilio-ruby'
-    account_sid = "ACa10aec94c8d1c2a0f157b7639ca373b5"
-    auth_token = "7680119fffc4c651147e7db465d8cdbc"
-    Twilio::REST::Client.new account_sid, auth_token
+    #require 'twilio-ruby'
+    #account_sid = "ACa10aec94c8d1c2a0f157b7639ca373b5"
+    #auth_token = "7680119fffc4c651147e7db465d8cdbc"
+    #Twilio::REST::Client.new account_sid, auth_token
   end
 
   def send_message(message, number, client)
-    @message = client.account.messages.create({:to => number,
-                                   :from => "+16503895324",
-                                   :body => message})
+    #@message = client.account.messages.create({:to => number,
+    #                               :from => "+16503895324",
+    #                               :body => message})
   end
 
   def log_in!(user)

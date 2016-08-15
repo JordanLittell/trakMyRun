@@ -35,6 +35,7 @@ gem 'foreman'
 gem 'jquery-ui-rails'
 
 gem 'backbone-on-rails'
+gem 'railties'
 gem 'faker'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'

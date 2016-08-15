@@ -14,7 +14,8 @@ RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Copy the main application.
 COPY . ./
+RUN rm -f tmp/pids/server.pid > /dev/null
+
+RUN bundle exec rails s
 
 EXPOSE 3000
-
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
